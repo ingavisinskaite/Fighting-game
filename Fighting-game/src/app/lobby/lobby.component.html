@@ -1,0 +1,31 @@
+<h1>{{ joinedRoom }}</h1>
+
+<div class="onlinePlayers">
+  Online players: {{ onlinePlayers }}
+</div>
+<div class="rooms">
+  <div class="room1" (click)="countPlayers(1)" [ngClass]="{'joined': joinedRoomNum === 1}">
+    <p>Room 1</p>
+    <h3 *ngIf="!isInRoom">JOIN</h3>
+    <h3 *ngIf="joinedRoomNum === 1">LEAVE</h3>
+    <p class="joinedPlayers">{{ firstRoomplayers }} players joined</p>
+  </div>
+  <div class="room2" (click)="countPlayers(2)" [ngClass]="{'joined': joinedRoomNum === 2}">
+    <p>Room 2</p>
+    <h3 *ngIf="!isInRoom">JOIN</h3>
+    <h3 *ngIf="joinedRoomNum === 2">LEAVE</h3>
+    <p class="joinedPlayers">{{ secondRoomplayers }} players joined</p>
+  </div>
+  <div class="room3" (click)="countPlayers(3)" [ngClass]="{'joined': joinedRoomNum === 3}">
+    <p>Room 3</p>
+    <h3 *ngIf="!isInRoom">JOIN</h3>
+    <h3 *ngIf="joinedRoomNum === 3">LEAVE</h3>
+    <p class="joinedPlayers">{{ thirdRoomplayers }} players joined</p>
+  </div>
+  <div class="room3" (click)="countPlayers(4)" [ngClass]="{'joined': joinedRoomNum === 4}">
+    <p>Room 3</p>
+    <h3 *ngIf="!isInRoom">JOIN</h3>
+    <h3 *ngIf="joinedRoomNum === 4">LEAVE</h3>
+    <p class="joinedPlayers">{{ fourthRoomplayers }} players joined</p>
+  </div>
+</div>
