@@ -1,30 +1,42 @@
+import { RegisterService } from './services/auth/auth.service';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire';
+import { LobbyComponent } from './components/lobby/lobby.component';
+import { LobbyService, AuthService } from './services';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './components/login/login.component';
+import { HeaderComponent } from './components/login/header/header.component';
 
-import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { AuthService } from './services/auth/auth.service';
+import { CommonModule } from '@angular/common';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignUpComponent
+    SignUpComponent,
+    HeaderComponent,
+    LobbyComponent,
+    LoginComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    CommonModule,
+    BrowserModule
   ],
-  providers: [AuthService],
+  
+  providers: [AuthService, LobbyService, RegisterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
