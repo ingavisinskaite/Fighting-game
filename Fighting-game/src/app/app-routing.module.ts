@@ -1,7 +1,7 @@
-import { HeaderComponent } from './header/header.component';
-import { MainComponent } from './main/main.component';
-import { MapComponent } from './map/map.component';
-import { NewsComponent } from './news/news.component';
+import { HeaderComponent } from './components/header/header.component';
+import { MainComponent } from './components/main/main.component';
+import { MapComponent } from './components/map/map.component';
+import { NewsComponent } from './components/news/news.component';
 
 
 import { NgModule } from '@angular/core';
