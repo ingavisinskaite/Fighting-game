@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { RegisterService } from '../../services/auth/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,14 +11,14 @@ export class SignUpComponent implements OnInit {
 
 
 
-  constructor(public authService: RegisterService) { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit() {
   }
 
   public signUp(email: string, password: string, confpassword: string): Promise<void> {
     if (password === confpassword) {
-      return this.authService.signUp(email, password, confpassword);
+      return this.authService.signUp(email, password);
     } else {
       window.alert('PASSWORDS DONT MATCH');
     }

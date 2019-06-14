@@ -1,4 +1,3 @@
-import { RegisterService } from './services/auth/auth.service';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { LobbyComponent } from './components/lobby/lobby.component';
@@ -36,7 +35,7 @@ import { CommonModule } from '@angular/common';
     BrowserModule
   ],
   
-  providers: [AuthService, LobbyService, RegisterService],
+  providers: [AuthService, LobbyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
