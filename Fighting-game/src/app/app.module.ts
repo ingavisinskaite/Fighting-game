@@ -1,37 +1,36 @@
-import { AuthService } from './auth/auth.service.service';
 import { AngularFireModule } from '@angular/fire';
+import { LobbyComponent } from './components/lobby/lobby.component';
+import { LobbyService, AuthService } from './services';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { LoginComponent } from './admin/login/login.component';
-import { HeaderComponent } from './header/header.component';
+import { LoginComponent } from './components/login/login.component';
+import { HeaderComponent } from './components/header/header.component';
 
-const config = {
-  apiKey: 'AIzaSyDGo7ZbbSGzja22l2yQi3ovJo971mYWg5w',
-  authDomain: 'first-project-20ab3.firebaseapp.com',
-  databaseURL: 'https://first-project-20ab3.firebaseio.com',
-  projectId: 'first-project-20ab3',
-  storageBucket: 'first-project-20ab3.appspot.com',
-  messagingSenderId: '1016833167186',
-  appId: '1:1016833167186:web:c556ef1603552f1f'
-};
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { CommonModule } from '@angular/common';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    LobbyComponent,
+    LoginComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(config),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    CommonModule,
+    BrowserModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, LobbyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

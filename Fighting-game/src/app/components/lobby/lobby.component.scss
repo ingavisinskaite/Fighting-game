@@ -1,0 +1,33 @@
+.rooms {
+    width: 90vw;
+    margin: 0 auto;
+    div {
+        display: inline-block;
+        border: 2px solid black;
+        width: 20vw;
+        height: 150px;
+        margin: 3px;
+        text-align: center;
+    }
+    .joinedPlayers {
+        text-align: right;
+        margin-right: 5px;
+    }
+}
+
+h1 {
+    text-align: center;
+}
+
+.onlinePlayers {
+    margin: 15px 0;
+}
+
+.joined {
+    background-color: purple;
+    color: white;
+}
+
+.notJoined {
+    pointer-events: none
+}
