@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lobby.component.scss']
 })
 export class LobbyComponent implements OnInit {
+  joinedRoom: number;
 
 
   constructor(public _lobbyService: LobbyService) { }
@@ -17,10 +18,14 @@ export class LobbyComponent implements OnInit {
   public countPlayers(roomNum: number): void {
     if (!this._lobbyService.isInRoom) {
       this._lobbyService.joinRoom(roomNum);
+      this.getJoinedRoom();
     } else {
       this._lobbyService.leaveRoom();
-      this._lobbyService.joinedRoomNum = 0;
     }
+  }
+
+  public getJoinedRoom() {
+    this.joinedRoom = this._lobbyService.joinedRoom;
   }
 
 }
