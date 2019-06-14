@@ -1,4 +1,4 @@
-import { AuthService } from './../../services';
+import { AuthService } from '../../../services';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -13,4 +13,12 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  // tarpininkas is AuthService
+  public get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn;
+  }
+
+  public isLoggedOut() {
+    return this.authService.logout();
+  }
 }

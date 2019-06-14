@@ -1,0 +1,18 @@
+<div class="displayTable">
+    <div class="displayTableCell">
+      <div class="authBlock">
+        <h3>Sign Up</h3>
+          <div class="formGroup">
+            <input name = "email" type="email" class="formControl" placeholder="Email Address" #userEmail required>
+          </div>
+          <div class="formGroup">
+            <input name = "password" type="password" class="formControl" placeholder="Password" #userPwd required>
+            <input name = "confpassword" type="password" class="formControl" placeholder="Confirmation Password" #userPwdConf required>
+          </div>
+          <div class="formGroup">
+            <input name="button" type="button" class="btn btnPrimary" value="Sign Up" (click)="signUp(userEmail.value, userPwd.value, userPwdConf.value)">
+          </div>
+      </div>
+    </div>
+</div>
+
