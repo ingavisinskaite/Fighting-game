@@ -1,4 +1,4 @@
-import { LobbyService } from './../services/lobby.service';
+import { LobbyService } from './../../services/lobby.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -14,7 +14,7 @@ export class LobbyComponent implements OnInit {
   ngOnInit() {
   }
 
-  public countPlayers(roomNum: number) {
+  public countPlayers(roomNum: number): void {
     if (!this._lobbyService.isInRoom) {
       this._lobbyService.joinRoom(roomNum);
     } else {
