@@ -8,7 +8,7 @@ export class LobbyService {
   onlinePlayers = 0;
   isOnline: boolean;
   roomPlayers = [0, 0, 0, 0];
-  message = 'Welcome to game lobby';
+  private message = 'Welcome to game lobby';
   isInRoom = false;
   joinedRoomNum: number;
 
@@ -40,7 +40,6 @@ export class LobbyService {
 
       return this.roomPlayers[this.joinedRoomNum - 1];
     }
-    this.joinedRoomNum = 0;
   }
 
   public get joinedRoom(): number {
@@ -59,7 +58,16 @@ export class LobbyService {
     this.onlinePlayers = num;
   }
 
-  
+  public get roomMessage(): string {
+    return this.message;
+  }
 
+  public get joinedPlayers(): Array<number> {
+    return this.roomPlayers;
+  }
+
+  public get playerState(): boolean {
+    return this.isInRoom;
+  }
 
 }
