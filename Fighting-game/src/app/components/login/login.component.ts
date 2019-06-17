@@ -13,4 +13,16 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  public get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn;
+  }
+
+  public isLoggedOut(): Promise<void> {
+    return this.authService.logout();
+  }
+
+  public login(email: string, password: string): Promise<void> {
+    return this.authService.login(email, password);
+  }
+
 }
