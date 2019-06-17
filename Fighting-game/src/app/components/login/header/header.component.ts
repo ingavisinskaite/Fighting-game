@@ -1,24 +1,25 @@
-import { AuthService } from '../../../services';
-import { Component, OnInit } from '@angular/core';
+// import { AuthService } from '../../../services';
+// import { Component, OnInit } from '@angular/core';
 
-@Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
-})
-export class HeaderComponent implements OnInit {
+// @Component({
+//   selector: 'app-header',
+//   templateUrl: './header.component.html',
+//   styleUrls: ['./header.component.scss']
+// })
+// export class HeaderComponent implements OnInit {
+//   authService: any;
 
-  constructor(public authService: AuthService) { }
+//   constructor() { }
 
-  ngOnInit() {
-  }
+//   ngOnInit() {
+//   }
 
-  // tarpininkas is AuthService
-  public get isLoggedIn(): boolean {
-    return this.authService.isLoggedIn;
-  }
+  
+//   public get isLoggedIn(): boolean {
+//     return this.authService.isLoggedIn;
+//   }
 
-  public isLoggedOut() {
-    return this.authService.logout();
-  }
-}
+//   public isLoggedOut(): void {
+//     return this.authService.logout();
+//   }
+// }

@@ -43,7 +43,7 @@ export class AuthService {
     window.alert('You have successfully logged out');
   }
 
-  public get isLoggedIn(): boolean {
+  get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
     return user !== null;
   }
