@@ -10,12 +10,12 @@ import { SignUpComponent } from '../app/components/sign-up/sign-up.component';
 import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
+  { path: '', component: MainComponent },
   { path: 'register-user', component: SignUpComponent },
-  { path:  'login', component:  LoginComponent},
-{path: 'header', component: HeaderComponent},
-{path: 'main', component: MainComponent},
-{path: 'map', component: MapComponent},
-{path: 'news', component: NewsComponent}
+  { path: 'login', component:  LoginComponent },
+  { path: 'header', component: HeaderComponent },
+  { path: 'map', component: MapComponent },
+  { path: 'news', component: NewsComponent }
 ];
 
 @NgModule({
