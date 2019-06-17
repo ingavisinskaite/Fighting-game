@@ -1,3 +1,4 @@
+import { LobbyComponent } from './components/lobby/lobby.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MainComponent } from './components/main/main.component';
 import { MapComponent } from './components/map/map.component';
@@ -15,7 +16,8 @@ const routes: Routes = [
 {path: 'header', component: HeaderComponent},
 {path: 'main', component: MainComponent},
 {path: 'map', component: MapComponent},
-{path: 'news', component: NewsComponent}
+{path: 'news', component: NewsComponent},
+{path: 'lobby', component: LobbyComponent}
 ];
 
 @NgModule({

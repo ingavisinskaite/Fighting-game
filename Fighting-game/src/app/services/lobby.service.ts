@@ -22,7 +22,7 @@ export class LobbyService {
       this.isInRoom = true;
       if (this.roomPlayers[roomNum - 1] === 2) {
         this.roomPlayers[i] = 0;
-        this._router.navigateByUrl('/');
+        this._router.navigateByUrl('/fight');
       }
       return this.roomPlayers[roomNum - 1];
     }
