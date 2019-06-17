@@ -26,6 +26,29 @@ export class AuthService {
       }
     });
   }
+
+  // public async login(email: string, password: string): Promise<void> {
+  //   try {
+  //     await this.afAuth.auth.signInWithEmailAndPassword(email, password);
+  //     this.router.navigate(['/']);
+  //     window.alert('You have successfully logged in');
+  //   } catch (e) {
+  //     alert('Error!' + e.message);
+  //   }
+  // }
+
+  // public async logout(): Promise<void> {
+  //   await this.afAuth.auth.signOut();
+  //   localStorage.removeItem('user');
+  //   this.router.navigate(['/login']);
+  //   window.alert('You have successfully logged out');
+  // }
+
+  // get isLoggedIn(): boolean {
+  //   const user = JSON.parse(localStorage.getItem('user'));
+  //   return user !== null;
+  // }
+
   public async signUp(email: string, password: string): Promise<void> {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
         .then((result) => {
