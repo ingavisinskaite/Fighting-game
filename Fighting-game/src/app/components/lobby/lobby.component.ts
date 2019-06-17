@@ -1,4 +1,4 @@
-import { LobbyService } from './../../services';
+import { LobbyService, AuthService } from './../../services';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -14,12 +14,14 @@ export class LobbyComponent implements OnInit {
   isInRoom: boolean;
 
 
-  constructor(public _lobbyService: LobbyService) { }
+  constructor(public _lobbyService: LobbyService,
+              public authService: AuthService) { }
 
   ngOnInit() {
     this.getRoomMessage();
     this.getRoomPlayers();
     this.getOnlinePlayers();
+    this.countOnlinePlayers();
   }
 
   public countPlayers(roomNum: number): void {
@@ -57,6 +59,16 @@ export class LobbyComponent implements OnInit {
 
   public getPlayerState() {
     this.isInRoom = this._lobbyService.playerState;
+  }
+
+  public get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn;
+  }
+
+  private countOnlinePlayers() {
+    if (this.authService.isLoggedIn) {
+      this.onlinePlayers += 1;
+    }
   }
 
 }
