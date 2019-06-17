@@ -16,7 +16,7 @@ export class LobbyComponent implements OnInit {
 
 
   constructor(public _lobbyService: LobbyService,
-    public authService: AuthService) { }
+              public authService: AuthService) { }
 
   ngOnInit() {
     this.getRoomMessage();
