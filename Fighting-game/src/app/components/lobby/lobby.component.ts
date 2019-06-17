@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lobby.component.scss']
 })
 export class LobbyComponent implements OnInit {
+
   joinedRoom: number;
   onlinePlayers: number;
   message: string;
@@ -15,7 +16,7 @@ export class LobbyComponent implements OnInit {
 
 
   constructor(public _lobbyService: LobbyService,
-              public authService: AuthService) { }
+    public authService: AuthService) { }
 
   ngOnInit() {
     this.getRoomMessage();
@@ -33,7 +34,7 @@ export class LobbyComponent implements OnInit {
       this.getPlayerState();
     } else {
       this._lobbyService.leaveRoom();
-      this._lobbyService.joinedRoom = 0;
+      this._lobbyService.joinedRoomNum = 0;
       this.getJoinedRoom();
       this.getRoomMessage();
       this.getRoomPlayers();

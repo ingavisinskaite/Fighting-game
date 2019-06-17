@@ -1,31 +1,31 @@
-<h1>{{ message }}</h1>
+<h1>{{ _lobbyService.joinedRoom }}</h1>
 
 <div class="onlinePlayers">
-  Online players: {{ onlinePlayers }}
+  Online players: {{ _lobbyService.onlinePlayers }}
 </div>
 <div class="rooms">
-  <div class="room1" (click)="countPlayers(1)" [ngClass]="{'joined': joinedRoom === 1, 'notJoined': isInRoom && joinedRoom !== 1}">
+  <div class="room1" (click)="countPlayers(1)" [ngClass]="{'joined': _lobbyService.joinedRoomNum === 1, 'notJoined': _lobbyService.isInRoom && _lobbyService.joinedRoomNum !== 1}">
     <p>Room 1</p>
-    <h3 *ngIf="!isInRoom">JOIN</h3>
-    <h3 *ngIf="joinedRoom === 1">LEAVE</h3>
-    <p class="joinedPlayers">{{ roomPlayers[0]}} players joined</p>
+    <h3 *ngIf="!_lobbyService.isInRoom">JOIN</h3>
+    <h3 *ngIf="_lobbyService.joinedRoomNum === 1">LEAVE</h3>
+    <p class="joinedPlayers">{{ _lobbyService.firstRoomplayers }} players joined</p>
   </div>
-  <div class="room2" (click)="countPlayers(2)" [ngClass]="{'joined': joinedRoom === 2, 'notJoined': isInRoom && joinedRoom !== 2}">
+  <div class="room2" (click)="countPlayers(2)" [ngClass]="{'joined': _lobbyService.joinedRoomNum === 2, 'notJoined': _lobbyService.isInRoom && _lobbyService.joinedRoomNum !== 2}">
     <p>Room 2</p>
-    <h3 *ngIf="!isInRoom">JOIN</h3>
-    <h3 *ngIf="joinedRoom === 2">LEAVE</h3>
-    <p class="joinedPlayers">{{ roomPlayers[1] }} players joined</p>
+    <h3 *ngIf="!_lobbyService.isInRoom">JOIN</h3>
+    <h3 *ngIf="_lobbyService.joinedRoomNum === 2">LEAVE</h3>
+    <p class="joinedPlayers">{{ _lobbyService.secondRoomplayers }} players joined</p>
   </div>
-  <div class="room3" (click)="countPlayers(3)" [ngClass]="{'joined': joinedRoom === 3, 'notJoined': isInRoom && joinedRoom !== 3}">
+  <div class="room3" (click)="countPlayers(3)" [ngClass]="{'joined': _lobbyService.joinedRoomNum === 3, 'notJoined': _lobbyService.isInRoom && _lobbyService.joinedRoomNum !== 3}">
     <p>Room 3</p>
-    <h3 *ngIf="!isInRoom">JOIN</h3>
-    <h3 *ngIf="joinedRoom === 3">LEAVE</h3>
-    <p class="joinedPlayers">{{ roomPlayers[2] }} players joined</p>
+    <h3 *ngIf="!_lobbyService.isInRoom">JOIN</h3>
+    <h3 *ngIf="_lobbyService.joinedRoomNum === 3">LEAVE</h3>
+    <p class="joinedPlayers">{{ _lobbyService.thirdRoomplayers }} players joined</p>
   </div>
-  <div class="room3" (click)="countPlayers(4)" [ngClass]="{'joined': joinedRoom === 4, 'notJoined': isInRoom && joinedRoom !== 4}">
+  <div class="room3" (click)="countPlayers(4)" [ngClass]="{'joined': _lobbyService.joinedRoomNum === 4, 'notJoined': _lobbyService.isInRoom && _lobbyService.joinedRoomNum !== 4}">
     <p>Room 3</p>
-    <h3 *ngIf="!isInRoom">JOIN</h3>
-    <h3 *ngIf="joinedRoom === 4">LEAVE</h3>
-    <p class="joinedPlayers">{{ roomPlayers[3] }} players joined</p>
+    <h3 *ngIf="!_lobbyService.isInRoom">JOIN</h3>
+    <h3 *ngIf="_lobbyService.joinedRoomNum === 4">LEAVE</h3>
+    <p class="joinedPlayers">{{ _lobbyService.fourthRoomplayers }} players joined</p>
   </div>
 </div>
