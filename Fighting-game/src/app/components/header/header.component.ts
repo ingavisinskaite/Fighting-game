@@ -1,3 +1,4 @@
+// import { AuthService } from '../../../services';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  authService: any;
 
   constructor() { }
 
   ngOnInit() {
   }
 
+    // tarpininkas is AuthService
+    public get isLoggedIn(): boolean {
+      return this.authService.isLoggedIn;
+    }
+  
+    public isLoggedOut(): void {
+      return this.authService.logout();
+    }
 }
