@@ -3,6 +3,7 @@ export interface IUser {
     email: string;
     displayName: string;
     photoURL: string;
-    nemailVerified: boolean;
     online: boolean;
+    emailVerified: boolean;
+    room: number;
 }

@@ -11,6 +11,7 @@ import { IUser } from '../models/user/user.model';
 
 export class AuthService {
   user: User;
+  userData: IUser;
 
   constructor(public afAuth: AngularFireAuth,
               public router: Router,
@@ -26,27 +27,27 @@ export class AuthService {
     });
   }
 
-  public async login(email: string, password: string): Promise<void> {
-    try {
-      await this.afAuth.auth.signInWithEmailAndPassword(email, password);
-      this.router.navigate(['/lobby']);
-      window.alert('You have successfully logged in');
-    } catch (e) {
-      alert('Error!' + e.message);
-    }
-  }
+  // public async login(email: string, password: string): Promise<void> {
+  //   try {
+  //     await this.afAuth.auth.signInWithEmailAndPassword(email, password);
+  //     this.router.navigate(['/']);
+  //     window.alert('You have successfully logged in');
+  //   } catch (e) {
+  //     alert('Error!' + e.message);
+  //   }
+  // }
 
-  public async logout(): Promise<void> {
-    await this.afAuth.auth.signOut();
-    localStorage.removeItem('user');
-    this.router.navigate(['/login']);
-    window.alert('You have successfully logged out');
-  }
+  // public async logout(): Promise<void> {
+  //   await this.afAuth.auth.signOut();
+  //   localStorage.removeItem('user');
+  //   this.router.navigate(['/login']);
+  //   window.alert('You have successfully logged out');
+  // }
 
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
-    return user !== null;
-  }
+  // get isLoggedIn(): boolean {
+  //   const user = JSON.parse(localStorage.getItem('user'));
+  //   return user !== null;
+  // }
 
   public async signUp(email: string, password: string): Promise<void> {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
@@ -69,13 +70,34 @@ export class AuthService {
         email: user.email,
         displayName: user.displayName,
         photoURL: user.photoURL,
-        nemailVerified: user.emailVerified,
-        online: true
+        online: true,
+        emailVerified: user.emailVerified,
+        room: user.room
     };
     return userRef.set(userData, {
     merge: true
     });
   }
 
+  public async login(email: string, password: string): Promise<void> {
+    try {
+      await this.afAuth.auth.signInWithEmailAndPassword(email, password);
+      this.router.navigate(['/']);
+      window.alert('You have successfully logged in');
+    } catch (e) {
+      alert('Error!' + e.message);
+    }
+  }
 
+  public async logout(): Promise<void> {
+    await this.afAuth.auth.signOut();
+    localStorage.removeItem('user');
+    this.router.navigate(['/login']);
+    window.alert('You have successfully logged out');
+  }
+
+  public get isLoggedIn(): boolean {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user !== null;
+  }
 }
