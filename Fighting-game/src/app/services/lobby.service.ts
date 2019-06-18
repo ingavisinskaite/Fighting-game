@@ -1,9 +1,14 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
+import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
+import { IUser } from '../models/user/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class LobbyService {
   onlinePlayers = 0;
   isOnline: boolean;
@@ -12,7 +17,8 @@ export class LobbyService {
   isInRoom = false;
   joinedRoomNum: number;
 
-  constructor(private _router: Router) { }
+  constructor(private _router: Router,
+              private afs: AngularFirestore) { }
 
   public joinRoom(roomNum: number): number {
     this.joinedRoomNum = roomNum;
@@ -70,5 +76,8 @@ export class LobbyService {
     return this.isInRoom;
   }
 
+  public getOnlinePlayers(): Observable<any[]> {
+    return this.afs.collection('users').valueChanges();
+  }
 
 }

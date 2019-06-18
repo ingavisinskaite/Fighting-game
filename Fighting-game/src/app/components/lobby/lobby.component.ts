@@ -22,7 +22,7 @@ export class LobbyComponent implements OnInit {
     this.getRoomMessage();
     this.getRoomPlayers();
     this.getOnlinePlayers();
-    this.countOnlinePlayers();
+    this.getOnlinePlayersCount();
   }
 
   public countPlayers(roomNum: number): void {
@@ -66,10 +66,16 @@ export class LobbyComponent implements OnInit {
     return this.authService.isLoggedIn;
   }
 
-  private countOnlinePlayers() {
-    if (this.authService.isLoggedIn) {
-      this.onlinePlayers += 1;
-    }
+  public getOnlinePlayersCount() {
+    this._lobbyService.getOnlinePlayers()
+    .subscribe(data => {
+      this.onlinePlayers = 0;
+      for (let user of data) {
+        if (user.online === true) {
+          this.onlinePlayers += 1;
+        }
+      }
+  });
   }
 
 }

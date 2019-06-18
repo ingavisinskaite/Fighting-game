@@ -69,7 +69,8 @@ export class AuthService {
         email: user.email,
         displayName: user.displayName,
         photoURL: user.photoURL,
-        nemailVerified: user.emailVerified
+        nemailVerified: user.emailVerified,
+        online: true
     };
     return userRef.set(userData, {
     merge: true
