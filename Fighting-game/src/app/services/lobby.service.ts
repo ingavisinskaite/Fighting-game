@@ -1,102 +1,83 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
+import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
+import { IUser } from '../models/user/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class LobbyService {
   onlinePlayers = 0;
   isOnline: boolean;
-  firstRoomplayers = 0;
-  secondRoomplayers = 0;
-  thirdRoomplayers = 0;
-  fourthRoomplayers = 0;
-  joinedRoom = 'Welcome to game lobby';
+  roomPlayers = [0, 0, 0, 0];
+  private message = 'Welcome to game lobby';
   isInRoom = false;
   joinedRoomNum: number;
 
-  constructor(private _router: Router) { }
+  constructor(private _router: Router,
+              private afs: AngularFirestore) { }
 
   public joinRoom(roomNum: number): number {
     this.joinedRoomNum = roomNum;
-    if (roomNum === 1) {
-      this.firstRoomplayers += 1;
-      this.joinedRoom = 'You joined room 1';
+    for (let i = 0; i < this.roomPlayers.length; i++) {
+      this.roomPlayers[roomNum - 1] += 1;
+      this.message = 'You joined room ' + roomNum;
       this.isInRoom = true;
-      if (this.firstRoomplayers === 2) {
-        this.firstRoomplayers = 0;
-        this._router.navigateByUrl('/');
+      if (this.roomPlayers[roomNum - 1] === 2) {
+        this.roomPlayers[i] = 0;
+        this._router.navigateByUrl('/fight');
       }
-      return this.firstRoomplayers;
-    } else if (roomNum === 2) {
-      this.secondRoomplayers += 1;
-      this.joinedRoom = 'You joined room 2';
-      this.isInRoom = true;
-      if (this.secondRoomplayers === 2) {
-        this.secondRoomplayers = 0;
-        this._router.navigateByUrl('/');
-      }
-      return this.secondRoomplayers;
-    } else if (roomNum === 3) {
-      this.thirdRoomplayers += 1;
-      this.joinedRoom = 'You joined room 3';
-      this.isInRoom = true;
-      if (this.thirdRoomplayers === 2) {
-        this.thirdRoomplayers = 0;
-        this._router.navigateByUrl('/');
-      }
-      return this.thirdRoomplayers;
-    } else {
-      this.fourthRoomplayers += 1;
-      this.joinedRoom = 'You joined room 4';
-      this.isInRoom = true;
-      if (this.fourthRoomplayers === 2) {
-        this.fourthRoomplayers = 0;
-        this._router.navigateByUrl('/');
-      }
-      return this.fourthRoomplayers;
+      return this.roomPlayers[roomNum - 1];
     }
   }
 
   public leaveRoom(): number {
-    if (this.joinedRoomNum === 1) {
-      if (this.firstRoomplayers === 0) {
+    for (let i = 0; i < this.roomPlayers.length; i++) {
+      if (this.roomPlayers[this.joinedRoomNum - 1] === 0) {
         return;
       } else {
-        this.firstRoomplayers -= 1;
+        this.roomPlayers[this.joinedRoomNum - 1] -= 1;
       }
-      this.joinedRoom = 'Welcome to game lobby';
+      this.message = 'Welcome to game lobby';
       this.isInRoom = false;
 
-      return this.firstRoomplayers;
-    } else if (this.joinedRoomNum === 2) {
-      if (this.secondRoomplayers === 0) {
-        return;
-      } else {
-        this.secondRoomplayers -= 1;
-      }
-      this.joinedRoom = 'Welcome to game lobby';
-      this.isInRoom = false;
-      return this.secondRoomplayers;
-    } else if (this.joinedRoomNum === 3) {
-      if (this.thirdRoomplayers === 0) {
-        return;
-      } else {
-        this.thirdRoomplayers -= 1;
-      }
-      this.joinedRoom = 'Welcome to game lobby';
-      this.isInRoom = false;
-      return this.thirdRoomplayers;
-    } else {
-      if (this.fourthRoomplayers === 0) {
-        return;
-      } else {
-        this.fourthRoomplayers -= 1;
-      }
-      this.joinedRoom = 'Welcome to game lobby';
-      this.isInRoom = false;
-      return this.fourthRoomplayers;
+      return this.roomPlayers[this.joinedRoomNum - 1];
     }
+  }
+
+  public get joinedRoom(): number {
+    return this.joinedRoomNum;
+  }
+
+  public set joinedRoom(num: number) {
+    this.joinedRoomNum = num;
+  }
+
+  public get onlinePlayersNum(): number {
+    return this.onlinePlayers;
+  }
+
+  public set onlinePlayersNum(num: number) {
+    this.onlinePlayers = num;
+  }
+
+  public get roomMessage(): string {
+    return this.message;
+  }
+
+  public get joinedPlayers(): Array<number> {
+    return this.roomPlayers;
+  }
+
+  public get playerState(): boolean {
+    return this.isInRoom;
+  }
+
+  public getOnlinePlayers(): Observable<any[]> {
+    return this.afs.collection('users').valueChanges();
   }
 
 }

@@ -29,7 +29,7 @@ export class AuthService {
   public async login(email: string, password: string): Promise<void> {
     try {
       await this.afAuth.auth.signInWithEmailAndPassword(email, password);
-      this.router.navigate(['/']);
+      this.router.navigate(['/lobby']);
       window.alert('You have successfully logged in');
     } catch (e) {
       alert('Error!' + e.message);
@@ -69,7 +69,8 @@ export class AuthService {
         email: user.email,
         displayName: user.displayName,
         photoURL: user.photoURL,
-        nemailVerified: user.emailVerified
+        nemailVerified: user.emailVerified,
+        online: true
     };
     return userRef.set(userData, {
     merge: true

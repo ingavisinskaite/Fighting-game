@@ -4,4 +4,5 @@ export interface IUser {
     displayName: string;
     photoURL: string;
     nemailVerified: boolean;
+    online: boolean;
 }
