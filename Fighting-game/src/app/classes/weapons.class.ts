@@ -1,4 +1,4 @@
-import { IWeapon } from '../model/weapon.model';
+import { IWeapon } from '../models/weapon.model';
 
 export class Weaponry {
 

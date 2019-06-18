@@ -1,4 +1,4 @@
-import { IArmor } from '../model';
+import { IArmor } from '../models';
 
 export class Armory {
 

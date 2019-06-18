@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { ArenaComponent } from './arena/arena.component';
+import { ArenaComponent } from './components/arena/arena.component';
 
 @NgModule({
   declarations: [

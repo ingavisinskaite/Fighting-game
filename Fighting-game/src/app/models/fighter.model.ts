@@ -1,4 +1,4 @@
-import { IWeapon, IArmor, IBody } from './';
+import { IWeapon, IArmor, IBody } from '.';
 
 export interface IFighter {
     name: string;

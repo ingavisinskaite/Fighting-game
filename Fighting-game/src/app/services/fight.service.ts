@@ -1,10 +1,10 @@
-import { IBody } from './../model/body.model';
+import { IBody } from '../models/body.model';
 import { Armory } from './../classes/armor.class';
-import { IArmor } from './../model/armor.model';
-import { IWeapon } from './../model/weapon.model';
+import { IArmor } from '../models/armor.model';
+import { IWeapon } from '../models/weapon.model';
 import { Weaponry } from './../classes/weapons.class';
 import { Injectable } from '@angular/core';
-import { IFighter } from '../model';
+import { IFighter } from '../models';
 
 
 @Injectable({
@@ -135,14 +135,9 @@ export class FightService {
     // get data from firebase etc.
   }
 
-  // public getFightersHP(id: string): number {
-  //   for (const fighter of this.fighters) {
-  //     if (fighter.id === id) {
-  //       console.log(fighter.hp);
-  //       return fighter.hp;
-  //     }
-  //   }
-  // }
+  public getFightersHP(id: string): number {
+    return this.fighters[this.getFighterIndex(id)].hp;
+  }
 
   public assignWeapon(fighterId: string, weaponId: string, oneHanded: boolean) {
     if (oneHanded) {

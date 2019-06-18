@@ -1,5 +1,5 @@
-import { FightService } from './../services/fight.service';
-import { Armory, Weaponry } from '../classes';
+import { FightService } from '../../services/fight.service';
+import { Armory, Weaponry } from '../../classes';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
