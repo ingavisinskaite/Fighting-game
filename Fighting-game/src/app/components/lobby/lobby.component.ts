@@ -29,9 +29,9 @@ export class LobbyComponent implements OnInit {
         r.playerCount = (r.player1 ? 1 : 0) + (r.player2 ? 1 : 0);
         if (r.playerCount === 2) {
           if (r.player1 === this.userId) {
-            this.router.navigateByUrl('/arena');
+            this.router.navigateByUrl('/room');
           } else if (r.player2 === this.userId) {
-            this.router.navigateByUrl('/arena');
+            this.router.navigateByUrl('/room');
           } else {
             return;
           }
