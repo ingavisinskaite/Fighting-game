@@ -20,4 +20,10 @@ export class LoginComponent implements OnInit {
       password: new FormControl ('', [Validators.required, Validators.minLength(6)]),
     });
 }
+// public get isLoggedIn(): boolean {
+//       return this.authService.isLoggedIn;
+//     }
+//     public isLoggedOut() {
+//       return this.authService.logout();
+//     }
 }

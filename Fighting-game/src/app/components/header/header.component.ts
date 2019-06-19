@@ -1,4 +1,5 @@
-// import { AuthService } from '../../../services';
+import { User } from 'firebase';
+import { AuthService } from '../../services';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  authService: any;
+  // authService: any;
 
-  constructor() { }
+  constructor(public authService: AuthService ) { }
 
   ngOnInit() {
   }
@@ -18,8 +19,8 @@ export class HeaderComponent implements OnInit {
     public get isLoggedIn(): boolean {
       return this.authService.isLoggedIn;
     }
-  
-    public isLoggedOut(): void {
+
+    public isLoggedOut() {
       return this.authService.logout();
     }
 }
