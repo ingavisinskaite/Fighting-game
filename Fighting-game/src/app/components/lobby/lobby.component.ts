@@ -27,7 +27,7 @@ export class LobbyComponent implements OnInit {
     this._lobbyService.getRooms().subscribe(rooms => {
       this.roomPlayers = rooms.map(r => {
         r.playerCount = (r.player1 ? 1 : 0) + (r.player2 ? 1 : 0);
-        if (r.playerCount === 2) {
+        if (r.playerCount > 0) {
           if (r.player1 === this.userId) {
             this.router.navigateByUrl('/room');
           } else if (r.player2 === this.userId) {
@@ -35,10 +35,6 @@ export class LobbyComponent implements OnInit {
           } else {
             return;
           }
-          r.player1 = '';
-          r.player2 = '';
-          const updatedRoom = r as IRoom;
-          this._lobbyService.updateRoomPlayers(r.id, updatedRoom);
         }
         const room = r as IRoom;
         return room;
