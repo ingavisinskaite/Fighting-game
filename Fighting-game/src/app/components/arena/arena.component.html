@@ -5,7 +5,7 @@
   <label class="container">
     {{ weapon.name }}
     {{ weapon.damage }}
-    <input type="radio" name="weapon" (click)="chooseWeapon(currentPlayer, weapon.id, true); attackTest(weapon.id, true)">
+    <input type="radio" name="weapon" (click)="chooseWeapon(currentPlayer, weapon.id, true)">
     <span class="checkmark"></span>
   </label>
 </div>
@@ -14,7 +14,7 @@
   <label class="container">
     {{ weapon.name }}
     {{ weapon.damage }}
-    <input type="radio" name="weapon" (click)="chooseWeapon(currentPlayer, weapon.id, false); attackTest(weapon.id, false)">
+    <input type="radio" name="weapon" (click)="chooseWeapon(currentPlayer, weapon.id, false)">
     <span class="checkmark"></span>
   </label>
 </div>
@@ -57,10 +57,10 @@
 
 <div class="attackWrap">
   <label class="container">
-    <input type="radio" name="attack" (click)="chooseAttack('head')">
-    <input type="radio" name="attack" (click)="chooseAttack('torso')">
-    <input type="radio" name="attack" (click)="chooseAttack('arms')">
-    <input type="radio" name="attack" (click)="chooseAttack('legs')">
+    <input type="radio" name="attack" (click)="chooseAttack(currentPlayer, 'head')">
+    <input type="radio" name="attack" (click)="chooseAttack(currentPlayer, 'torso')">
+    <input type="radio" name="attack" (click)="chooseAttack(currentPlayer, 'arms')">
+    <input type="radio" name="attack" (click)="chooseAttack(currentPlayer, 'legs')">
   </label>
 </div>
 
@@ -68,10 +68,10 @@
 
 <div class="defencekWrap">
   <label class="container">
-    <input type="radio" name="defence" (click)="chooseDefence('head')">
-    <input type="radio" name="defence" (click)="chooseDefence('torso')">
-    <input type="radio" name="defence" (click)="chooseDefence('arms')">
-    <input type="radio" name="defence" (click)="chooseDefence('legs')">
+    <input type="radio" name="defence" (click)="chooseDefence(currentPlayer, 'head')">
+    <input type="radio" name="defence" (click)="chooseDefence(currentPlayer, 'torso')">
+    <input type="radio" name="defence" (click)="chooseDefence(currentPlayer, 'arms')">
+    <input type="radio" name="defence" (click)="chooseDefence(currentPlayer, 'legs')">
   </label>
 </div>
 

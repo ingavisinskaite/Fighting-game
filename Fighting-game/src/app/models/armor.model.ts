@@ -1,4 +1,5 @@
 export interface IArmor {
+    protec: string;
     name: string;
     id: string;
     armor: number;

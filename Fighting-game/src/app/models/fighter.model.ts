@@ -5,6 +5,8 @@ export interface IFighter {
     id: string;
     class: string;
     hp: number;
+    attack: string;
+    defence: string;
     body: IBody;
     weaponLeft: IWeapon;
     weaponRight: IWeapon;

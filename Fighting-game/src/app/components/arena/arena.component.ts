@@ -10,23 +10,14 @@ import { Component, OnInit } from '@angular/core';
 export class ArenaComponent implements OnInit {
 
   currentPlayer = '0';
-
-// Nežinau kaip paimti HP iš to Array, tai dabar taip priskyriau.
-// Nesugalvoju, kaip pernaudoti tas pačias funkcijas abiem žaidėjam, kad išsisaugotų pasirinkimų vertės.
-// Atakuojamai/Kiekvienai kūno daliai reikia priskirti: armor: number, defence: boolean.
-// Atakai reikia priskirti: weapon.damage: number, attack: string.
-// Rezultate kiekvieno Fighter HP reikia priskirti aritmetiką ir pokytį. Išsaugoti kitam turnui.
-  currentFighterHP = 100;
-
-  currentFighterDamage: number;
-  currentFighterAttack: string;
-  currentFighterDefence: string;
+  currentFighterHP = 0;
 
   constructor(public _fight: FightService,
               public _weaponry: Weaponry,
               public _armory: Armory) { }
 
   ngOnInit() {
+    this.showFighterHP(this.currentPlayer);
   }
 
   chooseWeapon(fighterId: string, weaponId: string, oneHanded: boolean) {
@@ -37,13 +28,14 @@ export class ArenaComponent implements OnInit {
     this._fight.assignArmor(fighterId, armorId);
   }
 
-  attackTest(weaponId: string, oneHanded: boolean) {
-    this.currentFighterDamage = this._fight.getDamage(weaponId, oneHanded);
-    this.currentFighterHP -= this.currentFighterDamage;
+  showFighterHP(fighterId: string) {
+    this.currentFighterHP = this._fight.getFightersHP(fighterId);
   }
 
-  // 1. Reikia funkcijos, kuri išsaugotų pirmo žaidėjo pasirinkimus ir paduotų antro žaidėjo langą. 
-  // Į ją ir changePlayer() turėtų įeiti. 
+  // attackTest(weaponId: string, oneHanded: boolean) {
+  //   this.currentFighterDamage = this._fight.getDamage(weaponId, oneHanded);
+  //   this.currentFighterHP -= this.currentFighterDamage;
+  // }
 
   changePlayer() {
     if (this.currentPlayer === '0') {
@@ -55,14 +47,12 @@ export class ArenaComponent implements OnInit {
     }
   }
 
-  chooseAttack(bodyPart: string) {
-    this.currentFighterAttack = bodyPart;
-    console.log(this.currentFighterAttack);
+  chooseAttack(fighterId: string, bodyPart: string) {
+    this._fight.assignAttack(fighterId, bodyPart);
   }
 
-  chooseDefence(bodyPart: string) {
-    this.currentFighterDefence = bodyPart;
-    console.log(this.currentFighterDefence);
+  chooseDefence(fighterId: string, bodyPart: string) {
+    this._fight.assignDefence(fighterId, bodyPart);
   }
 
 }
