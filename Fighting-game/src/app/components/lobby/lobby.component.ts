@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { IRoom } from './../../models/room.model';
 import { LobbyService, AuthService } from './../../services';
 import { Component, OnInit } from '@angular/core';
@@ -11,13 +12,14 @@ export class LobbyComponent implements OnInit {
 
   joinedRoom: number;
   onlinePlayers: number;
-  message: string;
+  message = 'Welcome to game lobby';
   roomPlayers: Array<IRoom>;
   isInRoom: boolean = false;
   userId: string;
 
   constructor(public _lobbyService: LobbyService,
-              public authService: AuthService) { }
+              public authService: AuthService,
+              public router: Router) { }
 
   ngOnInit() {
     this.getOnlinePlayersCount();
@@ -25,12 +27,24 @@ export class LobbyComponent implements OnInit {
     this._lobbyService.getRooms().subscribe(rooms => {
       this.roomPlayers = rooms.map(r => {
         r.playerCount = (r.player1 ? 1 : 0) + (r.player2 ? 1 : 0);
+        if (r.playerCount === 2) {
+          if (r.player1 === this.userId) {
+            this.router.navigateByUrl('/arena');
+          } else if (r.player2 === this.userId) {
+            this.router.navigateByUrl('/arena');
+          } else {
+            return;
+          }
+          r.player1 = '';
+          r.player2 = '';
+          const updatedRoom = r as IRoom;
+          this._lobbyService.updateRoomPlayers(r.id, updatedRoom);
+        }
         const room = r as IRoom;
         return room;
       });
     });
   }
-
 
   public toggleRoom(roomNum: number, userId: string) {
     const roomId = 'Room ' + roomNum;
@@ -80,5 +94,6 @@ export class LobbyComponent implements OnInit {
     this.userId = this.authService.getUserId();
     console.log(this.userId);
   }
+
 
 }

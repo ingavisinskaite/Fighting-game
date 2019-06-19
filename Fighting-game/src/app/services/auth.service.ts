@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from 'firebase';
 import { IUser } from '../models/user/user.model';
+import * as firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -83,7 +84,7 @@ export class AuthService {
   public async login(email: string, password: string): Promise<void> {
     try {
       await this.afAuth.auth.signInWithEmailAndPassword(email, password);
-      this.router.navigate(['/']);
+      this.router.navigate(['/lobby']);
       window.alert('You have successfully logged in');
       this.getUserId();
     } catch (e) {
@@ -103,11 +104,21 @@ export class AuthService {
   return user !== null;
 }
 
+// public getCurrentUserId() {
+//   firebase.auth().onAuthStateChanged(function(user) {
+//   if (user) {
+//     this.userId = user.uid;
+//     console.log(this.userId);
+//   } else {
+//     // No user is signed in.
+//   }
+// });
+// }
+
 public getUserId(): string {
   this.userId = localStorage.getItem('user');
   console.log(this.userId);
   return this.userId;
 }
-
 
 }
