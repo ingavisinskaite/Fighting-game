@@ -31,6 +31,7 @@ export class LobbyComponent implements OnInit {
     const roomId = 'Room ' + roomNum;
     const selectedRoom = this.roomPlayers[roomNum - 1];
     delete selectedRoom.playerCount;
+    this.authService.setRoom(roomNum, userId);
     if (!this.isInRoom) {
       if (selectedRoom.player1 === '') {
         selectedRoom.player1 = userId;
@@ -58,7 +59,7 @@ export class LobbyComponent implements OnInit {
     this._lobbyService.getPlayers()
       .subscribe(data => {
         this.onlinePlayers = 0;
-        for (let user of data) {
+        for (const user of data) {
           if (user.online === true) {
             this.onlinePlayers += 1;
           }
@@ -73,7 +74,6 @@ export class LobbyComponent implements OnInit {
 
   public getCurrentUserId() {
     this.userId = this.authService.getUserId();
-    console.log(this.userId);
   }
 
   public getRooms() {
@@ -90,5 +90,4 @@ export class LobbyComponent implements OnInit {
       });
     });
   }
-
 }
