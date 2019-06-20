@@ -4,6 +4,8 @@ export class Armory {
 
     head: IArmor[] = [{
         protec: 'head',
+        criticalDmgCounter: 2,
+        criticalDmg: 10,
         name: 'Leather Helmet',
         id: '0',
         armor: 5,
@@ -12,6 +14,8 @@ export class Armory {
     },
     {
         protec: 'head',
+        criticalDmgCounter: 2,
+        criticalDmg: 10,
         name: 'Iron Helmet',
         id: '1',
         armor: 20,
@@ -21,6 +25,8 @@ export class Armory {
 
     torso: IArmor[] = [{
         protec: 'torso',
+        criticalDmgCounter: 2,
+        criticalDmg: 10,
         name: 'Leather Vest',
         id: '0',
         armor: 5,
@@ -29,6 +35,8 @@ export class Armory {
     },
     {
         protec: 'torso',
+        criticalDmgCounter: 2,
+        criticalDmg: 10,
         name: 'Chainmail Vest',
         id: '1',
         armor: 20,
@@ -38,6 +46,8 @@ export class Armory {
 
     arms: IArmor[] = [{
         protec: 'arms',
+        criticalDmgCounter: 2,
+        criticalDmg: 10,
         name: 'Leather Greaves',
         id: '0',
         armor: 5,
@@ -46,6 +56,8 @@ export class Armory {
     },
     {
         protec: 'arms',
+        criticalDmgCounter: 2,
+        criticalDmg: 10,
         name: 'Chainmail Greaves',
         id: '1',
         armor: 20,
@@ -55,6 +67,8 @@ export class Armory {
 
     legs: IArmor[] = [{
         protec: 'legs',
+        criticalDmgCounter: 2,
+        criticalDmg: 10,
         name: 'Leather Pants',
         id: '0',
         armor: 5,
@@ -63,6 +77,8 @@ export class Armory {
     },
     {
         protec: 'legs',
+        criticalDmgCounter: 2,
+        criticalDmg: 10,
         name: 'Chainmail Pants',
         id: '1',
         armor: 20,

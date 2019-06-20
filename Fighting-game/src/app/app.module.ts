@@ -12,8 +12,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 
-// import { HeaderComponent } from './components/login/header/header.component';
-
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ArenaComponent } from './components/arena/arena.component';
@@ -47,6 +45,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { MainComponent } from './components/main/main.component';
 import { MapComponent } from './components/map/map.component';
 import { NewsComponent } from './components/news/news.component';
+import { RoomComponent } from './components/room/room.component';
 
 
 @NgModule({
@@ -60,7 +59,8 @@ import { NewsComponent } from './components/news/news.component';
     MapComponent,
     NewsComponent,
     LoginComponent,
-    LobbyComponent
+    LobbyComponent,
+    RoomComponent
   ],
   imports: [
     AppRoutingModule,

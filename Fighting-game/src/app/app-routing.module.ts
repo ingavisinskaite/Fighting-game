@@ -1,3 +1,4 @@
+import { RoomComponent } from './components/room/room.component';
 import { LobbyComponent } from './components/lobby/lobby.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MainComponent } from './components/main/main.component';
@@ -18,7 +19,8 @@ const routes: Routes = [
 {path: 'main', component: MainComponent},
 {path: 'map', component: MapComponent},
 {path: 'news', component: NewsComponent},
-{path: 'lobby', component: LobbyComponent}
+{path: 'lobby', component: LobbyComponent},
+{path: 'room', component: RoomComponent}
 ];
 
 @NgModule({
