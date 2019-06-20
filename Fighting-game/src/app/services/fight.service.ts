@@ -1,4 +1,3 @@
-import { IBody } from '../models/body.model';
 import { Armory } from './../classes/armor.class';
 import { IArmor } from '../models/armor.model';
 import { IWeapon } from '../models/weapon.model';
@@ -24,12 +23,6 @@ export class FightService {
     hp: 100,
     attack: 'none',
     defence: 'none',
-    body: {
-      head: true,
-      torso: true,
-      legs: true,
-      arms: true
-    },
     weaponLeft: {
       name: 'Fists',
       id: '0',
@@ -46,6 +39,8 @@ export class FightService {
     },
     armorArms: {
       protec: 'arms',
+      criticalDmgCounter: 2,
+      criticalDmg: 10,
       name: 'none',
       id: '0',
       armor: 0,
@@ -54,6 +49,8 @@ export class FightService {
     },
     armorLegs: {
       protec: 'legs',
+      criticalDmgCounter: 2,
+      criticalDmg: 10,
       name: 'none',
       id: '0',
       armor: 0,
@@ -62,6 +59,8 @@ export class FightService {
     },
     armorTorso: {
       protec: 'torso',
+      criticalDmgCounter: 2,
+      criticalDmg: 10,
       name: 'none',
       id: '0',
       armor: 0,
@@ -70,6 +69,8 @@ export class FightService {
     },
     armorHead: {
       protec: 'head',
+      criticalDmgCounter: 2,
+      criticalDmg: 10,
       name: 'none',
       id: '0',
       armor: 0,
@@ -84,12 +85,6 @@ export class FightService {
     hp: 100,
     attack: 'none',
     defence: 'none',
-    body: {
-      head: true,
-      torso: true,
-      legs: true,
-      arms: true
-    },
     weaponLeft: {
       name: 'Fists',
       id: '0',
@@ -106,6 +101,8 @@ export class FightService {
     },
     armorArms: {
       protec: 'arms',
+      criticalDmgCounter: 2,
+      criticalDmg: 10,
       name: 'none',
       id: '0',
       armor: 0,
@@ -114,6 +111,8 @@ export class FightService {
     },
     armorLegs: {
       protec: 'legs',
+      criticalDmgCounter: 2,
+      criticalDmg: 10,
       name: 'none',
       id: '0',
       armor: 0,
@@ -122,6 +121,8 @@ export class FightService {
     },
     armorTorso: {
       protec: 'torso',
+      criticalDmgCounter: 2,
+      criticalDmg: 10,
       name: 'none',
       id: '0',
       armor: 0,
@@ -130,6 +131,8 @@ export class FightService {
     },
     armorHead: {
       protec: 'head',
+      criticalDmgCounter: 2,
+      criticalDmg: 10,
       name: 'none',
       id: '0',
       armor: 0,
@@ -221,6 +224,33 @@ export class FightService {
       this.fighters[deffendingFighterIndex].armorLegs.durability -= 1;
       if (this.fighters[deffendingFighterIndex].armorLegs.durability < 0) {
         this.fighters[deffendingFighterIndex].armorLegs.armor = 0;
+      }
+    }
+  }
+
+  private changeCriticalCounterAndDmg(attacingFighterIndex: number, deffendingFighterIndex: number) {
+    if (this.fighters[attacingFighterIndex].attack === this.fighters[deffendingFighterIndex].armorHead.protec) {
+      this.fighters[deffendingFighterIndex].armorHead.criticalDmgCounter -= 1;
+      if (this.fighters[deffendingFighterIndex].armorHead.criticalDmgCounter < 0) {
+        this.fighters[deffendingFighterIndex].armorHead.criticalDmg = 10;
+      }
+    }
+    if (this.fighters[attacingFighterIndex].attack === this.fighters[deffendingFighterIndex].armorTorso.protec) {
+      this.fighters[deffendingFighterIndex].armorTorso.criticalDmgCounter -= 1;
+      if (this.fighters[deffendingFighterIndex].armorTorso.criticalDmgCounter < 0) {
+        this.fighters[deffendingFighterIndex].armorTorso.criticalDmg = 10;
+      }
+    }
+    if (this.fighters[attacingFighterIndex].attack === this.fighters[deffendingFighterIndex].armorArms.protec) {
+      this.fighters[deffendingFighterIndex].armorArms.criticalDmgCounter -= 1;
+      if (this.fighters[deffendingFighterIndex].armorArms.criticalDmgCounter < 0) {
+        this.fighters[deffendingFighterIndex].armorArms.criticalDmg = 10;
+      }
+    }
+    if (this.fighters[attacingFighterIndex].attack === this.fighters[deffendingFighterIndex].armorLegs.protec) {
+      this.fighters[deffendingFighterIndex].armorLegs.criticalDmgCounter -= 1;
+      if (this.fighters[deffendingFighterIndex].armorLegs.criticalDmgCounter < 0) {
+        this.fighters[deffendingFighterIndex].armorLegs.criticalDmg = 10;
       }
     }
   }

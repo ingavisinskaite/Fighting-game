@@ -1,4 +1,4 @@
-import { IWeapon, IArmor, IBody } from '.';
+import { IWeapon, IArmor } from '.';
 
 export interface IFighter {
     name: string;
@@ -7,7 +7,6 @@ export interface IFighter {
     hp: number;
     attack: string;
     defence: string;
-    body: IBody;
     weaponLeft: IWeapon;
     weaponRight: IWeapon;
     armorHead: IArmor;

@@ -28,14 +28,10 @@ export class ArenaComponent implements OnInit {
     this._fight.assignArmor(fighterId, armorId);
   }
 
+  // Pakeisti, kad rodytų iš service
   showFighterHP(fighterId: string) {
     this.currentFighterHP = this._fight.getFightersHP(fighterId);
   }
-
-  // attackTest(weaponId: string, oneHanded: boolean) {
-  //   this.currentFighterDamage = this._fight.getDamage(weaponId, oneHanded);
-  //   this.currentFighterHP -= this.currentFighterDamage;
-  // }
 
   changePlayer() {
     if (this.currentPlayer === '0') {
