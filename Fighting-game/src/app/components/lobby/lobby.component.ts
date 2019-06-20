@@ -22,24 +22,9 @@ export class LobbyComponent implements OnInit {
               public router: Router) { }
 
   ngOnInit() {
+    this.getRooms();
     this.getOnlinePlayersCount();
     this.getCurrentUserId();
-    this._lobbyService.getRooms().subscribe(rooms => {
-      this.roomPlayers = rooms.map(r => {
-        r.playerCount = (r.player1 ? 1 : 0) + (r.player2 ? 1 : 0);
-        if (r.playerCount > 0) {
-          if (r.player1 === this.userId) {
-            this.router.navigateByUrl('/room');
-          } else if (r.player2 === this.userId) {
-            this.router.navigateByUrl('/room');
-          } else {
-            return;
-          }
-        }
-        const room = r as IRoom;
-        return room;
-      });
-    });
   }
 
   public toggleRoom(roomNum: number, userId: string) {
@@ -70,7 +55,7 @@ export class LobbyComponent implements OnInit {
   }
 
   public getOnlinePlayersCount() {
-    this._lobbyService.getOnlinePlayers()
+    this._lobbyService.getPlayers()
     .subscribe(data => {
       this.onlinePlayers = 0;
       for (let user of data) {
@@ -91,5 +76,28 @@ export class LobbyComponent implements OnInit {
     console.log(this.userId);
   }
 
+  public getRooms() {
+    this._lobbyService.getRooms().subscribe(rooms => {
+      this.roomPlayers = rooms.map(r => {
+        r.playerCount = (r.player1 ? 1 : 0) + (r.player2 ? 1 : 0);
+        if (r.playerCount === 2) {
+          if (r.player1 === this.userId) {
+            this.router.navigateByUrl('/room');
+          } else if (r.player2 === this.userId) {
+            this.router.navigateByUrl('/room');
+          } else {
+            return;
+          }
+          r.player1 = '';
+          r.player2 = '';
+          r.playerCount = 0;
+          const updatedRoom = r as IRoom;
+          this._lobbyService.updateRoomPlayers(r.id, updatedRoom);
+        }
+        const room = r as IRoom;
+        return room;
+      });
+    });
+  }
 
 }

@@ -14,8 +14,12 @@ export class LobbyService {
 
   constructor(private afs: AngularFirestore) { }
 
-  public getOnlinePlayers(): Observable<any[]> {
+  public getPlayers(): Observable<any[]> {
     return this.afs.collection('users').valueChanges();
+  }
+
+  public getPlayer(id: string): Observable<IUser> {
+    return this.afs.collection('users').doc<IUser>(id).valueChanges();
   }
 
   public updateRoomPlayers(roomId: string, data: IRoom): Promise<void> {
@@ -30,6 +34,10 @@ export class LobbyService {
         return { id, ...data };
       });
     }));
+  }
+
+  public getRoomPlayers(): Observable<any[]> {
+    return this.afs.collection('users').valueChanges();
   }
 
 }
