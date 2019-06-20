@@ -1,4 +1,6 @@
-import { LobbyService } from './../../services';
+import { Router } from '@angular/router';
+import { IRoom } from './../../models/room.model';
+import { LobbyService, AuthService } from './../../services';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -13,50 +15,85 @@ export class LobbyComponent implements OnInit {
   roomPlayers: number[];
   isInRoom: boolean;
 
+  joinedRoom: number;
+  onlinePlayers: number;
+  message = 'Welcome to game lobby';
+  roomPlayers: Array<IRoom>;
+  isInRoom: boolean = false;
+  userId: string;
 
-  constructor(public _lobbyService: LobbyService) { }
+  constructor(public _lobbyService: LobbyService,
+    public authService: AuthService,
+    public router: Router) { }
 
   ngOnInit() {
-    this.getRoomMessage();
-    this.getRoomPlayers();
-    this.getOnlinePlayers();
+    this.getRooms();
+    this.getOnlinePlayersCount();
+    this.getCurrentUserId();
   }
 
-  public countPlayers(roomNum: number): void {
-    if (!this._lobbyService.isInRoom) {
-      this._lobbyService.joinRoom(roomNum);
-      this.getJoinedRoom();
-      this.getRoomMessage();
-      this.getRoomPlayers();
-      this.getPlayerState();
+  public toggleRoom(roomNum: number, userId: string) {
+    const roomId = 'Room ' + roomNum;
+    const selectedRoom = this.roomPlayers[roomNum - 1];
+    delete selectedRoom.playerCount;
+    if (!this.isInRoom) {
+      if (selectedRoom.player1 === '') {
+        selectedRoom.player1 = userId;
+      } else {
+        selectedRoom.player2 = userId;
+      }
+      this._lobbyService.updateRoomPlayers(roomId, selectedRoom).then(x => console.log(x));
+      this.isInRoom = true;
+      this.message = 'You joined room ' + roomNum;
+      this.joinedRoom = roomNum;
     } else {
-      this._lobbyService.leaveRoom();
-      this._lobbyService.joinedRoom = 0;
-      this.getJoinedRoom();
-      this.getRoomMessage();
-      this.getRoomPlayers();
-      this.getPlayerState();
+      selectedRoom.player1 = '';
+      this.joinedRoom = 0;
+      this.isInRoom = false;
+      this.message = 'Welcome to game lobby';
+      this._lobbyService.updateRoomPlayers(roomId, selectedRoom).then(x => console.log(x));
     }
   }
 
-  public getJoinedRoom() {
-    this.joinedRoom = this._lobbyService.joinedRoom;
+  public get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn;
   }
 
-  public getOnlinePlayers() {
-    this.onlinePlayers = this._lobbyService.onlinePlayers;
+  public getOnlinePlayersCount() {
+    this._lobbyService.getPlayers()
+      .subscribe(data => {
+        this.onlinePlayers = 0;
+        for (let user of data) {
+          if (user.online === true) {
+            this.onlinePlayers += 1;
+          }
+        }
+      });
   }
 
-  public getRoomMessage() {
-    this.message = this._lobbyService.roomMessage;
+  public updateRoomPlayers(roomNum: number) {
+    const roomId = 'Room ' + roomNum;
+    this._lobbyService.updateRoomPlayers(roomId, this.roomPlayers[roomNum]);
   }
 
-  public getRoomPlayers() {
-    this.roomPlayers = this._lobbyService.joinedPlayers;
+  public getCurrentUserId() {
+    this.userId = this.authService.getUserId();
+    console.log(this.userId);
   }
 
-  public getPlayerState() {
-    this.isInRoom = this._lobbyService.playerState;
+  public getRooms() {
+    this._lobbyService.getRooms().subscribe(rooms => {
+      this.roomPlayers = rooms.map(r => {
+        r.playerCount = (r.player1 ? 1 : 0) + (r.player2 ? 1 : 0);
+        if (r.player1 === this.userId) {
+          this.router.navigateByUrl('/room');
+        } else if (r.player2 === this.userId) {
+          this.router.navigateByUrl('/room');
+        }
+        const room = r as IRoom;
+        return room;
+      });
+    });
   }
 
 }

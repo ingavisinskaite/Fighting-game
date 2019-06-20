@@ -1,74 +1,42 @@
+import { IRoom } from './../models/room.model';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
+import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
+import { IUser } from '../models/user/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class LobbyService {
-  onlinePlayers = 0;
-  isOnline: boolean;
-  roomPlayers = [0, 0, 0, 0];
-  private message = 'Welcome to game lobby';
-  isInRoom = false;
-  joinedRoomNum: number;
 
-  constructor(private _router: Router) { }
+  constructor(private afs: AngularFirestore) { }
 
-  // roomMessage: string;
-  public joinRoom(roomNum: number): number {
-    this.joinedRoomNum = roomNum;
-    for (let i = 0; i < this.roomPlayers.length; i++) {
-      this.roomPlayers[roomNum - 1] += 1;
-      this.message = 'You joined room ' + roomNum;
-      this.isInRoom = true;
-      if (this.roomPlayers[roomNum - 1] === 2) {
-        this.roomPlayers[i] = 0;
-        this._router.navigateByUrl('/');
-      }
-      return this.roomPlayers[roomNum - 1];
-    }
+  public getPlayers(): Observable<any[]> {
+    return this.afs.collection('users').valueChanges();
   }
 
-  public leaveRoom(): number {
-    for (let i = 0; i < this.roomPlayers.length; i++) {
-      if (this.roomPlayers[this.joinedRoomNum - 1] === 0) {
-        return;
-      } else {
-        this.roomPlayers[this.joinedRoomNum - 1] -= 1;
-      }
-      this.message = 'Welcome to game lobby';
-      this.isInRoom = false;
-
-      return this.roomPlayers[this.joinedRoomNum - 1];
-    }
+  public getPlayer(id: string): Observable<IUser> {
+    return this.afs.collection('users').doc<IUser>(id).valueChanges();
   }
 
-  public get joinedRoom(): number {
-    return this.joinedRoomNum;
+  public updateRoomPlayers(roomId: string, data: IRoom): Promise<void> {
+    return this.afs.collection('rooms').doc(roomId).update(data);
   }
 
-  public set joinedRoom(num: number) {
-    this.joinedRoomNum = num;
+  public getRooms(): Observable<any[]> {
+    return this.afs.collection('rooms').snapshotChanges().pipe(map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data() as IRoom;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      });
+    }));
   }
 
-  public get onlinePlayersNum(): number {
-    return this.onlinePlayers;
+  public getRoomPlayers(): Observable<any[]> {
+    return this.afs.collection('users').valueChanges();
   }
-
-  public set onlinePlayersNum(num: number) {
-    this.onlinePlayers = num;
-  }
-
-  public get roomMessage(): string {
-    return this.message;
-  }
-
-  public get joinedPlayers(): Array<number> {
-    return this.roomPlayers;
-  }
-
-  public get playerState(): boolean {
-    return this.isInRoom;
-  }
-
 }
