@@ -1,9 +1,10 @@
+import { IUser } from './../models/user/user.model';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from 'firebase';
-import { IUser } from '../models/user/user.model';
+
 import * as firebase from 'firebase/app';
 import { userInfo } from 'os';
 
@@ -101,29 +102,32 @@ export class AuthService {
     this.userData.room = data.user.room;
   }
 
-  public async login(email: string, password: string): Promise<void> {
-      return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+  public async login(email: string, password: string) {
+     if (this.userData.online === false) { return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         console.log(result);
         this.saveUser(result);
         this.router.navigate(['/login']);
         this.setUserData(result.user);
         window.alert('You have successfully logged in');
-      })
-
-      .catch ((error) => {
-      alert('Error!' + error.message);
       });
+    }
+     return ((error) => {
+       alert('Error!' + error.message);
+       });
   }
 
 
   public async logout(): Promise<void> {
+    if (this.userData.online === true) {
       return this.afAuth.auth.signOut().then(() => {
       localStorage.removeItem('user');
       this.deleteUser();
       this.router.navigate(['/login']);
       });
       }
+    }
+
 
   private deleteUser(): void {
     this.userData.uid = '';
@@ -134,7 +138,7 @@ export class AuthService {
     this.userData.emailVerified = false;
     this.userData.room = -1;
   }
-      
+
 
   public get isLoggedIn(): boolean {
   const user = JSON.parse(localStorage.getItem('user'));
