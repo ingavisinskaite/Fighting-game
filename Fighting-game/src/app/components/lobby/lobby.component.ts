@@ -18,8 +18,8 @@ export class LobbyComponent implements OnInit {
   userId: string;
 
   constructor(public _lobbyService: LobbyService,
-              public authService: AuthService,
-              public router: Router) { }
+    public authService: AuthService,
+    public router: Router) { }
 
   ngOnInit() {
     this.getRooms();
@@ -56,14 +56,14 @@ export class LobbyComponent implements OnInit {
 
   public getOnlinePlayersCount() {
     this._lobbyService.getPlayers()
-    .subscribe(data => {
-      this.onlinePlayers = 0;
-      for (let user of data) {
-        if (user.online === true) {
-          this.onlinePlayers += 1;
+      .subscribe(data => {
+        this.onlinePlayers = 0;
+        for (let user of data) {
+          if (user.online === true) {
+            this.onlinePlayers += 1;
+          }
         }
-      }
-  });
+      });
   }
 
   public updateRoomPlayers(roomNum: number) {
@@ -80,19 +80,10 @@ export class LobbyComponent implements OnInit {
     this._lobbyService.getRooms().subscribe(rooms => {
       this.roomPlayers = rooms.map(r => {
         r.playerCount = (r.player1 ? 1 : 0) + (r.player2 ? 1 : 0);
-        if (r.playerCount === 2) {
-          if (r.player1 === this.userId) {
-            this.router.navigateByUrl('/room');
-          } else if (r.player2 === this.userId) {
-            this.router.navigateByUrl('/room');
-          } else {
-            return;
-          }
-          r.player1 = '';
-          r.player2 = '';
-          r.playerCount = 0;
-          const updatedRoom = r as IRoom;
-          this._lobbyService.updateRoomPlayers(r.id, updatedRoom);
+        if (r.player1 === this.userId) {
+          this.router.navigateByUrl('/room');
+        } else if (r.player2 === this.userId) {
+          this.router.navigateByUrl('/room');
         }
         const room = r as IRoom;
         return room;
