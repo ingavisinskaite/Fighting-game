@@ -10,7 +10,8 @@ import { IUser } from '../models/user/user.model';
 })
 
 export class AuthService {
-  user: User;
+  user: User; //
+
   userData: IUser;
 
   constructor(public afAuth: AngularFireAuth,
