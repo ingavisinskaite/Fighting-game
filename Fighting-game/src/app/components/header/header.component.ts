@@ -1,3 +1,4 @@
+import { User } from 'firebase';
 import { AuthService } from '../../services';
 import { Component, OnInit } from '@angular/core';
 

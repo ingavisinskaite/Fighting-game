@@ -65,7 +65,7 @@ export class AuthService {
     return this.afAuth.auth.currentUser.sendEmailVerification();
   }
 
-  public SetUserData(user: any): Promise<void> {
+  public SetUserData(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     const userData: IUser = {
       uid: user.uid,
@@ -95,7 +95,7 @@ export class AuthService {
   public async logout(): Promise<void> {
     await this.afAuth.auth.signOut();
     localStorage.removeItem('user');
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
     window.alert('You have successfully logged out');
   }
 
