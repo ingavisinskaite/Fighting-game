@@ -36,7 +36,7 @@ import {
   MatExpansionModule,
   MatProgressSpinnerModule,
   MatTabsModule,
-  MatSnackBarModule
+  MatSnackBarModule,
 } from '@angular/material';
 
 
@@ -60,7 +60,7 @@ import { RoomComponent } from './components/room/room.component';
     NewsComponent,
     LoginComponent,
     LobbyComponent,
-    RoomComponent
+    RoomComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -75,7 +75,7 @@ import { RoomComponent } from './components/room/room.component';
     MatButtonModule,
     MatFormFieldModule,
     MatCardModule,
-    MatInputModule
+    MatInputModule,
   ],
 
   providers: [FightService, Weaponry, Armory, AuthService, LobbyService],
