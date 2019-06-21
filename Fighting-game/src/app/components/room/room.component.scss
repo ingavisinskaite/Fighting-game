@@ -1,25 +1,50 @@
+.roomPage {
+    min-height: 80vh;
+}
+
 .room {
-    text-align: center;
-    display: inline-block;
+  text-align: center;
 }
 
 .players {
-    border: 1px solid black;
-    width: 50vw;
+  width: 50vw;
+  display: inline-block;
 }
 
 #character {
-    width: 250px;
-    height: 400px;
-    margin-top: -105px;
+  width: 250px;
+  height: 400px;
 }
 
 .character {
-    float: right;
-    margin-right: 150px;
+  float: right;
+  margin-right: 150px;
+  display: inline-block;
 }
 
 .message {
-    display: inline-block;
-    margin: 0 3px;
+  display: inline-block;
+  margin: 0 3px;
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 7px;
+}
+
+.leave {
+  float: right;
+  margin-top: 20px;
+  margin-right: 50px;
+}
+
+.chatMessages {
+    margin-top: 20px;
+    width: 62vw;
+    z-index: -1;
+}
+
+.chat {
+    width: 58vw;
+    display: block;
+    margin-top: 5px;
+    z-index: -1;
 }

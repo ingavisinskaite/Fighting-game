@@ -32,7 +32,7 @@ import {
   MatExpansionModule,
   MatProgressSpinnerModule,
   MatTabsModule,
-  MatSnackBarModule
+  MatSnackBarModule,
 } from '@angular/material';
 
 
@@ -42,6 +42,7 @@ import { MainComponent } from './components/main/main.component';
 import { MapComponent } from './components/map/map.component';
 import { NewsComponent } from './components/news/news.component';
 import { RoomComponent } from './components/room/room.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { RoomComponent } from './components/room/room.component';
     NewsComponent,
     LoginComponent,
     LobbyComponent,
-    RoomComponent
+    RoomComponent,
+    PageNotFoundComponent
   ],
   imports: [
     AppRoutingModule,
@@ -71,7 +73,7 @@ import { RoomComponent } from './components/room/room.component';
     MatButtonModule,
     MatFormFieldModule,
     MatCardModule,
-    MatInputModule
+    MatInputModule,
   ],
 
   providers: [AuthService, LobbyService],

@@ -18,8 +18,11 @@ export class LobbyComponent implements OnInit {
   userId: string;
 
   constructor(public _lobbyService: LobbyService,
-    public authService: AuthService,
-    public router: Router) { }
+              public authService: AuthService,
+              public router: Router) {
+      
+      this.isInRoom = false;
+     }
 
   ngOnInit() {
     this.getRooms();
@@ -51,6 +54,14 @@ export class LobbyComponent implements OnInit {
       this.message = 'Welcome to game lobby';
       this._lobbyService.updateRoom(roomId, selectedRoom);
     }
+  }
+
+  public checkIfJoined() {
+    this._lobbyService.getPlayer(this.userId).subscribe(player => {
+      if (player.room !== -1) {
+        this.router.navigateByUrl('/room/' + player.room);
+      }
+    });
   }
 
   public get isLoggedIn(): boolean {

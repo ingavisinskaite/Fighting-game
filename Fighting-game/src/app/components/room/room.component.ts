@@ -14,6 +14,7 @@ export class RoomComponent implements OnInit {
   currentUserId: string;
   roomNum: number;
   room: IRoom;
+  formatedDate: string;
 
   // @HostListener('window:beforeunload', ['$event'])
   // beforeUnloadHandler(event) {
@@ -21,9 +22,9 @@ export class RoomComponent implements OnInit {
   // }
 
   constructor(private _lobbyService: LobbyService,
-              private _authService: AuthService,
-              private _activatedRoute: ActivatedRoute,
-              private _router: Router ) { }
+    private _authService: AuthService,
+    private _activatedRoute: ActivatedRoute,
+    private _router: Router) { }
 
   ngOnInit() {
     this.roomNum = this._activatedRoute.snapshot.params.roomNum;
@@ -40,7 +41,8 @@ export class RoomComponent implements OnInit {
 
   public sendMessage(message: string) {
     const sentMessage = message;
-    const playerSentMessage = this.currentUserId + ': ' + sentMessage;
+    this.getCurrentDate();
+    const playerSentMessage = this.formatedDate + ' ' + this.currentUserId + ': ' + sentMessage;
     this.room.chat.push(playerSentMessage);
     this.updateRoom(this.roomNum, this.room);
   }
@@ -59,16 +61,39 @@ export class RoomComponent implements OnInit {
     let roomId = 'Room ' + this.roomNum;
     if (this.room.player1 === this.currentUserId) {
       this.room.player1 = '';
+      this.room.playerCount -= 1;
     } else {
       this.room.player2 = '';
+      this.room.playerCount -= 1;
     }
 
     if (this.room.player1 === '' && this.room.player2 === '') {
       this.room.chat = [];
     }
- 
+
     this._lobbyService.updateRoom(roomId, this.room);
     this._router.navigateByUrl('/lobby');
+  }
+
+  public getCurrentDate() {
+    this.formatedDate = '';
+    const fullDate = new Date();
+    const hours = fullDate.getHours();
+    let hoursString = '';
+    if (hours < 10) {
+        hoursString = `0${hours.toString()}`;
+    } else {
+        hoursString = hours.toString();
+    }
+    const minutes = fullDate.getMinutes();
+    let minutesString = '';
+    if (minutes < 10) {
+        minutesString = `0${minutes.toString()}`;
+    } else {
+        minutesString = minutes.toString();
+    }
+    this.formatedDate = hoursString + ':' + minutesString;
+    return this.formatedDate;
   }
 
 }

@@ -18,6 +18,10 @@ export class LobbyService {
     return this.afs.collection('users').valueChanges();
   }
 
+  public getPlayer(playerId: string): Observable<any> {
+    return this.afs.collection('users').doc(playerId).valueChanges();
+  }
+
   public updateRoom(roomId: string, data: IRoom): Promise<void> {
     return this.afs.collection('rooms').doc(roomId).update(data);
   }
