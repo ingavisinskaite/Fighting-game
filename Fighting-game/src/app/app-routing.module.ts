@@ -20,7 +20,8 @@ const routes: Routes = [
 {path: 'map', component: MapComponent},
 {path: 'news', component: NewsComponent},
 {path: 'lobby', component: LobbyComponent},
-{path: 'room/:roomNum', component: RoomComponent}
+{path: 'room/:roomNum', component: RoomComponent},
+{ path: '**', redirectTo: 'login'}
 ];
 
 @NgModule({
