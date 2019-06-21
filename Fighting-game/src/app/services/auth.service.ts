@@ -51,7 +51,12 @@ export class AuthService {
       photoURL: user.photoURL,
       online: false,
       emailVerified: user.emailVerified,
-      room: -1
+      room: -1,
+      fullname: '',
+      birthDate: '',
+      gender: '',
+      country: '',
+      bio: '',
     };
     return userRef.set(userData, {
       merge: true
@@ -60,7 +65,7 @@ export class AuthService {
 
   public async login(email: string, password: string): Promise<void> {
     try {
-      await this.afAuth.auth.signInWithEmailAndPassword(email, password)
+      await this.afAuth.auth.signInWithEmailAndPassword(email, password);
       this.router.navigate(['/lobby']);
       window.alert('You have successfully logged in');
       this.getUserId();

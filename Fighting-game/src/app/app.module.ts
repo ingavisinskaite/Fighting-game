@@ -14,16 +14,20 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { CommonModule } from '@angular/common';
 
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
+  MatCheckboxModule,
   MatFormFieldModule,
   MatInputModule,
   MatCardModule,
   MatSelectModule,
   MatButtonModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatGridListModule,
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
@@ -42,7 +46,7 @@ import { MainComponent } from './components/main/main.component';
 import { MapComponent } from './components/map/map.component';
 import { NewsComponent } from './components/news/news.component';
 import { RoomComponent } from './components/room/room.component';
-
+import { FormsComponent } from './components/profile/forms/forms.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,8 @@ import { RoomComponent } from './components/room/room.component';
     NewsComponent,
     LoginComponent,
     LobbyComponent,
-    RoomComponent
+    RoomComponent,
+    FormsComponent
   ],
   imports: [
     AppRoutingModule,
@@ -71,7 +76,12 @@ import { RoomComponent } from './components/room/room.component';
     MatButtonModule,
     MatFormFieldModule,
     MatCardModule,
-    MatInputModule
+    MatCheckboxModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatGridListModule
   ],
 
   providers: [AuthService, LobbyService],
