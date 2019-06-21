@@ -1,6 +1,7 @@
 import { AuthService } from './../../services';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { IUser } from '../../models/user/user.model';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +10,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  authLogin: any;
+
   constructor(public authService: AuthService) { }
 
   ngOnInit() {
@@ -20,6 +23,16 @@ export class LoginComponent implements OnInit {
       password: new FormControl ('', [Validators.required, Validators.minLength(6)]),
     });
 }
+
+public  login(email: string, password: string): Promise <void> {
+  return this.authService.login(email, password);
+}
+// public fbLogin(): Promise <void> {
+//   return this.authLogin.facebookAuth();
+// }
+// public  googleLogin(): Promise <void> {
+//   return this.authLogin.googleAuth();
+// }
 // public get isLoggedIn(): boolean {
 //       return this.authService.isLoggedIn;
 //     }

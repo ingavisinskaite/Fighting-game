@@ -102,30 +102,48 @@ export class AuthService {
     this.userData.room = data.user.room;
   }
 
-  public async login(email: string, password: string) {
-     if (this.userData.online === false) { return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+  public async login(email: string, password: string): Promise <void> {
+     if (this.userData.online === false) { 
+      return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         console.log(result);
         this.saveUser(result);
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
         this.setUserData(result.user);
         window.alert('You have successfully logged in');
       });
+    } else {
+      window.alert('Allready logged in !!!');
     }
-     return ((error) => {
-       alert('Error!' + error.message);
-       });
+  }
+  public facebookAuth(): Promise <void> {
+    return this.authLogin(new firebase.auth.FacebookAuthProvider());
+  }
+
+  public googleAuth(): Promise<void> {
+    return this.authLogin(new firebase.auth.GoogleAuthProvider());
+}
+
+  private async authLogin(provider: any): Promise<void> {
+    return this.afAuth.auth.signInWithPopup(provider)
+      .then((res) => {
+        console.log(res);
+        console.log('You have been successfully logged in!');
+      }).catch((error) => {
+        console.log(error);
+    });
   }
 
 
   public async logout(): Promise<void> {
-    if (this.userData.online === true) {
+    if (this.userData.online !== false) {
       return this.afAuth.auth.signOut().then(() => {
       localStorage.removeItem('user');
       this.deleteUser();
       this.router.navigate(['/login']);
+      window.alert('You have successfully logged out');
       });
-      }
+    }
     }
 
 
