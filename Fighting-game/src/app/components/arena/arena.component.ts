@@ -12,25 +12,28 @@ export class ArenaComponent implements OnInit {
   currentPlayer = '0';
   currentFighterHP = 0;
 
+  fighterOneId = '0';
+  fighterTwoId = '1';
+
   constructor(public _fight: FightService,
               public _weaponry: Weaponry,
               public _armory: Armory) { }
 
   ngOnInit() {
-    this.showFighterHP(this.currentPlayer);
   }
 
   chooseWeapon(fighterId: string, weaponId: string, oneHanded: boolean) {
     this._fight.assignWeapon(fighterId, weaponId, oneHanded);
   }
 
-  chooseArmor(fighterId: string, armorId: string) {
-    this._fight.assignArmor(fighterId, armorId);
+  chooseArmor(fighterId: string, armorId: string, protec: string) {
+    this._fight.assignArmor(fighterId, armorId, protec);
+    // console.log('armor id:' + armorId);
   }
 
   // Pakeisti, kad rodytų iš service
-  showFighterHP(fighterId: string) {
-    this.currentFighterHP = this._fight.getFightersHP(fighterId);
+  showFighterHP() {
+    this.currentFighterHP = this._fight.getFightersHP(this.currentPlayer);
   }
 
   changePlayer() {
@@ -49,6 +52,11 @@ export class ArenaComponent implements OnInit {
 
   chooseDefence(fighterId: string, bodyPart: string) {
     this._fight.assignDefence(fighterId, bodyPart);
+  }
+
+  fight() {
+    this._fight.calculateCombat(this.fighterOneId, this.fighterTwoId);
+    console.log('Clash');
   }
 
 }

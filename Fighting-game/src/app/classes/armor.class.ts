@@ -5,7 +5,7 @@ export class Armory {
     head: IArmor[] = [{
         protec: 'head',
         criticalDmgCounter: 2,
-        criticalDmg: 10,
+        criticalDmg: 0,
         name: 'Leather Helmet',
         id: '0',
         armor: 5,
@@ -15,18 +15,18 @@ export class Armory {
     {
         protec: 'head',
         criticalDmgCounter: 2,
-        criticalDmg: 10,
+        criticalDmg: 0,
         name: 'Iron Helmet',
         id: '1',
         armor: 20,
-        durability: 10,
+        durability: 3,
         image: './assets/images/body/head.svg'
     }];
 
     torso: IArmor[] = [{
         protec: 'torso',
         criticalDmgCounter: 2,
-        criticalDmg: 10,
+        criticalDmg: 0,
         name: 'Leather Vest',
         id: '0',
         armor: 5,
@@ -36,18 +36,18 @@ export class Armory {
     {
         protec: 'torso',
         criticalDmgCounter: 2,
-        criticalDmg: 10,
+        criticalDmg: 0,
         name: 'Chainmail Vest',
         id: '1',
         armor: 20,
-        durability: 10,
+        durability: 3,
         image: './assets/images/body/torso.svg'
     }];
 
     arms: IArmor[] = [{
         protec: 'arms',
         criticalDmgCounter: 2,
-        criticalDmg: 10,
+        criticalDmg: 0,
         name: 'Leather Greaves',
         id: '0',
         armor: 5,
@@ -57,18 +57,18 @@ export class Armory {
     {
         protec: 'arms',
         criticalDmgCounter: 2,
-        criticalDmg: 10,
+        criticalDmg: 0,
         name: 'Chainmail Greaves',
         id: '1',
         armor: 20,
-        durability: 10,
+        durability: 3,
         image: './assets/images/body/arms.svg'
     }];
 
     legs: IArmor[] = [{
         protec: 'legs',
         criticalDmgCounter: 2,
-        criticalDmg: 10,
+        criticalDmg: 0,
         name: 'Leather Pants',
         id: '0',
         armor: 5,
@@ -78,11 +78,11 @@ export class Armory {
     {
         protec: 'legs',
         criticalDmgCounter: 2,
-        criticalDmg: 10,
+        criticalDmg: 0,
         name: 'Chainmail Pants',
         id: '1',
         armor: 20,
-        durability: 10,
+        durability: 3,
         image: './assets/images/body/legs.svg'
     }];
 

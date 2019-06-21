@@ -24,7 +24,9 @@
 <div class="armorWrap" *ngFor="let armor of _armory.head">
   <label class="container">
     {{ armor.name }}
-    <input type="radio" name="armor" (click)="chooseArmor(currentPlayer, armor.id)">
+    {{ armor.protec }}
+    {{ armor.id }}
+    <input type="radio" name="armor" (click)="chooseArmor(currentPlayer, armor.id, armor.protec)">
     <span class="checkmark"></span>
   </label>
 </div>
@@ -32,7 +34,9 @@
 <div class="armorWrap" *ngFor="let armor of _armory.torso">
   <label class="container">
     {{ armor.name }}
-    <input type="radio" name="armor" (click)="chooseArmor(currentPlayer, armor.id)">
+    {{ armor.protec }}
+    {{ armor.id }}
+    <input type="radio" name="armor" (click)="chooseArmor(currentPlayer, armor.id, armor.protec)">
     <span class="checkmark"></span>
   </label>
 </div>
@@ -40,7 +44,9 @@
 <div class="armorWrap" *ngFor="let armor of _armory.arms">
   <label class="container">
     {{ armor.name }}
-    <input type="radio" name="armor" (click)="chooseArmor(currentPlayer, armor.id)">
+    {{ armor.protec }}
+    {{ armor.id }}
+    <input type="radio" name="armor" (click)="chooseArmor(currentPlayer, armor.id, armor.protec)">
     <span class="checkmark"></span>
   </label>
 </div>
@@ -48,7 +54,9 @@
 <div class="armorWrap" *ngFor="let armor of _armory.legs">
   <label class="container">
     {{ armor.name }}
-    <input type="radio" name="armor" (click)="chooseArmor(currentPlayer, armor.id)">
+    {{ armor.protec }}
+    {{ armor.id }}
+    <input type="radio" name="armor" (click)="chooseArmor(currentPlayer, armor.id, armor.protec)">
     <span class="checkmark"></span>
   </label>
 </div>
@@ -82,6 +90,10 @@
   <div id="legs"><img [src]="_fight.fighters[0].armorLegs.image"></div>
 </div>
 
-<button (onclick)="changePlayer()">Submit Your Choices</button>
+<button type="button" (click)="changePlayer()">Submit Your Choices</button>
+<button type="button" (click)="showFighterHP()">Show HP</button>
 
-<div><p> {{ currentFighterHP }} </p></div>
+<p> Current Fighter ID: {{ currentPlayer }} </p>
+<p> Current Fighter HP: {{ currentFighterHP }} </p>
+
+<div><button type="button" (click)="fight()">FIGHT</button></div>
