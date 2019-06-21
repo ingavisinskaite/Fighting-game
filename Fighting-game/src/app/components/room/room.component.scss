@@ -1,0 +1,25 @@
+.room {
+    text-align: center;
+    display: inline-block;
+}
+
+.players {
+    border: 1px solid black;
+    width: 50vw;
+}
+
+#character {
+    width: 250px;
+    height: 400px;
+    margin-top: -105px;
+}
+
+.character {
+    float: right;
+    margin-right: 150px;
+}
+
+.message {
+    display: inline-block;
+    margin: 0 3px;
+}

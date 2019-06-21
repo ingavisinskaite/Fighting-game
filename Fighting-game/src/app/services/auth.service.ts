@@ -22,7 +22,7 @@ export class AuthService {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.user = user;
-        localStorage.setItem('user', JSON.stringify(this.user.uid));
+        localStorage.setItem('user', this.user.uid);
       } else {
         localStorage.setItem('user', null);
       }
@@ -103,17 +103,6 @@ export class AuthService {
   const user = JSON.parse(localStorage.getItem('user'));
   return user !== null;
 }
-
-// public getCurrentUserId() {
-//   firebase.auth().onAuthStateChanged(function(user) {
-//   if (user) {
-//     this.userId = user.uid;
-//     console.log(this.userId);
-//   } else {
-//     // No user is signed in.
-//   }
-// });
-// }
 
 public getUserId(): string {
   this.userId = localStorage.getItem('user');

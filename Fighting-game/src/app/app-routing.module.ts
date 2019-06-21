@@ -20,7 +20,7 @@ const routes: Routes = [
 {path: 'map', component: MapComponent},
 {path: 'news', component: NewsComponent},
 {path: 'lobby', component: LobbyComponent},
-{path: 'room', component: RoomComponent}
+{path: 'room/:roomNum', component: RoomComponent}
 ];
 
 @NgModule({

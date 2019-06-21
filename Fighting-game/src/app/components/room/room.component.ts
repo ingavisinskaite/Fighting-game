@@ -1,5 +1,8 @@
+import { AuthService } from './../../services/auth.service';
 import { LobbyService } from './../../services/lobby.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IRoom } from 'src/app/models/room.model';
 
 @Component({
   selector: 'app-room',
@@ -7,30 +10,64 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./room.component.scss']
 })
 export class RoomComponent implements OnInit {
-  players: Array<string>;
-  allRoomsPlayers: Array<string[]>;
+  players = [];
+  currentUserId: string;
+  roomNum: number;
+  room: IRoom;
 
-  constructor(private _lobbyService: LobbyService) { }
+  // @HostListener('window:beforeunload', ['$event'])
+  // beforeUnloadHandler(event) {
+  //   this.removePlayerFromRoom();
+  // }
+
+  constructor(private _lobbyService: LobbyService,
+              private _authService: AuthService,
+              private _activatedRoute: ActivatedRoute,
+              private _router: Router ) { }
 
   ngOnInit() {
-    this.getRoomPlayers();
+    this.roomNum = this._activatedRoute.snapshot.params.roomNum;
+    this.getCurrentUserId();
+    this.getRoomPlayers(this.roomNum);
   }
 
-  public getRoomPlayers() {
-    this._lobbyService.getRooms().subscribe(rooms => {
-      this.allRoomsPlayers = [];
-      for (let room of rooms) {
-        this.players = [];
-        this.players.push(room.player1);
-        this.players.push(room.player2);
-        this.allRoomsPlayers.push(this.players);
-      }
-      console.log(this.allRoomsPlayers);
+  public getRoomPlayers(roomNum: number) {
+    const roomId = 'Room ' + roomNum;
+    this._lobbyService.getRoom(roomId).subscribe(room => {
+      this.room = room;
     });
   }
 
-  public getPlayer(playerid: string) {
-    this._lobbyService.getPlayer(playerid).subscribe(x => console.log(x));
+  public sendMessage(message: string) {
+    const sentMessage = message;
+    const playerSentMessage = this.currentUserId + ': ' + sentMessage;
+    this.room.chat.push(playerSentMessage);
+    this.updateRoom(this.roomNum, this.room);
+  }
+
+  public getCurrentUserId() {
+    this.currentUserId = this._authService.getUserId();
+  }
+
+  public updateRoom(roomNum: number, data: IRoom) {
+    let roomId = 'Room ' + roomNum;
+    this._lobbyService.updateRoom(roomId, data);
+  }
+
+  public leaveRoom() {
+    let roomId = 'Room ' + this.roomNum;
+    if (this.room.player1 === this.currentUserId) {
+      this.room.player1 = '';
+    } else {
+      this.room.player2 = '';
+    }
+
+    if (this.room.player1 === '' && this.room.player2 === '') {
+      this.room.chat = [];
+    }
+ 
+    this._lobbyService.updateRoom(roomId, this.room);
+    this._router.navigateByUrl('/lobby');
   }
 
 }

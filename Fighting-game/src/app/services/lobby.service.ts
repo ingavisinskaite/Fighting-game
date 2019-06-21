@@ -18,12 +18,12 @@ export class LobbyService {
     return this.afs.collection('users').valueChanges();
   }
 
-  public getPlayer(id: string): Observable<IUser> {
-    return this.afs.collection('users').doc<IUser>(id).valueChanges();
+  public updateRoom(roomId: string, data: IRoom): Promise<void> {
+    return this.afs.collection('rooms').doc(roomId).update(data);
   }
 
-  public updateRoomPlayers(roomId: string, data: IRoom): Promise<void> {
-    return this.afs.collection('rooms').doc(roomId).update(data);
+  public getRoom(roomId: string): Observable<any> {
+    return this.afs.collection('rooms').doc(roomId).valueChanges();
   }
 
   public getRooms(): Observable<any[]> {
