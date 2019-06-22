@@ -103,7 +103,7 @@ export class AuthService {
   }
 
   public async login(email: string, password: string): Promise <void> {
-     if (this.userData.online === false) { 
+     if (this.userData.online === false) {
       return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         console.log(result);
