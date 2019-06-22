@@ -5,12 +5,16 @@ import { LobbyService, AuthService } from './services';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { Weaponry, Armory } from './classes';
+import { FightService } from './services/fight.service';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { ArenaComponent } from './components/arena/arena.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { CommonModule } from '@angular/common';
 
@@ -32,7 +36,7 @@ import {
   MatExpansionModule,
   MatProgressSpinnerModule,
   MatTabsModule,
-  MatSnackBarModule
+  MatSnackBarModule,
 } from '@angular/material';
 
 
@@ -47,6 +51,7 @@ import { RoomComponent } from './components/room/room.component';
 @NgModule({
   declarations: [
     AppComponent,
+    ArenaComponent,
     SignUpComponent,
     FooterComponent,
     HeaderComponent,
@@ -55,11 +60,10 @@ import { RoomComponent } from './components/room/room.component';
     NewsComponent,
     LoginComponent,
     LobbyComponent,
-    RoomComponent
+    RoomComponent,
   ],
   imports: [
     AppRoutingModule,
-    AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
@@ -71,10 +75,10 @@ import { RoomComponent } from './components/room/room.component';
     MatButtonModule,
     MatFormFieldModule,
     MatCardModule,
-    MatInputModule
+    MatInputModule,
   ],
 
-  providers: [AuthService, LobbyService],
+  providers: [FightService, Weaponry, Armory, AuthService, LobbyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

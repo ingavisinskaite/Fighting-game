@@ -5,9 +5,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from 'firebase';
 
-import * as firebase from 'firebase/app';
-import { userInfo } from 'os';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -33,7 +30,7 @@ export class AuthService {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.user = user;
-        localStorage.setItem('user', JSON.stringify(this.user.uid));
+        localStorage.setItem('user', this.user.uid);
       } else {
         localStorage.setItem('user', null);
       }
@@ -100,6 +97,7 @@ export class AuthService {
     this.userData.online = data.user.online;
     this.userData.emailVerified = data.user.emailVerified;
     this.userData.room = data.user.room;
+    console.log(this.userData);
   }
 
   public async login(email: string, password: string): Promise <void> {
@@ -108,7 +106,11 @@ export class AuthService {
       .then((result) => {
         console.log(result);
         this.saveUser(result);
+<<<<<<< HEAD
         this.router.navigate(['/']);
+=======
+        this.router.navigate(['/main']);
+>>>>>>> e229847c1172bdbd4f8b59d3f160c54eedef2c1b
         this.setUserData(result.user);
         window.alert('You have successfully logged in');
       });
@@ -163,21 +165,8 @@ export class AuthService {
   return (user !== null && user.emailVerified !== false) ? true : false;
 }
 
-// public getCurrentUserId() {
-//   firebase.auth().onAuthStateChanged(function(user) {
-//   if (user) {
-//     this.userId = user.uid;
-//     console.log(this.userId);
-//   } else {
-//     // No user is signed in.
-//   }
-// });
-// }
-
-// public getUserId(): string {
-//   this.userId = localStorage.getItem('user');
-//   console.log(this.userId);
-//   return this.userId;
-// }
+public getUserId() {
+  return this.userData.uid;
+}
 
 }

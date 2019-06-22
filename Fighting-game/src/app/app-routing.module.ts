@@ -12,7 +12,7 @@ import { SignUpComponent } from '../app/components/sign-up/sign-up.component';
 import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
-  { path: '', component: MainComponent },
+  { path: '', component: LoginComponent },
   { path: 'register-user', component: SignUpComponent },
   { path:  'login', component:  LoginComponent},
 {path: 'header', component: HeaderComponent},
@@ -20,7 +20,7 @@ const routes: Routes = [
 {path: 'map', component: MapComponent},
 {path: 'news', component: NewsComponent},
 {path: 'lobby', component: LobbyComponent},
-{path: 'room', component: RoomComponent}
+{path: 'room/:roomNum', component: RoomComponent}
 ];
 
 @NgModule({
