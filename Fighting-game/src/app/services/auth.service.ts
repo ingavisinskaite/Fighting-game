@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from 'firebase';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -106,11 +107,8 @@ export class AuthService {
       .then((result) => {
         console.log(result);
         this.saveUser(result);
-<<<<<<< HEAD
         this.router.navigate(['/']);
-=======
         this.router.navigate(['/main']);
->>>>>>> e229847c1172bdbd4f8b59d3f160c54eedef2c1b
         this.setUserData(result.user);
         window.alert('You have successfully logged in');
       });
@@ -118,13 +116,39 @@ export class AuthService {
       window.alert('Allready logged in !!!');
     }
   }
-  public facebookAuth(): Promise <void> {
-    return this.authLogin(new firebase.auth.FacebookAuthProvider());
+  doFacebookLogin() {
+    return new Promise<any>((resolve, reject) => {
+      const provider = new firebase.auth.FacebookAuthProvider();
+      this.afAuth.auth
+      .signInWithPopup(provider)
+      .then(res => {
+        resolve(res);
+      }, err => {
+        console.log(err);
+        reject(err);
+      });
+    });
+ }
+  // public facebookAuth(): Promise <void> {
+  //   return this.authLogin(new firebase.auth.FacebookAuthProvider());
+  // }
+
+  doGoogleLogin() {
+    return new Promise<any>((resolve, reject) => {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      provider.addScope('profile');
+      provider.addScope('email');
+      this.afAuth.auth
+      .signInWithPopup(provider)
+      .then(res => {
+        resolve(res);
+      });
+    });
   }
 
-  public googleAuth(): Promise<void> {
-    return this.authLogin(new firebase.auth.GoogleAuthProvider());
-}
+//   public googleAuth(): Promise<void> {
+//     return this.authLogin(new firebase.auth.GoogleAuthProvider());
+// }
 
   private async authLogin(provider: any): Promise<void> {
     return this.afAuth.auth.signInWithPopup(provider)

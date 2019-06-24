@@ -14,10 +14,7 @@
   </mat-card-content>
   <mat-card-actions class="card" align="end">
       <button [disabled]="loginForm.invalid" mat-raised-button class="btn" (click)=" login(userEmail.value, userPassword.value)" color="primary">Submit</button>
+      <button class="facebook-button" (click)="fbLogin()"  mat-flat-button color="primary">Facebook login</button>
+      <button class="google-button" (click)="googleLogin()" mat-flat-button color= "warn">Google login</button>
   </mat-card-actions>
-  <!-- <div>
-    <p> ..or login with</p>
-    <button class="facebook-button" (click)="fbLogin()"  mat-flat-button>Facebook login</button>
-    <button class="google-button" (click)="googleLogin()" mat-flat-button>Google login</button>
-  </div> -->
 </mat-card>

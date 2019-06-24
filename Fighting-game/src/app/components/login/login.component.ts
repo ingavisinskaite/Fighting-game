@@ -27,12 +27,12 @@ export class LoginComponent implements OnInit {
 public  login(email: string, password: string): Promise <void> {
   return this.authService.login(email, password);
 }
-// public fbLogin(): Promise <void> {
-//   return this.authLogin.facebookAuth();
-// }
-// public  googleLogin(): Promise <void> {
-//   return this.authLogin.googleAuth();
-// }
+public fbLogin(): Promise <void> {
+  return this.authService.doFacebookLogin();
+}
+public  googleLogin(): Promise <void> {
+  return this.authService.doGoogleLogin();
+}
 // public get isLoggedIn(): boolean {
 //       return this.authService.isLoggedIn;
 //     }
