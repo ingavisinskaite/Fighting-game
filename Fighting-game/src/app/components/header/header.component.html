@@ -5,9 +5,9 @@
     <div class="nav-link"><a  [routerLink]="['/map']" class="menu-item">Map</a></div>
     <div class="nav-link"><a  [routerLink]="['/news']" class="menu-item">News</a></div>
     <div class="nav-link"><a  [routerLink]="['/lobby']" class="menu-item">Lobby</a></div>
-    <div class="nav-link"><a  [routerLink]="['/register-user']" class="menu-item">Sign Up</a></div>
-    <div class="nav-link"><a  [routerLink]="['/login']" class="menu-item">Login</a></div>
-    <div class="nav-link" *ngIf="isLoggedIn"><a   class="menu-item" (click)="logout()">Logout</a></div>
+    <div class="nav-link" *ngIf="!loggedIn"><a  [routerLink]="['/register-user']" class="menu-item">Sign Up</a></div>
+    <div class="nav-link" *ngIf="!loggedIn"><a  [routerLink]="['/login']" class="menu-item">Login</a></div>
+    <div class="nav-link" *ngIf="loggedIn"><a   class="menu-item" (click)="logout()">Logout</a></div>
     
   </div>
 </nav>

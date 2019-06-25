@@ -5,6 +5,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from 'firebase';
 import * as firebase from 'firebase';
+import { runInThisContext } from 'vm';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,7 @@ export class AuthService {
       room: -1
 
   };
+  loggedIn: string;
 
   constructor(public afAuth: AngularFireAuth,
               public router: Router,
@@ -107,8 +109,9 @@ export class AuthService {
       .then((result) => {
         console.log(result);
         this.saveUser(result);
-        this.router.navigate(['/']);
         this.router.navigate(['/main']);
+        this.loggedIn = 'true';
+        localStorage.setItem('loggedIn', this.loggedIn);
         this.setUserData(result.user);
         window.alert('You have successfully logged in');
       });
@@ -166,6 +169,8 @@ export class AuthService {
       return this.afAuth.auth.signOut().then(() => {
       localStorage.removeItem('user');
       this.deleteUser();
+      this.loggedIn = 'false';
+      localStorage.setItem('loggedIn', this.loggedIn);
       this.router.navigate(['/login']);
       window.alert('You have successfully logged out');
       });
@@ -185,8 +190,8 @@ export class AuthService {
 
 
   public get isLoggedIn(): boolean {
-  const user = localStorage.getItem('user');
-  return (user !== null) ? true : false;
+  let playerState = JSON.parse(localStorage.getItem('loggedIn'));
+  return playerState;
 }
 
 
