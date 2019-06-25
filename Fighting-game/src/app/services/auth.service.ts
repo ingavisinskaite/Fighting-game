@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from 'firebase';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -100,30 +101,75 @@ export class AuthService {
     console.log(this.userData);
   }
 
-  public async login(email: string, password: string) {
-     if (this.userData.online === false) { return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+  public async login(email: string, password: string): Promise <void> {
+     if (this.userData.online === false) {
+      return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         console.log(result);
         this.saveUser(result);
+        this.router.navigate(['/']);
         this.router.navigate(['/main']);
         this.setUserData(result.user);
         window.alert('You have successfully logged in');
       });
+    } else {
+      window.alert('Allready logged in !!!');
     }
-     return ((error) => {
-       alert('Error!' + error.message);
-       });
+  }
+  doFacebookLogin() {
+    return new Promise<any>((resolve, reject) => {
+      const provider = new firebase.auth.FacebookAuthProvider();
+      this.afAuth.auth
+      .signInWithPopup(provider)
+      .then(res => {
+        resolve(res);
+      }, err => {
+        console.log(err);
+        reject(err);
+      });
+    });
+ }
+  // public facebookAuth(): Promise <void> {
+  //   return this.authLogin(new firebase.auth.FacebookAuthProvider());
+  // }
+
+  doGoogleLogin() {
+    return new Promise<any>((resolve, reject) => {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      provider.addScope('profile');
+      provider.addScope('email');
+      this.afAuth.auth
+      .signInWithPopup(provider)
+      .then(res => {
+        resolve(res);
+      });
+    });
+  }
+
+//   public googleAuth(): Promise<void> {
+//     return this.authLogin(new firebase.auth.GoogleAuthProvider());
+// }
+
+  private async authLogin(provider: any): Promise<void> {
+    return this.afAuth.auth.signInWithPopup(provider)
+      .then((res) => {
+        console.log(res);
+        console.log('You have been successfully logged in!');
+      }).catch((error) => {
+        console.log(error);
+    });
   }
 
 
   public async logout(): Promise<void> {
-    if (this.userData.online === true) {
+    if (this.userData.online !== false) {
       return this.afAuth.auth.signOut().then(() => {
       localStorage.removeItem('user');
       this.deleteUser();
       this.router.navigate(['/login']);
+      window.alert('You have successfully logged out');
       });
-      }
+    }
     }
 
 
