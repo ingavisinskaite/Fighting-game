@@ -1,3 +1,4 @@
+import { CannotFoundComponent } from './components/404/404.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { LobbyComponent } from './components/lobby/lobby.component';
@@ -46,7 +47,6 @@ import { MainComponent } from './components/main/main.component';
 import { MapComponent } from './components/map/map.component';
 import { NewsComponent } from './components/news/news.component';
 import { RoomComponent } from './components/room/room.component';
-import { CannotFoundComponent } from './components/cannot-found/cannot-found.component';
 
 
 @NgModule({

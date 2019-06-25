@@ -1,11 +1,11 @@
 import { Router } from '@angular/router';
-import { AuthService } from './../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-cannot-found',
-  templateUrl: './cannot-found.component.html',
-  styleUrls: ['./cannot-found.component.scss']
+  selector: 'app-404',
+  templateUrl: './404.component.html',
+  styleUrls: ['./404.component.scss']
 })
 export class CannotFoundComponent implements OnInit {
   loggedIn: boolean;

@@ -1,4 +1,4 @@
-import { CannotFoundComponent } from './components/cannot-found/cannot-found.component';
+import { CannotFoundComponent } from './components/404/404.component';
 import { AuthGuard } from './auth.guard';
 import { RoomComponent } from './components/room/room.component';
 import { LobbyComponent } from './components/lobby/lobby.component';
