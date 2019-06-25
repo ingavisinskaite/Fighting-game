@@ -55,7 +55,6 @@ export class AuthService {
       fullname: '',
       birthDate: '',
       gender: '',
-      country: '',
       bio: '',
     };
     return userRef.set(userData, {
@@ -69,6 +68,7 @@ export class AuthService {
       this.router.navigate(['/lobby']);
       window.alert('You have successfully logged in');
       this.getUserId();
+      document.getElementById('prof').setAttribute('style', 'display: block');
     } catch (e) {
       alert('Error!' + e.message);
     }
@@ -103,5 +103,15 @@ export class AuthService {
   }
   public setRoom(roomNum: number, uid: string): Promise<void> {
     return this.afs.collection('users').doc(uid).update({ room: roomNum });
+  }
+
+  submitUser(value) {
+    this.getUserId();
+    this.afs.collection('users').doc(this.userId).update({ fullname: value.fullname });
+    value.birthday = new Date().toLocaleDateString();
+    this.afs.collection('users').doc(this.userId).update({ birthDate: value.birthday });
+    this.afs.collection('users').doc(this.userId).update({ gender: value.gender });
+    this.afs.collection('users').doc(this.userId).update({ bio: value.bio });
+    this.afs.collection('users').doc(this.userId).update({ photoURL: value.photoPath });
   }
 }

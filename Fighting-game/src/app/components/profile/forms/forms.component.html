@@ -2,9 +2,9 @@
   <div class="row">
     <div class="col-2">
       <div class="user-details-container">
-        <img class="user-image" src="../../../assets/ddd.png"/>
-        <span class="user-title">{{userDetailsForm.get('fullname').value}}</span>
-        <div class="user-bio"><span>{{userDetailsForm.get('bio').value}}</span></div>
+        <img id="photo" class="user-image" [src]="setImageURL()"/>
+        <span class="user-title">{{ userDetailsForm.get('fullname').value }}</span>
+        <div class="user-bio"><span>{{ userDetailsForm.get('bio').value }}</span></div>
       </div>
     </div>
     <div id="forms">
@@ -47,14 +47,18 @@
             </mat-error>
           </mat-form-field>
 
-          <button class="submit-btn" color="primary" mat-raised-button type="submit" [disabled]="!userDetailsForm.valid">
+          <mat-form-field class="full-width">
+            <input #photoPath matInput placeholder="Profile photo URL" formControlName="photoPath">
+
+          </mat-form-field>
+          <button (click)="getImageURL(true, photoPath.value)" class="submit-btn" color="primary" mat-raised-button type="submit" [disabled]="!userDetailsForm.valid">
             Submit
           </button>
 
         </form>
       </div>
 
-      <div class="col">
+      <!-- <div class="col">
       <h2 class="section-title">Account details</h2>
 
       <form [formGroup]="accountDetailsForm" novalidate (ngSubmit)="onSubmitAccountDetails(accountDetailsForm.value)">
@@ -95,7 +99,7 @@
         </button>
 
       </form>
-    </div>
+      </div> -->
   </div>
   </div>
 </div>

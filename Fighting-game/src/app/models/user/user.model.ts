@@ -9,6 +9,5 @@ export interface IUser {
     fullname: string;
     birthDate: string;
     gender: string;
-    country: string;
     bio: string;
 }

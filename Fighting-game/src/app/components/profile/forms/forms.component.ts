@@ -1,10 +1,11 @@
+import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import {
   PasswordValidator,
   ParentErrorStateMatcher,
 } from '../validators';
-
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-forms-page',
@@ -13,7 +14,8 @@ import {
   encapsulation: ViewEncapsulation.None
 })
 export class FormsComponent implements OnInit {
-
+  imagePath: string;
+  buttonClicked = false;
   userDetailsForm: FormGroup;
   accountDetailsForm: FormGroup;
 
@@ -61,10 +63,12 @@ export class FormsComponent implements OnInit {
     ]
   };
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              public authService: AuthService) { }
 
   ngOnInit() {
     this.createForms();
+    console.log(document.getElementById('photo'));
   }
 
   createForms() {
@@ -87,6 +91,7 @@ export class FormsComponent implements OnInit {
       bio: ['Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', Validators.maxLength(256)],
       birthday: ['', Validators.required],
       gender: new FormControl(this.genders[0], Validators.required),
+      photoPath: new FormControl(),
     });
 
     // user links form validations
@@ -100,12 +105,22 @@ export class FormsComponent implements OnInit {
     });
   }
 
-  onSubmitAccountDetails(value) {
-    console.log(value);
-  }
+  // onSubmitAccountDetails(value) {
+  // }
 
   onSubmitUserDetails(value) {
-    console.log(value);
+    this.authService.submitUser(value);
   }
 
+  getImageURL(clicked, path) {
+    this.buttonClicked = clicked;
+    this.imagePath = path;
+  }
+
+  setImageURL() {
+    if (!this.buttonClicked) {
+      this.imagePath = '../../../assets/ddd.png';
+    }
+    return this.imagePath;
+  }
 }
