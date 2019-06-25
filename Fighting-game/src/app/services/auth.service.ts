@@ -5,7 +5,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from 'firebase';
 import * as firebase from 'firebase';
-import { runInThisContext } from 'vm';
 
 @Injectable({
   providedIn: 'root'
@@ -15,20 +14,20 @@ export class AuthService {
   user: User; //
   // userId: any;
   userData: IUser = {
-      uid: '',
-      email: '',
-      displayName: '',
-      photoURL: '',
-      online: false,
-      emailVerified: false,
-      room: -1
+    uid: '',
+    email: '',
+    displayName: '',
+    photoURL: '',
+    online: false,
+    emailVerified: false,
+    room: -1
 
   };
   loggedIn: string;
 
   constructor(public afAuth: AngularFireAuth,
-              public router: Router,
-              public afs: AngularFirestore) {
+    public router: Router,
+    public afs: AngularFirestore) {
 
     this.afAuth.authState.subscribe(user => {
       if (user) {
@@ -103,18 +102,18 @@ export class AuthService {
     console.log(this.userData);
   }
 
-  public async login(email: string, password: string): Promise <void> {
-     if (this.userData.online === false) {
+  public async login(email: string, password: string): Promise<void> {
+    if (this.userData.online === false) {
       return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        console.log(result);
-        this.saveUser(result);
-        this.router.navigate(['/main']);
-        this.loggedIn = 'true';
-        localStorage.setItem('loggedIn', this.loggedIn);
-        this.setUserData(result.user);
-        window.alert('You have successfully logged in');
-      });
+        .then((result) => {
+          console.log(result);
+          this.saveUser(result);
+          this.router.navigate(['/main']);
+          this.loggedIn = 'true';
+          localStorage.setItem('loggedIn', this.loggedIn);
+          this.setUserData(result.user);
+          window.alert('You have successfully logged in');
+        });
     } else {
       window.alert('Allready logged in !!!');
     }
@@ -123,15 +122,15 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => {
       const provider = new firebase.auth.FacebookAuthProvider();
       this.afAuth.auth
-      .signInWithPopup(provider)
-      .then(res => {
-        resolve(res);
-      }, err => {
-        console.log(err);
-        reject(err);
-      });
+        .signInWithPopup(provider)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          console.log(err);
+          reject(err);
+        });
     });
- }
+  }
   // public facebookAuth(): Promise <void> {
   //   return this.authLogin(new firebase.auth.FacebookAuthProvider());
   // }
@@ -142,16 +141,16 @@ export class AuthService {
       provider.addScope('profile');
       provider.addScope('email');
       this.afAuth.auth
-      .signInWithPopup(provider)
-      .then(res => {
-        resolve(res);
-      });
+        .signInWithPopup(provider)
+        .then(res => {
+          resolve(res);
+        });
     });
   }
 
-//   public googleAuth(): Promise<void> {
-//     return this.authLogin(new firebase.auth.GoogleAuthProvider());
-// }
+  //   public googleAuth(): Promise<void> {
+  //     return this.authLogin(new firebase.auth.GoogleAuthProvider());
+  // }
 
   private async authLogin(provider: any): Promise<void> {
     return this.afAuth.auth.signInWithPopup(provider)
@@ -160,22 +159,20 @@ export class AuthService {
         console.log('You have been successfully logged in!');
       }).catch((error) => {
         console.log(error);
-    });
+      });
   }
 
 
   public async logout(): Promise<void> {
-    if (this.userData.online !== false) {
-      return this.afAuth.auth.signOut().then(() => {
+    return this.afAuth.auth.signOut().then(() => {
       localStorage.removeItem('user');
       this.deleteUser();
       this.loggedIn = 'false';
       localStorage.setItem('loggedIn', this.loggedIn);
       this.router.navigate(['/login']);
       window.alert('You have successfully logged out');
-      });
-    }
-    }
+    });
+  }
 
 
   private deleteUser(): void {
@@ -190,13 +187,13 @@ export class AuthService {
 
 
   public get isLoggedIn(): boolean {
-  let playerState = JSON.parse(localStorage.getItem('loggedIn'));
-  return playerState;
-}
+    let playerState = JSON.parse(localStorage.getItem('loggedIn'));
+    return playerState;
+  }
 
 
-public getUserId() {
-  return this.userData.uid;
-}
+  public getUserId() {
+    return this.userData.uid;
+  }
 
 }

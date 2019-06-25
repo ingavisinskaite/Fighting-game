@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
     }
 
     public logout(): Promise<void> {
+      this.isLoggedIn;
       return this._auth.logout();
     }
 }

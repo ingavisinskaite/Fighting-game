@@ -46,6 +46,7 @@ import { MainComponent } from './components/main/main.component';
 import { MapComponent } from './components/map/map.component';
 import { NewsComponent } from './components/news/news.component';
 import { RoomComponent } from './components/room/room.component';
+import { CannotFoundComponent } from './components/cannot-found/cannot-found.component';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { RoomComponent } from './components/room/room.component';
     LoginComponent,
     LobbyComponent,
     RoomComponent,
+    CannotFoundComponent,
   ],
   imports: [
     AppRoutingModule,

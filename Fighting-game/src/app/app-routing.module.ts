@@ -1,3 +1,4 @@
+import { CannotFoundComponent } from './components/cannot-found/cannot-found.component';
 import { AuthGuard } from './auth.guard';
 import { RoomComponent } from './components/room/room.component';
 import { LobbyComponent } from './components/lobby/lobby.component';
@@ -35,7 +36,7 @@ const routes: Routes = [
   {
     path: 'room/:roomNum', component: RoomComponent, canActivate: [AuthGuard]
   },
-  { path: '**', redirectTo: 'login' }
+  { path: '**', component: CannotFoundComponent }
 ];
 
 @NgModule({
