@@ -139,9 +139,10 @@ export class AuthService {
 
 
   public get isLoggedIn(): boolean {
-  const user = JSON.parse(localStorage.getItem('user'));
-  return (user !== null && user.emailVerified !== false) ? true : false;
+  const user = localStorage.getItem('user');
+  return (user !== null) ? true : false;
 }
+
 
 public getUserId() {
   return this.userData.uid;
