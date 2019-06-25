@@ -6,4 +6,5 @@ export interface IUser {
     online: boolean;
     emailVerified: boolean;
     room: number;
+    // price: number;
 }

@@ -32,7 +32,10 @@ import {
   MatExpansionModule,
   MatProgressSpinnerModule,
   MatTabsModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatIconModule,
+  MatToolbarModule,
+  MatCheckboxModule
 } from '@angular/material';
 
 
@@ -42,6 +45,12 @@ import { MainComponent } from './components/main/main.component';
 import { MapComponent } from './components/map/map.component';
 import { NewsComponent } from './components/news/news.component';
 import { RoomComponent } from './components/room/room.component';
+import { ShopComponent } from './components/shop/shop.component';
+import { DaggerComponent } from './components/shop/dagger/dagger.component';
+import { FistsComponent } from './components/shop/fists/fists.component';
+import { FlailComponent } from './components/shop/flail/flail.component';
+import { SwordComponent } from './components/shop/sword/sword.component';
+import { ArmorComponent } from './components/shop/armor/armor.component';
 
 
 @NgModule({
@@ -55,7 +64,13 @@ import { RoomComponent } from './components/room/room.component';
     NewsComponent,
     LoginComponent,
     LobbyComponent,
-    RoomComponent
+    RoomComponent,
+    ShopComponent,
+    DaggerComponent,
+    FistsComponent,
+    FlailComponent,
+    SwordComponent,
+    ArmorComponent
   ],
   imports: [
     AppRoutingModule,
@@ -71,9 +86,16 @@ import { RoomComponent } from './components/room/room.component';
     MatButtonModule,
     MatFormFieldModule,
     MatCardModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule
   ],
-
+  entryComponents: [ShopComponent, FistsComponent, DaggerComponent, SwordComponent, FlailComponent],
   providers: [AuthService, LobbyService],
   bootstrap: [AppComponent]
 })

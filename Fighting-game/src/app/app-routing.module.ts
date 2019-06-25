@@ -10,6 +10,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SignUpComponent } from '../app/components/sign-up/sign-up.component';
 import { LoginComponent } from './components/login/login.component';
+import { ShopComponent } from './components/shop/shop.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
 {path: 'map', component: MapComponent},
 {path: 'news', component: NewsComponent},
 {path: 'lobby', component: LobbyComponent},
+{path: 'shop', component: ShopComponent},
 {path: 'room', component: RoomComponent}
 ];
 
