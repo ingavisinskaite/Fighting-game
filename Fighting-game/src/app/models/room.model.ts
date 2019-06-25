@@ -3,4 +3,5 @@ export interface IRoom {
     player1: string;
     player2: string;
     playerCount: number;
+    chat: Array<string>;
 }

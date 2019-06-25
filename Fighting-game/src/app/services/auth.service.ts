@@ -1,19 +1,29 @@
+import { IUser } from './../models/user/user.model';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from 'firebase';
-import { IUser } from '../models/user/user.model';
-import * as firebase from 'firebase/app';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
-  user: User;
-  userData: IUser;
-  userId: string;
+  user: User; //
+  // userId: any;
+  userData: IUser = {
+    uid: '',
+    email: '',
+    displayName: '',
+    photoURL: '',
+    online: false,
+    emailVerified: false,
+    room: -1
+
+  };
+  loggedIn: string;
 
   constructor(public afAuth: AngularFireAuth,
     public router: Router,
@@ -22,7 +32,7 @@ export class AuthService {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.user = user;
-        localStorage.setItem('user', JSON.stringify(this.user.uid));
+        localStorage.setItem('user', this.user.uid);
       } else {
         localStorage.setItem('user', null);
       }
@@ -54,18 +64,18 @@ export class AuthService {
   public async signUp(email: string, password: string): Promise<void> {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        this.SendVerificationMail();
-        this.SetUserData(result.user);
+        this.sendVerificationMail();
+        this.setUserData(result.user);
       }).catch((error) => {
         window.alert(error.message);
       });
   }
 
-  public SendVerificationMail(): Promise<void> {
+  public sendVerificationMail(): Promise<void> {
     return this.afAuth.auth.currentUser.sendEmailVerification();
   }
 
-  public SetUserData(user: any) {
+  public setUserData(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     const userData: IUser = {
       uid: user.uid,
@@ -81,44 +91,109 @@ export class AuthService {
     });
   }
 
+  private saveUser(data: any) {
+    this.userData.uid = data.user.uid;
+    this.userData.email = data.user.email;
+    this.userData.displayName = data.user.displayName;
+    this.userData.photoURL = data.user.photoURL;
+    this.userData.online = data.user.online;
+    this.userData.emailVerified = data.user.emailVerified;
+    this.userData.room = data.user.room;
+    console.log(this.userData);
+  }
+
   public async login(email: string, password: string): Promise<void> {
-    try {
-      await this.afAuth.auth.signInWithEmailAndPassword(email, password);
-      this.router.navigate(['/lobby']);
-      window.alert('You have successfully logged in');
-      this.getUserId();
-    } catch (e) {
-      alert('Error!' + e.message);
+    if (this.userData.online === false) {
+      return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+        .then((result) => {
+          console.log(result);
+          this.saveUser(result);
+          this.router.navigate(['/main']);
+          this.loggedIn = 'true';
+          localStorage.setItem('loggedIn', this.loggedIn);
+          this.setUserData(result.user);
+          window.alert('You have successfully logged in');
+        });
+    } else {
+      window.alert('Allready logged in !!!');
     }
   }
+  doFacebookLogin() {
+    return new Promise<any>((resolve, reject) => {
+      const provider = new firebase.auth.FacebookAuthProvider();
+      this.afAuth.auth
+        .signInWithPopup(provider)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          console.log(err);
+          reject(err);
+        });
+    });
+  }
+  // public facebookAuth(): Promise <void> {
+  //   return this.authLogin(new firebase.auth.FacebookAuthProvider());
+  // }
 
-  public async logout(): Promise<void> {
-    await this.afAuth.auth.signOut();
-    localStorage.removeItem('user');
-    this.router.navigate(['/']);
-    window.alert('You have successfully logged out');
+  doGoogleLogin() {
+    return new Promise<any>((resolve, reject) => {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      provider.addScope('profile');
+      provider.addScope('email');
+      this.afAuth.auth
+        .signInWithPopup(provider)
+        .then(res => {
+          resolve(res);
+        });
+    });
   }
 
+  //   public googleAuth(): Promise<void> {
+  //     return this.authLogin(new firebase.auth.GoogleAuthProvider());
+  // }
+
+  private async authLogin(provider: any): Promise<void> {
+    return this.afAuth.auth.signInWithPopup(provider)
+      .then((res) => {
+        console.log(res);
+        console.log('You have been successfully logged in!');
+      }).catch((error) => {
+        console.log(error);
+      });
+  }
+
+
+  public async logout(): Promise<void> {
+    return this.afAuth.auth.signOut().then(() => {
+      localStorage.removeItem('user');
+      this.deleteUser();
+      this.loggedIn = 'false';
+      localStorage.setItem('loggedIn', this.loggedIn);
+      this.router.navigate(['/login']);
+      window.alert('You have successfully logged out');
+    });
+  }
+
+
+  private deleteUser(): void {
+    this.userData.uid = '';
+    this.userData.email = '';
+    this.userData.displayName = '';
+    this.userData.photoURL = '';
+    this.userData.online = false;
+    this.userData.emailVerified = false;
+    this.userData.room = -1;
+  }
+
+
   public get isLoggedIn(): boolean {
-  const user = JSON.parse(localStorage.getItem('user'));
-  return user !== null;
-}
+    let playerState = JSON.parse(localStorage.getItem('loggedIn'));
+    return playerState;
+  }
 
-// public getCurrentUserId() {
-//   firebase.auth().onAuthStateChanged(function(user) {
-//   if (user) {
-//     this.userId = user.uid;
-//     console.log(this.userId);
-//   } else {
-//     // No user is signed in.
-//   }
-// });
-// }
 
-public getUserId(): string {
-  this.userId = localStorage.getItem('user');
-  console.log(this.userId);
-  return this.userId;
-}
+  public getUserId() {
+    return this.userData.uid;
+  }
 
 }

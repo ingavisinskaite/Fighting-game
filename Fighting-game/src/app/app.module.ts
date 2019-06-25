@@ -1,3 +1,4 @@
+import { CannotFoundComponent } from './components/404/404.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { LobbyComponent } from './components/lobby/lobby.component';
@@ -5,12 +6,16 @@ import { LobbyService, AuthService } from './services';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { Weaponry, Armory } from './classes';
+import { FightService } from './services/fight.service';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { ArenaComponent } from './components/arena/arena.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { CommonModule } from '@angular/common';
 
@@ -33,9 +38,6 @@ import {
   MatProgressSpinnerModule,
   MatTabsModule,
   MatSnackBarModule,
-  MatIconModule,
-  MatToolbarModule,
-  MatCheckboxModule
 } from '@angular/material';
 
 
@@ -56,6 +58,7 @@ import { ArmorComponent } from './components/shop/armor/armor.component';
 @NgModule({
   declarations: [
     AppComponent,
+    ArenaComponent,
     SignUpComponent,
     FooterComponent,
     HeaderComponent,
@@ -74,7 +77,6 @@ import { ArmorComponent } from './components/shop/armor/armor.component';
   ],
   imports: [
     AppRoutingModule,
-    AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
@@ -87,16 +89,9 @@ import { ArmorComponent } from './components/shop/armor/armor.component';
     MatFormFieldModule,
     MatCardModule,
     MatInputModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatDialogModule,
-    MatToolbarModule,
-    MatCardModule,
-    MatIconModule,
-    MatButtonModule
   ],
   entryComponents: [ShopComponent, FistsComponent, DaggerComponent, SwordComponent, FlailComponent],
-  providers: [AuthService, LobbyService],
+  providers: [FightService, Weaponry, Armory, AuthService, LobbyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
