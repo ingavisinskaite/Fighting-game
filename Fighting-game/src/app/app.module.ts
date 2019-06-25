@@ -1,3 +1,4 @@
+import { CannotFoundComponent } from './components/404/404.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { LobbyComponent } from './components/lobby/lobby.component';
@@ -61,6 +62,7 @@ import { RoomComponent } from './components/room/room.component';
     LoginComponent,
     LobbyComponent,
     RoomComponent,
+    CannotFoundComponent,
   ],
   imports: [
     AppRoutingModule,
