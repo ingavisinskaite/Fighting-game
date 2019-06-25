@@ -1,10 +1,59 @@
-.map{
-    background-image: url('../../../assets/map.jpg');  
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    min-height: 100vh;
-    width: 100%;
-    margin-top: 3rem;
+// .map {
+//   background-image: url('../../../assets/map.jpg');
+//   background-size: cover;
+//   background-position: center center;
+//   background-repeat: no-repeat;
+//   min-height: 100vh;
+//   width: 100vw;
+//   margin-top: 3rem;
+// }
+
+.map {
+  min-width: 1111px;
+  position: relative;
+  margin-top: 30px;
+}
+
+.arena {
+  width: 60px;
+  cursor: pointer;
+}
+
+.fight {
+  position: absolute;
+  left: 465px;
+  top: 266px;
+}
+
+.arena-sign {
+  display: none;
+}
+
+.fight:hover {
+  .arena-sign {
+    display: block;
+    color: white;
+  }
+}
+
+.shop:hover {
+    .shop-sign {
+      display: block;
+      color: white;
+    }
+  }
+
+.shop-image {
+  width: 50px;
+  cursor: pointer;
+}
+
+.shop {
+  position: absolute;
+  left: 1095px;
+  top: 692px;
+}
+
+.shop-sign {
+  display: none;
 }
