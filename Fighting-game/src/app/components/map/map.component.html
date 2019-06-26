@@ -1,16 +1,15 @@
-<div class="map">
-    <img src="../../../assets/map.jpg">
+<div class="map" (scroll)="scrollHandler($event)">
+  <img src="../../../assets/map.jpg">
   <div class="fight">
-    <p class="arena-sign">ARENA</p>
-    <img [routerLink]="['/lobby']" class="arena" src="../../../assets/arena.png">
+    <img [routerLink]="['/lobby']" matTooltip="Arena"  [matTooltipPosition]="toolTipPosition" class="arena" src="../../../assets/arena.png">
   </div>
 
   <div class="shop">
     <p class="shop-sign">SHOP</p>
-    <img  class="shop-image" [routerLink]="['/shop']" src="../../../assets/shop.png">
+    <img class="shop-image" matTooltip="Shop"  [matTooltipPosition]="toolTipPosition" [routerLink]="['/shop']" src="../../../assets/shop.png">
   </div>
 
-  <div>
-      
-  </div>
+  <i class="material-icons zoom-in">zoom_in</i>
+  <i class="material-icons zoom-out">zoom_out</i>
+
 </div>
