@@ -1,4 +1,4 @@
-<div class="map" (scroll)="scrollHandler($event)">
+<div class="map" (onmousemove)="onMouseMove($event)">
   <img src="../../../assets/map.jpg">
   <div class="fight">
     <img [routerLink]="['/lobby']" matTooltip="Arena"  [matTooltipPosition]="toolTipPosition" class="arena" src="../../../assets/arena.png">
