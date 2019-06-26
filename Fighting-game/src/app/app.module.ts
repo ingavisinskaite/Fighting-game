@@ -37,7 +37,7 @@ import {
   MatExpansionModule,
   MatProgressSpinnerModule,
   MatTabsModule,
-  MatSnackBarModule,
+  MatSnackBarModule
 } from '@angular/material';
 
 
@@ -52,7 +52,6 @@ import { DaggerComponent } from './components/shop/dagger/dagger.component';
 import { FistsComponent } from './components/shop/fists/fists.component';
 import { FlailComponent } from './components/shop/flail/flail.component';
 import { SwordComponent } from './components/shop/sword/sword.component';
-import { ArmorComponent } from './components/shop/armor/armor.component';
 
 
 @NgModule({
@@ -73,7 +72,7 @@ import { ArmorComponent } from './components/shop/armor/armor.component';
     FistsComponent,
     FlailComponent,
     SwordComponent,
-    ArmorComponent
+    CannotFoundComponent
   ],
   imports: [
     AppRoutingModule,
@@ -89,6 +88,17 @@ import { ArmorComponent } from './components/shop/armor/armor.component';
     MatFormFieldModule,
     MatCardModule,
     MatInputModule,
+    MatSelectModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatDialogModule,
+    MatAutocompleteModule,
+    MatExpansionModule,
+    MatProgressSpinnerModule,
+    MatTabsModule,
+    MatSnackBarModule
+
   ],
   entryComponents: [ShopComponent, FistsComponent, DaggerComponent, SwordComponent, FlailComponent],
   providers: [FightService, Weaponry, Armory, AuthService, LobbyService],

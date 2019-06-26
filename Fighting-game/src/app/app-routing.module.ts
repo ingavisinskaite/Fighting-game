@@ -35,6 +35,9 @@ const routes: Routes = [
     path: 'lobby', component: LobbyComponent, canActivate: [AuthGuard]
   },
   {
+    path: 'shop', component: ShopComponent, canActivate: [AuthGuard]
+  },
+  {
     path: 'room/:roomNum', component: RoomComponent, canActivate: [AuthGuard]
   },
   { path: '**', component: CannotFoundComponent }
