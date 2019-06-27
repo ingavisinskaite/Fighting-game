@@ -1,44 +1,112 @@
+$break-medium: 1240px;
+$break-medium-small: 1000px;
+$break-small: 650px;
+$break-mobile: 400px;
+
 .map {
   position: relative;
   margin-top: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+
+  >img {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
 }
 
 .arena {
-  width: 60px;
+  max-width: 100%;
   cursor: pointer;
 }
 
 .fight {
+  width: 60px;
   position: absolute;
-  left: 465px;
-  top: 266px;
-}
+  left: 32%;
+  top: 31%;
 
-.arena-sign {
-  display: none;
+  @media screen and (max-width: $break-medium) {
+    width: 50px;
+  }
+
+  @media screen and (max-width: $break-medium-small) {
+    width: 38px;
+  }
+
+  @media screen and (max-width: $break-small) {
+    width: 25px;
+  }
+
+  @media screen and (max-width: $break-mobile) {
+    width: 18px;
+  }
 }
 
 .shop-image {
-  width: 50px;
+  max-width: 100%;
   cursor: pointer;
 }
 
 .shop {
+  width: 50px;
   position: absolute;
-  left: 1095px;
-  top: 692px;
+  left: 73%;
+  top: 84%;
+
+  @media screen and (max-width: $break-medium) {
+    width: 44px;
+  }
+
+  @media screen and (max-width: $break-medium-small) {
+    width: 34px;
+  }
+
+  @media screen and (max-width: $break-small) {
+    width: 20px;
+  }
+
+  @media screen and (max-width: $break-mobile) {
+    width: 12px;
+  }
 }
 
-.shop-sign {
-  display: none;
-}
-
-.zoom-in {
-    position: absolute;
-    right: 35px;
-}
-
-.zoom-out {
-    position: absolute;
-    right: 0;
-}
+//pulsing animation
+.pulse {
+    display: block;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 0 rgba(163, 162, 157, 0.4);
+    animation: pulse 2s infinite;
+  }
+  .pulse:hover {
+    animation: none;
+  }
+  
+  @-webkit-keyframes pulse {
+    0% {
+      -webkit-box-shadow: 0 0 0 0 rgba(163, 162, 157, 0.4);
+    }
+    70% {
+        -webkit-box-shadow: 0 0 0 10px rgba(163, 162, 157, 0);
+    }
+    100% {
+        -webkit-box-shadow: 0 0 0 0 rgba(163, 162, 157, 0);
+    }
+  }
+  @keyframes pulse {
+    0% {
+      -moz-box-shadow: 0 0 0 0 rgba(163, 162, 157, 0.4);
+      box-shadow: 0 0 0 0 rgba(163, 162, 157, 0.4);
+    }
+    70% {
+        -moz-box-shadow: 0 0 0 10px rgba(163, 162, 157, 0);
+        box-shadow: 0 0 0 10px rgba(163, 162, 157, 0);
+    }
+    100% {
+        -moz-box-shadow: 0 0 0 0 rgba(163, 162, 157, 0);
+        box-shadow: 0 0 0 0 rgba(163, 162, 157, 0);
+    }
+  }

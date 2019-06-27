@@ -1,15 +1,11 @@
-<div class="map" (onmousemove)="onMouseMove($event)">
+<div class="map" >
   <img src="../../../assets/map.jpg">
-  <div class="fight">
+  <div class="fight pulse">
     <img [routerLink]="['/lobby']" matTooltip="Arena"  [matTooltipPosition]="toolTipPosition" class="arena" src="../../../assets/arena.png">
   </div>
 
-  <div class="shop">
-    <p class="shop-sign">SHOP</p>
+  <div class="shop pulse">
     <img class="shop-image" matTooltip="Shop"  [matTooltipPosition]="toolTipPosition" [routerLink]="['/shop']" src="../../../assets/shop.png">
   </div>
-
-  <i class="material-icons zoom-in">zoom_in</i>
-  <i class="material-icons zoom-out">zoom_out</i>
 
 </div>
