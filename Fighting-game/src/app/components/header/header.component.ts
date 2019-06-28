@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  loggedIn: boolean;
 
   constructor(private _auth: AuthService) { }
 
@@ -15,7 +16,7 @@ export class HeaderComponent implements OnInit {
   }
 
     public get isLoggedIn(): boolean {
-      return this._auth.isLoggedIn;
+      return this.loggedIn = this._auth.isLoggedIn;
     }
 
     public logout(): Promise<void> {

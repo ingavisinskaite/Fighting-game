@@ -177,8 +177,9 @@ export class AuthService {
   }
 
 
-  public getUserId(): string {
-    return this.userData.uid;
+  public getUserId() {
+    let userId = localStorage.getItem('user');
+    return userId;
   }
 
   private checkUserData(user: any): any {
