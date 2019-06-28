@@ -34,4 +34,10 @@ signUpForm: FormGroup;
       window.alert('PASSWORDS DONT MATCH');
     }
   }
+  public fbLogin() {
+    return this.authService.doFacebookLogin();
+  }
+  public  googleLogin() {
+    return this.authService.doGoogleLogin();
+  }
 }
