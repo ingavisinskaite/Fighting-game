@@ -1,3 +1,4 @@
+import { IUser } from './../../models/user/user.model';
 import { AuthService } from './../../services/auth.service';
 import { LobbyService } from './../../services/lobby.service';
 import { Component, OnInit, HostListener } from '@angular/core';
@@ -15,6 +16,7 @@ export class RoomComponent implements OnInit {
   roomNum: number;
   room: IRoom;
   formatedDate: string;
+  currentPlayer: IUser;
 
   // @HostListener('window:beforeunload', ['$event'])
   // beforeUnloadHandler(event) {
@@ -50,6 +52,7 @@ export class RoomComponent implements OnInit {
   public getCurrentUserId() {
     this.currentUserId = this._authService.getUserId();
     console.log(this.currentUserId);
+    this.getCurrentPlayer(this.currentUserId);
   }
 
   public updateRoom(roomNum: number, data: IRoom) {
@@ -70,7 +73,8 @@ export class RoomComponent implements OnInit {
     if (this.room.player1 === '' && this.room.player2 === '') {
       this.room.chat = [];
     }
-
+    this.currentPlayer.room = -1;
+    this._lobbyService.updatePlayer(this.currentUserId, this.currentPlayer);
     this._lobbyService.updateRoom(roomId, this.room);
     this._router.navigateByUrl('/lobby');
   }
@@ -95,5 +99,12 @@ export class RoomComponent implements OnInit {
     this.formatedDate = hoursString + ':' + minutesString;
     return this.formatedDate;
   }
+
+    public getCurrentPlayer(playerId: string) {
+    this._lobbyService.getPlayer(playerId).subscribe(player => {
+      this.currentPlayer = player;
+    })
+  }
+
 
 }

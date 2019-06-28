@@ -193,7 +193,8 @@ export class AuthService {
 
 
   public getUserId() {
-    return this.userData.uid;
+    let userId = localStorage.getItem('user');
+    return userId;
   }
 
 }

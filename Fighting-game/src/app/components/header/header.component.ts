@@ -18,7 +18,6 @@ export class HeaderComponent implements OnInit {
 
     // tarpininkas is AuthService
     public get isLoggedIn(): boolean {
-      console.log(this._auth.isLoggedIn);
       return this.loggedIn = this._auth.isLoggedIn;
     }
 
