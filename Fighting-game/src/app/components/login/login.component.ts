@@ -2,6 +2,9 @@ import { AuthService } from './../../services';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IUser } from '../../models/user/user.model';
+import { Observable } from 'rxjs';
+import { promise } from 'protractor';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -11,8 +14,11 @@ import { IUser } from '../../models/user/user.model';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   authLogin: any;
+  durationInSeconds = 5;
 
-  constructor(public authService: AuthService) { }
+
+  constructor(public authService: AuthService,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.createloginForm();
@@ -24,15 +30,21 @@ export class LoginComponent implements OnInit {
     });
 }
 
-public  login(email: string, password: string): Promise <void> {
+public  login(email: string, password: string): Promise <any> {
   return this.authService.login(email, password);
 }
-public fbLogin(): Promise <void> {
+public fbLogin() {
   return this.authService.doFacebookLogin();
 }
-public  googleLogin(): Promise <void> {
+public  googleLogin() {
   return this.authService.doGoogleLogin();
 }
+// openSnackBar() {
+//   this._snackBar.openFromComponent(LoginComponent, {
+//     duration: this.durationInSeconds * 1000,
+//   });
+// }
+
 // public get isLoggedIn(): boolean {
 //       return this.authService.isLoggedIn;
 //     }

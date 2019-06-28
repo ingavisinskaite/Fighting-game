@@ -1,3 +1,4 @@
+import { IUser } from './../../models/user/user.model';
 import { Router } from '@angular/router';
 import { IRoom } from './../../models/room.model';
 import { LobbyService, AuthService } from './../../services';
@@ -16,13 +17,12 @@ export class LobbyComponent implements OnInit {
   roomPlayers: Array<IRoom>;
   isInRoom: boolean = false;
   userId: string;
+  currentPlayer: IUser;
 
   constructor(public _lobbyService: LobbyService,
               public authService: AuthService,
-              public router: Router) {
-      
-      this.isInRoom = false;
-     }
+              public router: Router)
+            {this.isInRoom = false;}
 
   ngOnInit() {
     this.getRooms();
@@ -43,6 +43,8 @@ export class LobbyComponent implements OnInit {
         selectedRoom.player2 = userId;
         this.router.navigateByUrl('/room/' + roomNum);
       }
+      this.currentPlayer.room = roomNum;
+      this._lobbyService.updatePlayer(userId, this.currentPlayer);
       this._lobbyService.updateRoom(roomId, selectedRoom);
       this.isInRoom = true;
       this.message = 'You joined room ' + roomNum;
@@ -58,6 +60,7 @@ export class LobbyComponent implements OnInit {
 
   public checkIfJoined() {
     this._lobbyService.getPlayer(this.userId).subscribe(player => {
+      this.currentPlayer = player;
       if (player.room !== -1) {
         this.router.navigateByUrl('/room/' + player.room);
       }
@@ -83,7 +86,7 @@ export class LobbyComponent implements OnInit {
   // Gaunamas playerio ID. Zmogus, kuris dabar yra prisijunges (paga Auth Service)
   public getCurrentUserId() {
     this.userId = this.authService.getUserId();
-    console.log(this.userId);
+    this.checkIfJoined();
   }
 
   public getRooms() {
