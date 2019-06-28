@@ -11,6 +11,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SignUpComponent } from '../app/components/sign-up/sign-up.component';
 import { LoginComponent } from './components/login/login.component';
+import { FormsComponent } from './components/profile/forms/forms.component';
 import { ShopComponent } from './components/shop/shop.component';
 
 const routes: Routes = [
@@ -40,6 +41,7 @@ const routes: Routes = [
   {
     path: 'room/:roomNum', component: RoomComponent, canActivate: [AuthGuard]
   },
+  { path: 'profile', component: FormsComponent, canActivate: [AuthGuard] },
   { path: '**', component: CannotFoundComponent }
 ];
 

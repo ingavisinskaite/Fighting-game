@@ -19,16 +19,20 @@ import { ArenaComponent } from './components/arena/arena.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { CommonModule } from '@angular/common';
 
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
+  MatCheckboxModule,
   MatFormFieldModule,
   MatInputModule,
   MatCardModule,
   MatSelectModule,
   MatButtonModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatGridListModule,
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
@@ -37,8 +41,10 @@ import {
   MatExpansionModule,
   MatProgressSpinnerModule,
   MatTabsModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatTooltipModule,
 } from '@angular/material';
+
 
 
 import { FooterComponent } from './components/footer/footer.component';
@@ -52,6 +58,7 @@ import { DaggerComponent } from './components/shop/dagger/dagger.component';
 import { FistsComponent } from './components/shop/fists/fists.component';
 import { FlailComponent } from './components/shop/flail/flail.component';
 import { SwordComponent } from './components/shop/sword/sword.component';
+import { FormsComponent } from './components/profile/forms/forms.component';
 
 
 @NgModule({
@@ -72,7 +79,8 @@ import { SwordComponent } from './components/shop/sword/sword.component';
     FistsComponent,
     FlailComponent,
     SwordComponent,
-    CannotFoundComponent
+    CannotFoundComponent,
+    FormsComponent
   ],
   imports: [
     AppRoutingModule,
@@ -88,7 +96,14 @@ import { SwordComponent } from './components/shop/sword/sword.component';
     MatFormFieldModule,
     MatCardModule,
     MatInputModule,
+    MatTooltipModule,
+    MatSnackBarModule,
+    MatCheckboxModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatSelectModule,
+    MatGridListModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
@@ -96,10 +111,9 @@ import { SwordComponent } from './components/shop/sword/sword.component';
     MatAutocompleteModule,
     MatExpansionModule,
     MatProgressSpinnerModule,
-    MatTabsModule,
-    MatSnackBarModule
-
+    MatTabsModule
   ],
+
   entryComponents: [ShopComponent, FistsComponent, DaggerComponent, SwordComponent, FlailComponent],
   providers: [FightService, Weaponry, Armory, AuthService, LobbyService],
   bootstrap: [AppComponent]

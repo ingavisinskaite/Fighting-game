@@ -6,5 +6,8 @@ export interface IUser {
     online: boolean;
     emailVerified: boolean;
     room: number;
-    // price: number;
+    fullname: string;
+    birthDate: string;
+    gender: string;
+    bio: string;
 }
