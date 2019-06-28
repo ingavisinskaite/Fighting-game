@@ -42,12 +42,14 @@ import {
 } from '@angular/material';
 
 
+
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MainComponent } from './components/main/main.component';
 import { MapComponent } from './components/map/map.component';
 import { NewsComponent } from './components/news/news.component';
 import { RoomComponent } from './components/room/room.component';
+
 
 
 @NgModule({
@@ -79,7 +81,8 @@ import { RoomComponent } from './components/room/room.component';
     MatFormFieldModule,
     MatCardModule,
     MatInputModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSnackBarModule
   ],
 
   providers: [FightService, Weaponry, Armory, AuthService, LobbyService],
