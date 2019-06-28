@@ -1,3 +1,5 @@
+import { RoomComponent } from './../components/room/room.component';
+import { IRoom } from 'src/app/models/room.model';
 import { Armory } from './../classes/armor.class';
 import { IArmor } from '../models/armor.model';
 import { IWeapon } from '../models/weapon.model';
@@ -142,7 +144,8 @@ export class FightService {
   }];
 
   constructor(private _weaponry: Weaponry,
-              private _armory: Armory) { }
+              private _armory: Armory,
+              private _room: RoomComponent) { }
 
   public initFighters() {
     // should init the fighters
@@ -152,7 +155,6 @@ export class FightService {
   public getFightersHP(id: string): number {
     return this.fighters[this.getFighterIndex(id)].hp;
   }
-
 
   // If fighter1.attack === fighter2.defence { attack is blocked and no harm is done }
   public assignAttack(fighterId: string, bodyPart: string) {

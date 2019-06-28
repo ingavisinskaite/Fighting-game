@@ -5,6 +5,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from 'firebase';
 import * as firebase from 'firebase';
+import { IWeapon, IArmor } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,74 @@ export class AuthService {
     photoURL: '',
     online: false,
     emailVerified: false,
-    room: -1
-
+    room: -1,
+    weaponRight: [],
+    weaponLeft: [],
+    armorHead: [],
+    armorTorso: [],
+    armorArms: [],
+    armorLegs: [],
+    fighter: {
+      name: '',
+      class: 'Fighter',
+      hp: 100,
+      attack: '',
+      defence: '',
+      weaponRight: {
+        name: '',
+        id: '',
+        damage: 0,
+        oneHanded: true,
+        image: ''
+      },
+      weaponLeft: {
+        name: '',
+        id: '',
+        damage: 0,
+        oneHanded: true,
+        image: ''
+      },
+      armorHead: {
+        protec: 'head',
+        criticalDmgCounter: 0,
+        criticalDmg: 0,
+        name: '',
+        id: '',
+        armor: 0,
+        durability: 0,
+        image: './assets/images/body/head.svg'
+      },
+      armorTorso: {
+        protec: 'torso',
+        criticalDmgCounter: 0,
+        criticalDmg: 0,
+        name: '',
+        id: '',
+        armor: 0,
+        durability: 0,
+        image: './assets/images/body/torso.svg'
+      },
+      armorArms: {
+        protec: 'arms',
+        criticalDmgCounter: 0,
+        criticalDmg: 0,
+        name: '',
+        id: '',
+        armor: 0,
+        durability: 0,
+        image: './assets/images/body/arms.svg'
+      },
+      armorLegs: {
+        protec: 'legs',
+        criticalDmgCounter: 0,
+        criticalDmg: 0,
+        name: '',
+        id: '',
+        armor: 0,
+        durability: 0,
+        image: './assets/images/body/legs.svg'
+      }
+    }
   };
   loggedIn: string;
 
@@ -84,7 +151,74 @@ export class AuthService {
       photoURL: user.photoURL,
       online: false,
       emailVerified: user.emailVerified,
-      room: -1
+      room: -1,
+      weaponRight: [],
+      weaponLeft: [],
+      armorHead: [],
+      armorTorso: [],
+      armorArms: [],
+      armorLegs: [],
+      fighter: {
+        name: '',
+        class: 'Fighter',
+        hp: 100,
+        attack: '',
+        defence: '',
+        weaponRight: {
+          name: '',
+          id: '',
+          damage: 0,
+          oneHanded: true,
+          image: ''
+        },
+        weaponLeft: {
+          name: '',
+          id: '',
+          damage: 0,
+          oneHanded: true,
+          image: ''
+        },
+        armorHead: {
+          protec: 'head',
+          criticalDmgCounter: 0,
+          criticalDmg: 0,
+          name: '',
+          id: '',
+          armor: 0,
+          durability: 0,
+          image: './assets/images/body/head.svg'
+        },
+        armorTorso: {
+          protec: 'torso',
+          criticalDmgCounter: 0,
+          criticalDmg: 0,
+          name: '',
+          id: '',
+          armor: 0,
+          durability: 0,
+          image: './assets/images/body/torso.svg'
+        },
+        armorArms: {
+          protec: 'arms',
+          criticalDmgCounter: 0,
+          criticalDmg: 0,
+          name: '',
+          id: '',
+          armor: 0,
+          durability: 0,
+          image: './assets/images/body/arms.svg'
+        },
+        armorLegs: {
+          protec: 'legs',
+          criticalDmgCounter: 0,
+          criticalDmg: 0,
+          name: '',
+          id: '',
+          armor: 0,
+          durability: 0,
+          image: './assets/images/body/legs.svg'
+        }
+      }
     };
     return userRef.set(userData, {
       merge: true

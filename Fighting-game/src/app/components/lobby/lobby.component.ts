@@ -80,6 +80,7 @@ export class LobbyComponent implements OnInit {
       });
   }
 
+  // Gaunamas playerio ID. Zmogus, kuris dabar yra prisijunges (paga Auth Service)
   public getCurrentUserId() {
     this.userId = this.authService.getUserId();
     console.log(this.userId);

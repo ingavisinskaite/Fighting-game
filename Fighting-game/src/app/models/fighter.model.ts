@@ -7,10 +7,10 @@ export interface IFighter {
     hp: number;
     attack: string;
     defence: string;
-    weaponLeft: IWeapon;
     weaponRight: IWeapon;
+    weaponLeft: IWeapon;
     armorHead: IArmor;
-    armorLegs: IArmor;
-    armorArms: IArmor;
     armorTorso: IArmor;
+    armorArms: IArmor;
+    armorLegs: IArmor;
 }
