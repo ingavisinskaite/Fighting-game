@@ -325,9 +325,9 @@ export class AuthService {
     return playerState;
   }
 
-
+  // Is local storage ima current user
   public getUserId() {
-    return this.userData.uid;
+    return JSON.parse(localStorage.getItem('user'));
   }
 
 }

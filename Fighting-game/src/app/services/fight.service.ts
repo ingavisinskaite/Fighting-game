@@ -1,3 +1,5 @@
+import { IUser } from './../models/user/user.model';
+import { LobbyService } from './lobby.service';
 import { RoomComponent } from './../components/room/room.component';
 import { IRoom } from 'src/app/models/room.model';
 import { Armory } from './../classes/armor.class';
@@ -12,6 +14,18 @@ import { IFighter } from '../models';
 })
 
 export class FightService {
+
+  room: IRoom;
+  roomNum: number;
+ 
+  playerOneId: string;
+  playerTwoId: string;
+
+  playerOne: IUser;
+  playerTwo: IUser;
+
+  fighterOne: IFighter;
+  fighterTwo: IFighter;
 
 // Šitie du fighteriai yra dabar tik šiaip. Realiai visi fighteriai turėtų ateiti iš duomenų bazės?
 // Mes dar čia nurodėme class, tai reikėtų jos modelį aprašyti ir apgalvoti, ką ji daro. Ir suimportuoti
@@ -145,12 +159,45 @@ export class FightService {
 
   constructor(private _weaponry: Weaponry,
               private _armory: Armory,
-              private _room: RoomComponent) { }
+              private _room: RoomComponent,
+              private _lobbyService: LobbyService) { }
 
   public initFighters() {
     // should init the fighters
     // get data from firebase etc.
   }
+
+  // Man reikia pačiam įrašyti ROOM number, kad pagauti ten esančius vartotojus. 
+  // Ga galėčiau naudoti _room funkciją, bet ji ne visus man reikalingus duomenis duoda. 
+  // Gaunu UIDs, pagal kuriuos galiu gauti user.fighter data.
+  public getPlayersUids(roomNum: number) {
+    const roomId = 'Room ' + roomNum;
+    this._lobbyService.getRoom(roomId).subscribe(room => {
+      this.room = room;
+      this.playerOneId = this.room.player1;
+      this.playerTwoId = this.room.player2;
+    });
+  }
+
+  // Tas "player" yra Observable data. Pavadinti galima bet kaip. 
+  // Gaunu player.fighter duomenis, kurie nugula į this.FighterTwo ir this.fighterOne
+  // Greičiausiai man reikia tik User, nes vis tiek reikia Id. 
+  public getPlayers(playerId: string) {
+    if (playerId === this.playerOneId) {
+      this._lobbyService.getPlayer(playerId).subscribe(player => {
+        this.fighterOne = player.fighter;
+        this.playerOne = player;
+      });
+    }
+    if (playerId === this.playerTwoId) {
+      this._lobbyService.getPlayer(playerId).subscribe(player => {
+        this.fighterTwo = player.fighter;
+        this.playerTwo = player;
+      });
+    }
+  }
+
+  
 
   public getFightersHP(id: string): number {
     return this.fighters[this.getFighterIndex(id)].hp;
@@ -470,31 +517,4 @@ export class FightService {
     }
   }
 
-
-  // public getDamage(id: string, oneHanded: boolean): number {
-  //   let damage = 0;
-  //   if (oneHanded === true) {
-  //     damage = this.getOneHandedDamage(id);
-  //     return damage;
-  //   } else {
-  //     damage = this.getTwoHandedDamage(id);
-  //     return damage;
-  //   }
-  // }
-
-  // private getOneHandedDamage(id: string): number {
-  //   for (const weapon of this._weaponry.oneHanded) {
-  //     if (weapon.id === id) {
-  //       return weapon.damage;
-  //     }
-  //   }
-  // }
-
-  // private getTwoHandedDamage(id: string): number {
-  //   for (const weapon of this._weaponry.twoHanded) {
-  //     if (weapon.id === id) {
-  //       return weapon.damage;
-  //     }
-  //   }
-  // }
 }
