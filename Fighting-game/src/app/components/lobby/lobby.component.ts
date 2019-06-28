@@ -75,7 +75,7 @@ export class LobbyComponent implements OnInit {
     this._lobbyService.getPlayers()
       .subscribe(data => {
         this.onlinePlayers = 0;
-        for (let user of data) {
+        for (const user of data) {
           if (user.online === true) {
             this.onlinePlayers += 1;
           }
@@ -85,7 +85,10 @@ export class LobbyComponent implements OnInit {
 
   public getCurrentUserId() {
     this.userId = this.authService.getUserId();
+<<<<<<< HEAD
     this.checkIfJoined();
+=======
+>>>>>>> a003564556240fde7b90425449d4f4af9ea0ede7
   }
 
   public getRooms() {
@@ -97,5 +100,4 @@ export class LobbyComponent implements OnInit {
       });
     });
   }
-
 }
