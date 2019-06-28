@@ -38,6 +38,7 @@ import {
   MatProgressSpinnerModule,
   MatTabsModule,
   MatSnackBarModule,
+  MatTooltipModule,
 } from '@angular/material';
 
 
@@ -78,6 +79,7 @@ import { RoomComponent } from './components/room/room.component';
     MatFormFieldModule,
     MatCardModule,
     MatInputModule,
+    MatTooltipModule
   ],
 
   providers: [FightService, Weaponry, Armory, AuthService, LobbyService],
