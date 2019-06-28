@@ -6,4 +6,8 @@ export interface IUser {
     online: boolean;
     emailVerified: boolean;
     room: number;
+    fullname: string;
+    birthDate: string;
+    gender: string;
+    bio: string;
 }

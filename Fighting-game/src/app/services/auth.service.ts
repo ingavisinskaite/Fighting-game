@@ -22,10 +22,15 @@ export class AuthService {
     photoURL: '',
     online: false,
     emailVerified: false,
-    room: -1
+    room: -1,
+    fullname: '',
+    birthDate: '',
+    gender: '',
+    bio: '',
   };
 
   loggedIn: string;
+  userId: string;
 
   constructor(public afAuth: AngularFireAuth,
               public router: Router,
@@ -74,7 +79,11 @@ export class AuthService {
       photoURL: newUser.photoURL,
       online: false,
       emailVerified: newUser.emailVerified,
-      room: -1
+      room: -1,
+      fullname: '',
+      birthDate: '',
+      gender: '',
+      bio: '',
     };
 
     return userRef.set(userData, {
@@ -178,8 +187,8 @@ export class AuthService {
 
 
   public getUserId() {
-    let userId = localStorage.getItem('user');
-    return userId;
+    this.userId = localStorage.getItem('user');
+    return this.userId;
   }
 
   private checkUserData(user: any): any {
@@ -210,4 +219,13 @@ export class AuthService {
     return newUser;
   }
 
+  submitUser(value) {
+    this.getUserId();
+    this.afs.collection('users').doc(this.userId).update({ fullname: value.fullname });
+    value.birthday = new Date().toLocaleDateString();
+    this.afs.collection('users').doc(this.userId).update({ birthDate: value.birthday });
+    this.afs.collection('users').doc(this.userId).update({ gender: value.gender });
+    this.afs.collection('users').doc(this.userId).update({ bio: value.bio });
+    this.afs.collection('users').doc(this.userId).update({ photoURL: value.photoPath });
+  }
 }
