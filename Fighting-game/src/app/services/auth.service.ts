@@ -6,6 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from 'firebase';
 import { auth } from 'firebase/app';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -31,6 +32,7 @@ export class AuthService {
 
   loggedIn: string;
   userId: string;
+  currentPlayer: IUser;
 
   constructor(public afAuth: AngularFireAuth,
               public router: Router,
@@ -106,18 +108,16 @@ export class AuthService {
     if (this.userData.online === false) {
       return this.afAuth.auth.signInWithEmailAndPassword(email, password)
         .then((result) => {
-          console.log(result);
           this.saveUser(result);
           this.router.navigate(['/main']);
           this.loggedIn = 'true';
           localStorage.setItem('loggedIn', this.loggedIn);
           // this.checkUserData(this.userData);
-          this.setUserData(result.user);
-          console.log(result);
+          this.setUserData(this.userData);
           this._snackBar.open('You are logged In', 'Ok');
         });
     } else {
-        this._snackBar.open('You are already logged In' , 'Ok'); //
+        this._snackBar.open('You are already logged In' , 'Ok');
     }
   }
 
@@ -228,4 +228,17 @@ export class AuthService {
     this.afs.collection('users').doc(this.userId).update({ bio: value.bio });
     this.afs.collection('users').doc(this.userId).update({ photoURL: value.photoPath });
   }
+
+  public updatePlayer(playerId: string, data: IUser): Promise<void> {
+    return this.afs.collection('users').doc(playerId).update(data);
+  }
+
+  public getPlayer(playerId: string): Observable<any> {
+    return this.afs.collection('users').doc(playerId).valueChanges();
+  }
+
+  public getPlayers(): Observable<any[]> {
+    return this.afs.collection('users').valueChanges();
+  }
+
 }

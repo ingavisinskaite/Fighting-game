@@ -73,7 +73,7 @@ export class RoomComponent implements OnInit {
       this.room.chat = [];
     }
     this.currentPlayer.room = -1;
-    this._lobbyService.updatePlayer(this.currentUserId, this.currentPlayer);
+    this._authService.updatePlayer(this.currentUserId, this.currentPlayer);
     this._lobbyService.updateRoom(roomId, this.room);
     this._router.navigateByUrl('/lobby');
   }
@@ -100,7 +100,7 @@ export class RoomComponent implements OnInit {
   }
 
     public getCurrentPlayer(playerId: string) {
-    this._lobbyService.getPlayer(playerId).subscribe(player => {
+    this._authService.getPlayer(playerId).subscribe(player => {
       this.currentPlayer = player;
     })
   }

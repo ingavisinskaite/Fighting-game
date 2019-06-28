@@ -44,7 +44,7 @@ export class LobbyComponent implements OnInit {
         this.router.navigateByUrl('/room/' + roomNum);
       }
       this.currentPlayer.room = roomNum;
-      this._lobbyService.updatePlayer(userId, this.currentPlayer);
+      this.authService.updatePlayer(userId, this.currentPlayer);
       this._lobbyService.updateRoom(roomId, selectedRoom);
       this.isInRoom = true;
       this.message = 'You joined room ' + roomNum;
@@ -59,7 +59,7 @@ export class LobbyComponent implements OnInit {
   }
 
   public checkIfJoined() {
-    this._lobbyService.getPlayer(this.userId).subscribe(player => {
+    this.authService.getPlayer(this.userId).subscribe(player => {
       this.currentPlayer = player;
       if (player.room !== -1) {
         this.router.navigateByUrl('/room/' + player.room);
@@ -72,7 +72,7 @@ export class LobbyComponent implements OnInit {
   }
 
   public getOnlinePlayersCount() {
-    this._lobbyService.getPlayers()
+    this.authService.getPlayers()
       .subscribe(data => {
         this.onlinePlayers = 0;
         for (const user of data) {
@@ -85,10 +85,7 @@ export class LobbyComponent implements OnInit {
 
   public getCurrentUserId() {
     this.userId = this.authService.getUserId();
-<<<<<<< HEAD
     this.checkIfJoined();
-=======
->>>>>>> a003564556240fde7b90425449d4f4af9ea0ede7
   }
 
   public getRooms() {

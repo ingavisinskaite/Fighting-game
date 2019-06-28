@@ -1,3 +1,5 @@
+import { LobbyService } from './../../services/lobby.service';
+import { IUser } from './../../models/user/user.model';
 import { AuthService } from '../../services';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,22 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   loggedIn: boolean;
+  currentPlayer: IUser;
+  currentPlayerId: string;
 
-  run = true;
-  constructor(private _auth: AuthService) { }
+  constructor(private _auth: AuthService,
+              private _lobbyService: LobbyService) { }
 
   ngOnInit() {
-    if (this.run) {
-      document.getElementById('prof').setAttribute('style', 'display: none');
-      this.run = false;
-    }
   }
 
   public get isLoggedIn(): boolean {
-    return this.loggedIn = this._auth.isLoggedIn;
+    this.loggedIn = this._auth.isLoggedIn;
+    return this.loggedIn;
   }
 
   public logout(): Promise<void> {
+
     return this._auth.logout();
   }
 
