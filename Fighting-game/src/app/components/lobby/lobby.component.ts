@@ -21,10 +21,8 @@ export class LobbyComponent implements OnInit {
 
   constructor(public _lobbyService: LobbyService,
               public authService: AuthService,
-              public router: Router) {
-      
-      this.isInRoom = false;
-     }
+              public router: Router)
+            {this.isInRoom = false;}
 
   ngOnInit() {
     this.getRooms();
@@ -62,6 +60,7 @@ export class LobbyComponent implements OnInit {
 
   public checkIfJoined() {
     this._lobbyService.getPlayer(this.userId).subscribe(player => {
+      this.currentPlayer = player;
       if (player.room !== -1) {
         this.router.navigateByUrl('/room/' + player.room);
       }
@@ -86,8 +85,7 @@ export class LobbyComponent implements OnInit {
 
   public getCurrentUserId() {
     this.userId = this.authService.getUserId();
-    console.log(this.userId);
-    this.getCurrentPlayer(this.userId);
+    this.checkIfJoined();
   }
 
   public getRooms() {
@@ -98,12 +96,6 @@ export class LobbyComponent implements OnInit {
         return room;
       });
     });
-  }
-
-  public getCurrentPlayer(playerId: string) {
-    this._lobbyService.getPlayer(playerId).subscribe(player => {
-      this.currentPlayer = player;
-    })
   }
 
 }

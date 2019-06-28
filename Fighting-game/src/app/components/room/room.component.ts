@@ -51,7 +51,6 @@ export class RoomComponent implements OnInit {
 
   public getCurrentUserId() {
     this.currentUserId = this._authService.getUserId();
-    console.log(this.currentUserId);
     this.getCurrentPlayer(this.currentUserId);
   }
 
