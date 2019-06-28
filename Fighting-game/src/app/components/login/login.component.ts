@@ -1,3 +1,4 @@
+import { LobbyService } from './../../services/lobby.service';
 import { AuthService } from './../../services';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
 
 
   constructor(public authService: AuthService,
-              private _snackBar: MatSnackBar) { }
+              private _snackBar: MatSnackBar,
+              private _lobbyService: LobbyService) { }
 
   ngOnInit() {
     this.createloginForm();
@@ -51,4 +53,10 @@ public  googleLogin() {
 //     public isLoggedOut() {
 //       return this.authService.logout();
 //     }
+
+public updatePlayer() {
+  let currentPlayerId = this.authService.getUserId();
+  let 
+  this._lobbyService.updatePlayer
+}
 }

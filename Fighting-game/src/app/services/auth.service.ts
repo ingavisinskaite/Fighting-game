@@ -155,7 +155,7 @@ export class AuthService {
       this.loggedIn = 'false';
       localStorage.setItem('loggedIn', this.loggedIn);
       this.router.navigate(['/login']);
-      this._snackBar.open('You are logged Out', 'Ok'); //
+      this._snackBar.open('You are logged Out', 'Ok');
     });
   }
 

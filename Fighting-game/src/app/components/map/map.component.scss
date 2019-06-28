@@ -38,10 +38,12 @@ $break-mobile: 400px;
 
   @media screen and (max-width: $break-medium-small) {
     width: 38px;
+    padding: 3px 6px;
   }
 
   @media screen and (max-width: $break-small) {
     width: 25px;
+    padding: 2px 5px;
   }
 
   @media screen and (max-width: $break-mobile) {
@@ -70,10 +72,12 @@ $break-mobile: 400px;
 
   @media screen and (max-width: $break-medium-small) {
     width: 34px;
+    padding: 8px;
   }
 
   @media screen and (max-width: $break-small) {
     width: 20px;
+    padding: 5px;
   }
 
   @media screen and (max-width: $break-mobile) {
