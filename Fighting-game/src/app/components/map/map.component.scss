@@ -1,5 +1,5 @@
 $break-medium: 1240px;
-$break-medium-small: 1000px;
+$break-medium-small: 900px;
 $break-small: 650px;
 $break-mobile: 400px;
 
@@ -33,21 +33,21 @@ $break-mobile: 400px;
   padding: 4px 8px;
 
   @media screen and (max-width: $break-medium) {
-    width: 50px;
+    width: 55px;
   }
 
   @media screen and (max-width: $break-medium-small) {
-    width: 38px;
+    width: 40px;
     padding: 3px 6px;
   }
 
   @media screen and (max-width: $break-small) {
-    width: 25px;
+    width: 35px;
     padding: 2px 5px;
   }
 
   @media screen and (max-width: $break-mobile) {
-    width: 18px;
+    width: 25px;
   }
 }
 
@@ -57,7 +57,7 @@ $break-mobile: 400px;
 }
 
 .shop {
-  width: 50px;
+  width: 60px;
   position: absolute;
   left: 72%;
   top: 81%;
@@ -67,21 +67,22 @@ $break-mobile: 400px;
   padding: 10px;
 
   @media screen and (max-width: $break-medium) {
-    width: 44px;
+    width: 50px;
   }
 
   @media screen and (max-width: $break-medium-small) {
-    width: 34px;
+    width: 45px;
     padding: 8px;
   }
 
   @media screen and (max-width: $break-small) {
-    width: 20px;
+    width: 35px;
     padding: 5px;
   }
 
   @media screen and (max-width: $break-mobile) {
-    width: 12px;
+    width: 25px;
+    padding: 3px;
   }
 }
 
