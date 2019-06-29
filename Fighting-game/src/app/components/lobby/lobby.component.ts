@@ -86,7 +86,6 @@ export class LobbyComponent implements OnInit {
   public getCurrentUserId() {
     this.userId = this.authService.getUserId();
     this.checkIfJoined();
-=======
   }
 
   public getRooms() {
