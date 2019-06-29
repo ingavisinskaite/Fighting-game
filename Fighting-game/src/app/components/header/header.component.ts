@@ -10,11 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   loggedIn: boolean;
-  currentPlayer: IUser;
-  currentPlayerId: string;
 
-  constructor(private _auth: AuthService,
-              private _lobbyService: LobbyService) { }
+  constructor(private _auth: AuthService) { }
 
   ngOnInit() {
   }
