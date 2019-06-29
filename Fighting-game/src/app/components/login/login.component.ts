@@ -2,9 +2,6 @@ import { LobbyService } from './../../services/lobby.service';
 import { AuthService } from './../../services';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { IUser } from '../../models/user/user.model';
-import { Observable } from 'rxjs';
-import { promise } from 'protractor';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -53,5 +50,6 @@ export class LoginComponent implements OnInit {
   //     public isLoggedOut() {
   //       return this.authService.logout();
   //     }
+
 
 }
