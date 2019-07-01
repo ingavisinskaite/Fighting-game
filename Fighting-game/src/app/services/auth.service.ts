@@ -58,10 +58,12 @@ export class AuthService {
       .then((result) => {
         console.log(result);
         this.sendVerificationMail();
-        this.setUserData(result.user, false);
+        this.loggedIn = 'true';
+        localStorage.setItem('loggedIn', this.loggedIn);
+        this.setUserData(result.user, true);
         this._snackBar.open('You succesfully signed up', 'Ok');
       }).catch((error) => {
-        this._snackBar.open(error, 'Ok'); //
+        this._snackBar.open(error, 'Ok');
       });
   }
 
