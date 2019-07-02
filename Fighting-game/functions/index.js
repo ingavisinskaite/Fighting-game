@@ -16,7 +16,7 @@ exports.sendMailVerification = functions.auth.user().onCreate(user => {
             to: dest,
             subject: 'Welcome Email',
             html: `<h1>Welcome to our fighting game!</h1> <br>
-                    <h3>We hope you will enjoy it</h3>`
+                    <h3>We hope you will enjoy it.</h3>`
         };
         
         return smtpTransport.sendMail(mailOptions, (error, info) => {

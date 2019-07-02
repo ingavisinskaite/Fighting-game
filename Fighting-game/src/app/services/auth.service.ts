@@ -58,12 +58,12 @@ export class AuthService {
   public async signUp(email: string, password: string): Promise<void> {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        console.log(result);
         this.sendVerificationMail();
         this.loggedIn = 'false';
         localStorage.setItem('loggedIn', this.loggedIn);
         this.setUserData(result.user, false);
         this._snackBar.open('You succesfully signed up', 'Ok');
+        this.router.navigate(['/login']);
       }).catch((error) => {
         this._snackBar.open(error, 'Ok');
       });
@@ -111,15 +111,15 @@ export class AuthService {
     if (this.userData.online === false) {
       return this.afAuth.auth.signInWithEmailAndPassword(email, password)
         .then((result) => {
-          if(result.user.emailVerified){
+          if (result.user.emailVerified){
             this.saveUser(result);
             this.router.navigate(['/main']);
             this.loggedIn = 'true';
             localStorage.setItem('loggedIn', this.loggedIn);
-            // this.checkUserData(this.userData);
-            this.setUserData(result.user, true);
             this._snackBar.open('You are logged In', 'Ok');
             this.getUserId();
+            this.updatePlayerOnlineState(this.userId, true);
+            this.updatePlayerEmailVerification(this.userId, true);
           } else {
             this._snackBar.open('Please verify your email', 'Ok');
           }
@@ -137,9 +137,9 @@ export class AuthService {
         this.router.navigate(['/main']);
         this.loggedIn = 'true';
         localStorage.setItem('loggedIn', this.loggedIn);
-        this.setUserData(result.user, true); //
         this._snackBar.open('You are logged In', 'Ok');
         this.getUserId();
+        this.updatePlayerOnlineState(this.userId, true);
       });
     } else {
         this._snackBar.open('You are already logged In', 'Ok'); //
@@ -154,9 +154,9 @@ export class AuthService {
         this.router.navigate(['/main']);
         this.loggedIn = 'true';
         localStorage.setItem('loggedIn', this.loggedIn);
-        this.setUserData(result.user, true);
         this._snackBar.open('You are logged In', 'Ok'); //
         this.getUserId();
+        this.updatePlayerOnlineState(this.userId, true);
       });
     } else {
         this._snackBar.open('You are already logged In', 'Ok'); //
@@ -247,6 +247,10 @@ export class AuthService {
 
   public updatePlayerOnlineState(playerId: string, isOnline: boolean) {
     return this.afs.collection('users').doc(playerId).update({online: isOnline});
+  }
+
+  public updatePlayerEmailVerification(playerId: string, isEmailVerified: boolean) {
+    return this.afs.collection('users').doc(playerId).update({emailVerified: isEmailVerified});
   }
 
   public getPlayer(playerId: string): Observable<any> {
