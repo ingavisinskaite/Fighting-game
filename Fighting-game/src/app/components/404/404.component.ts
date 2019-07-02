@@ -16,9 +16,8 @@ export class CannotFoundComponent implements OnInit {
   ngOnInit() {
   }
 
-  public isLoggedIn() {
+  public isLoggedIn(): void {
     this.loggedIn = this._authService.isLoggedIn;
-    console.log(this.loggedIn);
     if (this.loggedIn) {
       this.router.navigateByUrl('/main');
     } else {
