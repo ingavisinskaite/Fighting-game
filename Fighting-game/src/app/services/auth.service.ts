@@ -7,6 +7,8 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { User } from 'firebase';
 import { auth } from 'firebase/app';
 import { Observable } from 'rxjs';
+import * as functions from '@angular/fire/functions';
+import { userInfo } from 'os';
 
 
 @Injectable({
@@ -58,9 +60,9 @@ export class AuthService {
       .then((result) => {
         console.log(result);
         this.sendVerificationMail();
-        this.loggedIn = 'true';
+        this.loggedIn = 'false';
         localStorage.setItem('loggedIn', this.loggedIn);
-        this.setUserData(result.user, true);
+        this.setUserData(result.user, false);
         this._snackBar.open('You succesfully signed up', 'Ok');
       }).catch((error) => {
         this._snackBar.open(error, 'Ok');
@@ -109,14 +111,18 @@ export class AuthService {
     if (this.userData.online === false) {
       return this.afAuth.auth.signInWithEmailAndPassword(email, password)
         .then((result) => {
-          this.saveUser(result);
-          this.router.navigate(['/main']);
-          this.loggedIn = 'true';
-          localStorage.setItem('loggedIn', this.loggedIn);
-          // this.checkUserData(this.userData);
-          this.setUserData(result.user, true);
-          this._snackBar.open('You are logged In', 'Ok');
-          this.getUserId();
+          if(result.user.emailVerified){
+            this.saveUser(result);
+            this.router.navigate(['/main']);
+            this.loggedIn = 'true';
+            localStorage.setItem('loggedIn', this.loggedIn);
+            // this.checkUserData(this.userData);
+            this.setUserData(result.user, true);
+            this._snackBar.open('You are logged In', 'Ok');
+            this.getUserId();
+          } else {
+            this._snackBar.open('Please verify your email', 'Ok');
+          }
         });
     } else {
         this._snackBar.open('You are already logged In' , 'Ok');
