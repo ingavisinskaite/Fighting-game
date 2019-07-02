@@ -1,10 +1,8 @@
 import { IRoom } from './../models/room.model';
-import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
-import { IUser } from '../models/user/user.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
