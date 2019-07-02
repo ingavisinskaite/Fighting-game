@@ -8,7 +8,6 @@ import { User } from 'firebase';
 import { auth } from 'firebase/app';
 import { Observable } from 'rxjs';
 import * as functions from '@angular/fire/functions';
-import { userInfo } from 'os';
 
 
 @Injectable({
