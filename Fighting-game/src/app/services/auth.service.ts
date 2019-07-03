@@ -8,7 +8,6 @@ import { User } from 'firebase';
 import { auth } from 'firebase/app';
 import { Observable } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -102,7 +101,6 @@ export class AuthService {
     this.userData.online = true;
     this.userData.emailVerified = false;
     this.userData.room = -1;
-    // console.log(this.userData);
   }
 
   public async login(email: string, password: string): Promise<any> {

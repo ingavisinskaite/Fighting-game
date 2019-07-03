@@ -8,6 +8,7 @@ import { NgModule } from '@angular/core';
 
 import { Weaponry, Armory } from './classes';
 import { FightService } from './services/fight.service';
+import { NewsService } from './services/news.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -54,6 +55,8 @@ import { MapComponent } from './components/map/map.component';
 import { NewsComponent } from './components/news/news.component';
 import { RoomComponent } from './components/room/room.component';
 import { FormsComponent } from './components/profile/forms/forms.component';
+import { DeleteNewsDialogComponent } from './dialogs/delete-news-dialog/delete-news-dialog.component';
+import { EditNewsDialogComponent } from './dialogs/edit-news-dialog/edit-news-dialog.component';
 
 
 @NgModule({
@@ -70,7 +73,9 @@ import { FormsComponent } from './components/profile/forms/forms.component';
     LobbyComponent,
     RoomComponent,
     CannotFoundComponent,
-    FormsComponent
+    FormsComponent,
+    DeleteNewsDialogComponent,
+    EditNewsDialogComponent
   ],
   imports: [
     AppRoutingModule,
@@ -94,9 +99,10 @@ import { FormsComponent } from './components/profile/forms/forms.component';
     MatNativeDateModule,
     MatSelectModule,
     MatGridListModule,
+    MatTableModule
   ],
-
-  providers: [FightService, Weaponry, Armory, AuthService, LobbyService],
+  entryComponents: [DeleteNewsDialogComponent, EditNewsDialogComponent],
+  providers: [NewsService, FightService, Weaponry, Armory, AuthService, LobbyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
