@@ -15,8 +15,19 @@ exports.sendWelcomeMail = functions.auth.user().onCreate(user => {
             from: 'fightinggame8@gmail.com',
             to: dest,
             subject: 'Welcome Email',
-            html: `<h1>Welcome to our fighting game!</h1> <br>
-                    <h3>We hope you will enjoy it.</h3>`
+            html: `<mjml>
+            <mj-body>
+              <mj-section>
+                <mj-column>
+                  <mj-image width="100px" src="/assets/logo.png"></mj-image>
+                  <mj-divider border-color="grey"></mj-divider>
+                  <mj-text font-size="26px" color="red" font-family="helvetica" align="center">Welcome to our fighting game!</mj-text>
+                  <mj-spacer></mj-spacer>
+                  <mj-text font-size="20px" font-family="helvetica" align="center" color="grey">Thanks for joining, we hope you'll enjoy it.</mj-text>
+                </mj-column>
+              </mj-section>
+            </mj-body>
+          </mjml>`
         };
         
         return smtpTransport.sendMail(mailOptions, (error, info) => {

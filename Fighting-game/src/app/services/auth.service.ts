@@ -7,7 +7,6 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { User } from 'firebase';
 import { auth } from 'firebase/app';
 import { Observable } from 'rxjs';
-import { userInfo } from 'os';
 
 
 @Injectable({
