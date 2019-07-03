@@ -13,7 +13,7 @@ export class LobbyComponent implements OnInit {
 
   joinedRoom: number;
   onlinePlayers: number;
-  message = 'Welcome to game lobby';
+  message = 'LOBBY';
   roomPlayers: Array<IRoom>;
   isInRoom: boolean = false;
   userId: string;
@@ -52,7 +52,7 @@ export class LobbyComponent implements OnInit {
       selectedRoom.player1 = '';
       this.joinedRoom = 0;
       this.isInRoom = false;
-      this.message = 'Welcome to game lobby';
+      this.message = 'LOBBY';
       this._lobbyService.updateRoom(roomId, selectedRoom);
     }
   }

@@ -93,7 +93,7 @@ import { FormsComponent } from './components/profile/forms/forms.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatGridListModule
+    MatGridListModule,
   ],
 
   providers: [FightService, Weaponry, Armory, AuthService, LobbyService],
