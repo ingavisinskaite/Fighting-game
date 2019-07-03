@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NewsService } from './../../services';
 
 @Component({
@@ -9,14 +9,16 @@ import { NewsService } from './../../services';
 })
 export class DeleteNewsDialogComponent {
   constructor(public dialogRef: MatDialogRef<DeleteNewsDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: string,
               private article: NewsService) { }
 
-  private closeNewsDeleteDialog(): void {
+  closeNewsDeleteDialog(): void {
     this.dialogRef.close();
   }
 
-  private deleteArticle(): void {
-    this.article.delArticle();
-    this.dialogRef.close();
+  deleteArticle(data): void {
+    console.log('deleting...');
+    this.article.delArticle(data);
+    this.closeNewsDeleteDialog();
   }
 }

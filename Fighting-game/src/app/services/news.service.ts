@@ -2,44 +2,36 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { INews } from '../models/news.model';
 
 @Injectable()
 export class NewsService {
-  articleId: string;
-  articleData: object;
-
   constructor(private afs: AngularFirestore) { }
 
   addArticle(newsDetails): void {
     this.afs.collection('news').add(newsDetails);
+    console.log('New article created');
   }
-  getNewsData(): Observable<any[]> {
+
+  getNewsData(): Observable<INews[]> {
     return this.afs.collection('news').snapshotChanges().pipe(map(actions => {
       return actions.map(a => {
-        const data = a.payload.doc.data();
+        const data = a.payload.doc.data() as INews;
         const id = a.payload.doc.id;
         return { id, ...data };
       });
     }));
   }
-  getSelectedRow(id: string): string {
-    this.articleId = id;
-    return this.articleId;
+
+  delArticle(id: string): void {
+    console.log(id, 'deleted');
+    this.afs.collection('news').doc(id).delete();
   }
 
-  delArticle(): void {
-    this.afs.collection('news').doc(this.articleId).delete();
-  }
-
-  updateArticle(articleId, updatedAuthor, updatedVersion, updatedContent) {
-    // console.log(articleId);
-    // console.log(updatedAuthor);
-    // console.log(updatedVersion);
-    // console.log(updatedContent);
-
-    this.afs.collection('news').doc(articleId).update({ author: updatedAuthor });
-    this.afs.collection('news').doc(articleId).update({ version: updatedVersion });
-    this.afs.collection('news').doc(articleId).update({ content: updatedContent });
+  updateArticle(id, updatedAuthor, updatedVersion, updatedContent): void {
+    this.afs.collection('news').doc(id).update({ author: updatedAuthor });
+    this.afs.collection('news').doc(id).update({ version: updatedVersion });
+    this.afs.collection('news').doc(id).update({ content: updatedContent });
   }
 
   getNews() {

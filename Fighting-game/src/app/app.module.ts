@@ -56,6 +56,7 @@ import { NewsComponent } from './components/news/news.component';
 import { RoomComponent } from './components/room/room.component';
 import { FormsComponent } from './components/profile/forms/forms.component';
 import { DeleteNewsDialogComponent } from './dialogs/delete-news-dialog/delete-news-dialog.component';
+import { EditNewsDialogComponent } from './dialogs/edit-news-dialog/edit-news-dialog.component';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { DeleteNewsDialogComponent } from './dialogs/delete-news-dialog/delete-n
     RoomComponent,
     CannotFoundComponent,
     FormsComponent,
-    DeleteNewsDialogComponent
+    DeleteNewsDialogComponent,
+    EditNewsDialogComponent
   ],
   imports: [
     AppRoutingModule,
@@ -99,7 +101,7 @@ import { DeleteNewsDialogComponent } from './dialogs/delete-news-dialog/delete-n
     MatGridListModule,
     MatTableModule
   ],
-  entryComponents: [DeleteNewsDialogComponent],
+  entryComponents: [DeleteNewsDialogComponent, EditNewsDialogComponent],
   providers: [NewsService, FightService, Weaponry, Armory, AuthService, LobbyService],
   bootstrap: [AppComponent]
 })
