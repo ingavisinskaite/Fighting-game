@@ -20,9 +20,8 @@ export class LobbyComponent implements OnInit {
   currentPlayer: IUser;
 
   constructor(public _lobbyService: LobbyService,
-              public authService: AuthService,
-              public router: Router)
-            {this.isInRoom = false;}
+    public authService: AuthService,
+    public router: Router) { this.isInRoom = false; }
 
   ngOnInit() {
     this.getRooms();
@@ -30,7 +29,7 @@ export class LobbyComponent implements OnInit {
     this.getCurrentUserId();
   }
 
-  public toggleRoom(roomNum: number, userId: string) {
+  public toggleRoom(roomNum: number, userId: string): void {
     this.joinedRoom = roomNum;
     const roomId = 'Room ' + roomNum;
     const selectedRoom = this.roomPlayers[roomNum - 1];
@@ -44,7 +43,7 @@ export class LobbyComponent implements OnInit {
         this.router.navigateByUrl('/room/' + roomNum);
       }
       this.currentPlayer.room = roomNum;
-      this._lobbyService.updatePlayer(userId, this.currentPlayer);
+      this.authService.updatePlayer(userId, this.currentPlayer);
       this._lobbyService.updateRoom(roomId, selectedRoom);
       this.isInRoom = true;
       this.message = 'You joined room ' + roomNum;
@@ -58,8 +57,8 @@ export class LobbyComponent implements OnInit {
     }
   }
 
-  public checkIfJoined() {
-    this._lobbyService.getPlayer(this.userId).subscribe(player => {
+  private checkIfJoined(): void {
+    this.authService.getPlayer(this.userId).subscribe(player => {
       this.currentPlayer = player;
       if (player.room !== -1) {
         this.router.navigateByUrl('/room/' + player.room);
@@ -67,12 +66,8 @@ export class LobbyComponent implements OnInit {
     });
   }
 
-  public get isLoggedIn(): boolean {
-    return this.authService.isLoggedIn;
-  }
-
-  public getOnlinePlayersCount() {
-    this._lobbyService.getPlayers()
+  public getOnlinePlayersCount(): number {
+    this.authService.getPlayers()
       .subscribe(data => {
         this.onlinePlayers = 0;
         for (const user of data) {
@@ -81,14 +76,16 @@ export class LobbyComponent implements OnInit {
           }
         }
       });
+    return this.onlinePlayers;
   }
 
-  public getCurrentUserId() {
+  public getCurrentUserId(): string {
     this.userId = this.authService.getUserId();
     this.checkIfJoined();
+    return this.userId;
   }
 
-  public getRooms() {
+  public getRooms(): Array<IRoom> {
     this._lobbyService.getRooms().subscribe(rooms => {
       this.roomPlayers = rooms.map(r => {
         r.playerCount = (r.player1 ? 1 : 0) + (r.player2 ? 1 : 0);
@@ -96,5 +93,7 @@ export class LobbyComponent implements OnInit {
         return room;
       });
     });
+    return this.roomPlayers;
   }
+
 }
