@@ -63,7 +63,7 @@ export class RoomComponent implements OnInit {
     this.room.players.splice(currentUserPosition, 1);
     this.room.playerCount -= 1;
 
-    if (this.room.players === []) {
+    if (this.room.players.length === 0) {
       this.room.chat = [];
     }
     this.currentPlayer.room = -1;
