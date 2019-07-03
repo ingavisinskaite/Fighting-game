@@ -6,6 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from 'firebase';
 import { auth } from 'firebase/app';
+import { empty, Observable } from 'rxjs';
 
 
 @Injectable({
@@ -52,14 +53,17 @@ export class AuthService {
           duration: 3000
       });
   }
-  public async signUp(email: string, password: string): Promise<void> {
+  public async signUp(email: string, password: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         console.log(result);
         this.sendVerificationMail();
+        // this.router.navigate(['profile']);
         this.setUserData(result.user);
-        this._snackBar.open('You succesfully signed up', 'Ok');
-      }).catch((error) => {
+        this.login(email, password);
+        this.router.navigate(['profile']);
+        this._snackBar.open('You succesfully signed up, now you can login', 'Ok');
+      } ).catch((error) => {
         this._snackBar.open(error, 'Ok'); //
       });
   }
@@ -102,13 +106,13 @@ export class AuthService {
     // console.log(this.userData);
   }
 
-  public async login(email: string, password: string): Promise<void> {
+  public async login(email: string, password: string):Promise <any> {
     if (this.userData.online === false) {
       return this.afAuth.auth.signInWithEmailAndPassword(email, password)
         .then((result) => {
           console.log(result);
           this.saveUser(result);
-          this.router.navigate(['/main']);
+          this.router.navigate(['/profile']);
           this.loggedIn = 'true';
           localStorage.setItem('loggedIn', this.loggedIn);
           // this.checkUserData(this.userData);
