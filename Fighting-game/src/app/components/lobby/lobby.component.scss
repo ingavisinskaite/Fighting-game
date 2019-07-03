@@ -1,3 +1,8 @@
+$break-medium: 1221px;
+$break-medium-small: 815px;
+$break-small: 610px;
+$break-mobile: 450px;
+
 .rooms {
     width: 90vw;
     margin: 0 auto;
@@ -11,6 +16,20 @@
         margin-top: 100px;
         background-color: rgba(255, 255, 255, 0.6);
         position: relative;
+
+        @media screen and (max-width: $break-medium) {
+            width: 22%;
+          }
+
+          @media screen and (max-width: $break-medium-small) {
+            margin: 8px;
+            margin-top: 100px;
+            width: 21%
+          }
+
+          @media screen and (max-width: $break-small) {
+            width: 20%;
+          }
     }
 
     div:hover {
@@ -41,7 +60,7 @@ hr {
 .container {
     background: url('http://www.sclance.com/backgrounds/fighting-arena-background/fighting-arena-background_944304.jpg');
     background-size: cover;
-    width: 96vw;
+    max-width: 100%;
     height: 600px;
     position: relative;
     margin: 0 10px;
