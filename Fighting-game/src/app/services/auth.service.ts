@@ -115,12 +115,14 @@ export class AuthService {
             localStorage.setItem('loggedIn', this.loggedIn);
             this._snackBar.open('You are logged In', 'Ok');
             this.getUserId();
-            this.updatePlayerOnlineState(this.userId, true);
-            this.updatePlayerEmailVerification(this.userId, true);
+            this.updatePlayerOnlineState(result.user.uid, true);
+            this.updatePlayerEmailVerification(result.user.uid, true);
             this.router.navigate(['/profile']);
           } else {
             this._snackBar.open('Please verify your email', 'Ok');
           }
+        }).catch((error) => {
+          this._snackBar.open(error, 'Ok');
         });
     } else {
         this._snackBar.open('You are already logged In' , 'Ok');
