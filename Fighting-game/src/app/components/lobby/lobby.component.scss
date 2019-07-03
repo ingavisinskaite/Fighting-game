@@ -1,17 +1,50 @@
+$break-medium: 1221px;
+$break-medium-small: 815px;
+$break-small: 610px;
+$break-mobile: 450px;
+
 .rooms {
     width: 90vw;
     margin: 0 auto;
     div {
         display: inline-block;
         border: 2px solid black;
-        width: 20vw;
-        height: 150px;
-        margin: 3px;
+        width: 23%;
+        height: 260px;
+        margin: 10px;
         text-align: center;
+        margin-top: 100px;
+        background-color: rgba(255, 255, 255, 0.6);
+        position: relative;
+
+        @media screen and (max-width: $break-medium) {
+            width: 22%;
+          }
+
+          @media screen and (max-width: $break-medium-small) {
+            margin: 8px;
+            margin-top: 100px;
+            width: 21%
+          }
+
+          @media screen and (max-width: $break-small) {
+            width: 20%;
+          }
     }
+
+    div:hover {
+        background-color: rgba(255, 255, 255, 0.9);
+        transition: 0.5s ease-in-out all;
+    }
+
     .joinedPlayers {
-        text-align: right;
-        margin-right: 5px;
+        position: absolute;
+        bottom: 0;
+        right: 5px;
+    }
+
+    h3 {
+        margin-top: 70px;
     }
 }
 
@@ -19,6 +52,22 @@ h1 {
     text-align: center;
 }
 
-.onlinePlayers {
-    margin: 15px 0;
+hr {
+    background-color: grey;
+    border: 1px solid grey;
+}
+
+.container {
+    background: url('http://www.sclance.com/backgrounds/fighting-arena-background/fighting-arena-background_944304.jpg');
+    background-size: cover;
+    max-width: 100%;
+    height: 600px;
+    position: relative;
+    margin: 0 10px;
+
+    .onlinePlayers {
+        position: absolute;
+        left: 25px;
+        top: 15px;
+    }
 }

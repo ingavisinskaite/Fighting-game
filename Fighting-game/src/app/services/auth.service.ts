@@ -7,8 +7,6 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { User } from 'firebase';
 import { auth } from 'firebase/app';
 import { Observable } from 'rxjs';
-import * as functions from '@angular/fire/functions';
-
 
 @Injectable({
   providedIn: 'root'
@@ -54,14 +52,14 @@ export class AuthService {
           duration: 3000
       });
   }
-  public async signUp(email: string, password: string): Promise<void> {
+  public async signUp(email: string, password: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.sendVerificationMail();
         this.loggedIn = 'false';
         localStorage.setItem('loggedIn', this.loggedIn);
         this.setUserData(result.user, false);
-        this._snackBar.open('You succesfully signed up', 'Ok');
+        this._snackBar.open('You succesfully signed up, verify your email and login', 'Ok');
         this.router.navigate(['/login']);
       }).catch((error) => {
         this._snackBar.open(error, 'Ok');
@@ -103,25 +101,26 @@ export class AuthService {
     this.userData.online = true;
     this.userData.emailVerified = false;
     this.userData.room = -1;
-    // console.log(this.userData);
   }
 
-  public async login(email: string, password: string): Promise<void> {
+  public async login(email: string, password: string): Promise<any> {
     if (this.userData.online === false) {
       return this.afAuth.auth.signInWithEmailAndPassword(email, password)
         .then((result) => {
-          if (result.user.emailVerified){
+          if (result.user.emailVerified) {
             this.saveUser(result);
-            this.router.navigate(['/main']);
             this.loggedIn = 'true';
             localStorage.setItem('loggedIn', this.loggedIn);
             this._snackBar.open('You are logged In', 'Ok');
             this.getUserId();
-            this.updatePlayerOnlineState(this.userId, true);
-            this.updatePlayerEmailVerification(this.userId, true);
+            this.updatePlayerOnlineState(result.user.uid, true);
+            this.updatePlayerEmailVerification(result.user.uid, true);
+            this.router.navigate(['/profile']);
           } else {
             this._snackBar.open('Please verify your email', 'Ok');
           }
+        }).catch((error) => {
+          this._snackBar.open(error, 'Ok');
         });
     } else {
         this._snackBar.open('You are already logged In' , 'Ok');
