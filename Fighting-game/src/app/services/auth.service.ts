@@ -60,8 +60,7 @@ export class AuthService {
         this.sendVerificationMail();
         // this.router.navigate(['profile']);
         this.setUserData(result.user);
-        this.login(email, password);
-        this.router.navigate(['profile']);
+        this.router.navigate(['login']);
         this._snackBar.open('You succesfully signed up, now you can login', 'Ok');
       } ).catch((error) => {
         this._snackBar.open(error, 'Ok'); //
