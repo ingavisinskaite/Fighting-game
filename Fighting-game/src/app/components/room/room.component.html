@@ -4,24 +4,28 @@
   <button class="leave" mat-raised-button color="primary" (click)="leaveRoom()">Leave</button>
   <mat-card *ngIf="room" class="players">
     <h3>Players</h3>
-    <div>
-      <p><strong>Player 1: </strong>{{ room.player1 }}</p>
-      <p><strong>Player 2: </strong>{{ room.player2 }}</p>
+    <div *ngFor="let player of players"> 
+      <p><strong>Player: </strong>{{ player }}</p>
     </div>
   </mat-card>
   <div class="character">
     <img id="character"
       src="https://vignette.wikia.nocookie.net/pathfinder/images/f/f8/Valeros.jpg/revision/latest?cb=20080602020111">
   </div>
+
+  <div *ngIf="room" >
+
   <div class="chatMessages">
     <div class="message" (click)="sendMessage('Hello')">Hello</div>
     <div class="message" (click)="sendMessage('Bye')">Bye</div>
     <div class="message" (click)="sendMessage('Nice to meet you')">Nice to meet you</div>
   </div>
-  <mat-card *ngIf="room" class="chat">
+  <mat-card *ngIf="room.chat !== []" class="chat">
     <div *ngFor="let message of room.chat">
       <p>{{ message }}</p>
     </div>
   </mat-card>
+
+</div>
 
 </div>

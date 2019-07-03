@@ -35,13 +35,8 @@ export class LobbyComponent implements OnInit {
     const selectedRoom = this.roomPlayers[roomNum - 1];
     delete selectedRoom.playerCount;
     if (!this.isInRoom) {
-      if (selectedRoom.player1 === '') {
-        selectedRoom.player1 = userId;
-        this.router.navigateByUrl('/room/' + roomNum);
-      } else {
-        selectedRoom.player2 = userId;
-        this.router.navigateByUrl('/room/' + roomNum);
-      }
+      selectedRoom.players.push(userId);
+      this.router.navigateByUrl('/room/' + roomNum);
       this.currentPlayer.room = roomNum;
       this.authService.updatePlayer(userId, this.currentPlayer);
       this._lobbyService.updateRoom(roomId, selectedRoom);
@@ -49,7 +44,7 @@ export class LobbyComponent implements OnInit {
       this.message = 'You joined room ' + roomNum;
       this.joinedRoom = roomNum;
     } else {
-      selectedRoom.player1 = '';
+      selectedRoom.chat = [];
       this.joinedRoom = 0;
       this.isInRoom = false;
       this.message = 'LOBBY';
@@ -88,7 +83,7 @@ export class LobbyComponent implements OnInit {
   public getRooms(): Array<IRoom> {
     this._lobbyService.getRooms().subscribe(rooms => {
       this.roomPlayers = rooms.map(r => {
-        r.playerCount = (r.player1 ? 1 : 0) + (r.player2 ? 1 : 0);
+        r.playerCount = r.players.length;
         const room = r as IRoom;
         return room;
       });

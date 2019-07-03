@@ -33,6 +33,7 @@ export class RoomComponent implements OnInit {
     const roomId = 'Room ' + roomNum;
     this._lobbyService.getRoom(roomId).subscribe(room => {
       this.room = room;
+      this.players = room.players;
     });
     return this.room;
   }
@@ -52,21 +53,17 @@ export class RoomComponent implements OnInit {
   }
 
   private updateRoom(roomNum: number, data: IRoom): void {
-    let roomId = 'Room ' + roomNum;
+    const roomId = 'Room ' + roomNum;
     this._lobbyService.updateRoom(roomId, data);
   }
 
   public leaveRoom(): void {
     let roomId = 'Room ' + this.roomNum;
-    if (this.room.player1 === this.currentUserId) {
-      this.room.player1 = '';
-      this.room.playerCount -= 1;
-    } else {
-      this.room.player2 = '';
-      this.room.playerCount -= 1;
-    }
+    const currentUserPosition = this.room.players.indexOf(this.currentUserId);
+    this.room.players.splice(currentUserPosition, 1);
+    this.room.playerCount -= 1;
 
-    if (this.room.player1 === '' && this.room.player2 === '') {
+    if (this.room.players === []) {
       this.room.chat = [];
     }
     this.currentPlayer.room = -1;
