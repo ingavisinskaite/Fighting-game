@@ -1,10 +1,8 @@
 import { IRoom } from './../models/room.model';
-import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
-import { IUser } from '../models/user/user.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,20 +12,9 @@ export class LobbyService {
 
   constructor(private afs: AngularFirestore) { }
 
-  public getPlayers(): Observable<any[]> {
-    return this.afs.collection('users').valueChanges();
-  }
-
-  public getPlayer(playerId: string): Observable<any> {
-    return this.afs.collection('users').doc(playerId).valueChanges();
-  }
 
   public updateRoom(roomId: string, data: IRoom): Promise<void> {
     return this.afs.collection('rooms').doc(roomId).update(data);
-  }
-
-  public updatePlayer(playerId: string, data: IUser): Promise<void> {
-    return this.afs.collection('users').doc(playerId).update(data);
   }
 
   public getRoom(roomId: string): Observable<any> {
@@ -42,10 +29,6 @@ export class LobbyService {
         return { id, ...data };
       });
     }));
-  }
-
-  public getRoomPlayers(): Observable<any[]> {
-    return this.afs.collection('users').valueChanges();
   }
 
 }

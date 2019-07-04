@@ -18,11 +18,6 @@ export class RoomComponent implements OnInit {
   formatedDate: string;
   currentPlayer: IUser;
 
-  // @HostListener('window:beforeunload', ['$event'])
-  // beforeUnloadHandler(event) {
-  //   this.removePlayerFromRoom();
-  // }
-
   constructor(private _lobbyService: LobbyService,
     private _authService: AuthService,
     private _activatedRoute: ActivatedRoute,
@@ -34,14 +29,15 @@ export class RoomComponent implements OnInit {
     this.getRoomPlayers(this.roomNum);
   }
 
-  public getRoomPlayers(roomNum: number) {
+  private getRoomPlayers(roomNum: number): IRoom {
     const roomId = 'Room ' + roomNum;
     this._lobbyService.getRoom(roomId).subscribe(room => {
       this.room = room;
     });
+    return this.room;
   }
 
-  public sendMessage(message: string) {
+  public sendMessage(message: string): void {
     const sentMessage = message;
     this.getCurrentDate();
     const playerSentMessage = this.formatedDate + ' ' + this.currentUserId + ': ' + sentMessage;
@@ -49,17 +45,18 @@ export class RoomComponent implements OnInit {
     this.updateRoom(this.roomNum, this.room);
   }
 
-  public getCurrentUserId() {
+  private getCurrentUserId(): string {
     this.currentUserId = this._authService.getUserId();
     this.getCurrentPlayer(this.currentUserId);
+    return this.currentUserId;
   }
 
-  public updateRoom(roomNum: number, data: IRoom) {
+  private updateRoom(roomNum: number, data: IRoom): void {
     let roomId = 'Room ' + roomNum;
     this._lobbyService.updateRoom(roomId, data);
   }
 
-  public leaveRoom() {
+  public leaveRoom(): void {
     let roomId = 'Room ' + this.roomNum;
     if (this.room.player1 === this.currentUserId) {
       this.room.player1 = '';
@@ -73,12 +70,12 @@ export class RoomComponent implements OnInit {
       this.room.chat = [];
     }
     this.currentPlayer.room = -1;
-    this._lobbyService.updatePlayer(this.currentUserId, this.currentPlayer);
+    this._authService.updatePlayer(this.currentUserId, this.currentPlayer);
     this._lobbyService.updateRoom(roomId, this.room);
     this._router.navigateByUrl('/lobby');
   }
 
-  public getCurrentDate() {
+  private getCurrentDate(): string {
     this.formatedDate = '';
     const fullDate = new Date();
     const hours = fullDate.getHours();
@@ -99,10 +96,11 @@ export class RoomComponent implements OnInit {
     return this.formatedDate;
   }
 
-    public getCurrentPlayer(playerId: string) {
-    this._lobbyService.getPlayer(playerId).subscribe(player => {
+    private getCurrentPlayer(playerId: string): IUser {
+    this._authService.getPlayer(playerId).subscribe(player => {
       this.currentPlayer = player;
-    })
+    });
+    return this.currentPlayer;
   }
 
 

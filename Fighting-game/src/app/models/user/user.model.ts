@@ -15,4 +15,8 @@ export interface IUser {
     armorArms: Array<IArmor>;
     armorLegs: Array<IArmor>;
     fighter: IFighter;
+    fullname: string;
+    birthDate: string;
+    gender: string;
+    bio: string;
 }

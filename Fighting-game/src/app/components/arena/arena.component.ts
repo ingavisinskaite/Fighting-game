@@ -22,6 +22,7 @@ export class ArenaComponent implements OnInit {
               public _armory: Armory) { }
 
   ngOnInit() {
+    // this.getPlayerIds();
   }
 
   chooseWeapon(fighterId: string, weaponId: string, oneHanded: boolean) {
@@ -39,15 +40,24 @@ export class ArenaComponent implements OnInit {
   }
 
   // Labai graži funkcija, bet kaip "id" čia atsiranda?
-  getCurrentPlayerId(id: string) {
-    if (id === this._fight.playerOneId) {
-      this.currentPlayerId = id;
-      console.log('getCurrentPlayerId, One' + this.currentPlayerId);
-    }
-    if (id === this._fight.playerTwoId) {
-      this.currentPlayerId = id;
-      console.log('getCurrentPlayerId, Two' + this.currentPlayerId);
-    }
+  // getCurrentPlayerId(id: string) {
+  //   if (id === this._fight.playerOneId) {
+  //     this.currentPlayerId = id;
+  //     console.log('getCurrentPlayerId, One' + this.currentPlayerId);
+  //   }
+  //   if (id === this._fight.playerTwoId) {
+  //     this.currentPlayerId = id;
+  //     console.log('getCurrentPlayerId, Two' + this.currentPlayerId);
+  //   }
+  // }
+
+  
+  getPlayerIds() {
+    this._fight.getPlayersUids(1);
+    this.fighterOneId = this._fight.playerOneId;
+    console.log('IdOne: ' + this.fighterOneId);
+    this.fighterTwoId = this._fight.playerOneId;
+    console.log('IdTwo ' + this.fighterTwoId);
   }
 
   changePlayer() {

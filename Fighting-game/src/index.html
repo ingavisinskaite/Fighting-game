@@ -8,8 +8,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="./assets/logo.png">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
+  <link href="https://fonts.googleapis.com/css?family=Orbitron:400,700&display=swap" rel="stylesheet"></head>
 <body>
-  <app-root></app-root>
+  <app-root>
+      <div class="wrapper" *ngIf="showOverlay">
+          <img class="loaderlogo" src="../../../assets/logo.png" alt="logo">
+          <div class="spinner"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+  </app-root>
 </body>
 </html>
