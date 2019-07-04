@@ -57,6 +57,7 @@ import { RoomComponent } from './components/room/room.component';
 import { FormsComponent } from './components/profile/forms/forms.component';
 import { DeleteNewsDialogComponent } from './dialogs/delete-news-dialog/delete-news-dialog.component';
 import { EditNewsDialogComponent } from './dialogs/edit-news-dialog/edit-news-dialog.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 @NgModule({
@@ -99,7 +100,8 @@ import { EditNewsDialogComponent } from './dialogs/edit-news-dialog/edit-news-di
     MatNativeDateModule,
     MatSelectModule,
     MatGridListModule,
-    MatTableModule
+    MatTableModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   entryComponents: [DeleteNewsDialogComponent, EditNewsDialogComponent],
   providers: [NewsService, FightService, Weaponry, Armory, AuthService, LobbyService],
