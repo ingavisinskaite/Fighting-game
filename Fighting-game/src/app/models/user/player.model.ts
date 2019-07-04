@@ -1,6 +1,6 @@
 import { IArmor, IWeapon, IFighter } from '../index';
 
-export interface IUser {
+export interface IPlayer {
     uid?: string;
     email: string;
     displayName: string;

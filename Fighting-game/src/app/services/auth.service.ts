@@ -25,7 +25,13 @@ export class AuthService {
     online: false,
     emailVerified: false,
     room: -1,
-    weaponRight: [],
+    weaponRight: [{
+      name: 'Fists',
+      id: '0',
+      damage: 10,
+      oneHanded: true,
+      image: '/assets/images/weapons/knuckles.svg'
+    }],
     weaponLeft: [],
     armorHead: [],
     armorTorso: [],
@@ -144,7 +150,13 @@ export class AuthService {
       online: false,
       emailVerified: user.emailVerified,
       room: -1,
-      weaponRight: [],
+      weaponRight: [{
+        name: 'Fists',
+        id: '0',
+        damage: 10,
+        oneHanded: true,
+        image: '/assets/images/weapons/knuckles.svg'
+      }],
       weaponLeft: [],
       armorHead: [],
       armorTorso: [],
@@ -239,7 +251,7 @@ export class AuthService {
           this.loggedIn = 'true';
           localStorage.setItem('loggedIn', this.loggedIn);
           // this.checkUserData(this.userData);
-          this.setUserData(result.user);
+          // this.setUserData(result.user);
           console.log(result);
           this._snackBar.open('You are logged In', 'Ok');
         });
@@ -256,7 +268,7 @@ export class AuthService {
         this.router.navigate(['/main']);
         this.loggedIn = 'true';
         localStorage.setItem('loggedIn', this.loggedIn);
-        this.setUserData(result.user); //
+        // this.setUserData(result.user);
         this._snackBar.open('You are logged In', 'Ok');
       });
     } else {
@@ -272,7 +284,7 @@ export class AuthService {
         this.router.navigate(['/main']);
         this.loggedIn = 'true';
         localStorage.setItem('loggedIn', this.loggedIn);
-        this.setUserData(result.user);
+        // this.setUserData(result.user);
         this._snackBar.open('You are logged In', 'Ok'); //
       });
     } else {

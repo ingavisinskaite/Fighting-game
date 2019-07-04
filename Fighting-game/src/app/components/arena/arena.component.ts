@@ -15,6 +15,8 @@ export class ArenaComponent implements OnInit {
   fighterOneId = '0';
   fighterTwoId = '1';
 
+  currentPlayerId = '';
+
   constructor(public _fight: FightService,
               public _weaponry: Weaponry,
               public _armory: Armory) { }
@@ -31,9 +33,21 @@ export class ArenaComponent implements OnInit {
     // console.log('armor id:' + armorId);
   }
 
-  // Pakeisti, kad rodytų iš service
+  // OK
   showFighterHP() {
     this.currentFighterHP = this._fight.getFightersHP(this.currentPlayer);
+  }
+
+  // Labai graži funkcija, bet kaip "id" čia atsiranda?
+  getCurrentPlayerId(id: string) {
+    if (id === this._fight.playerOneId) {
+      this.currentPlayerId = id;
+      console.log('getCurrentPlayerId, One' + this.currentPlayerId);
+    }
+    if (id === this._fight.playerTwoId) {
+      this.currentPlayerId = id;
+      console.log('getCurrentPlayerId, Two' + this.currentPlayerId);
+    }
   }
 
   changePlayer() {

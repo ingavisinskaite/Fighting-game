@@ -17,7 +17,7 @@ export class FightService {
 
   room: IRoom;
   roomNum: number;
- 
+
   playerOneId: string;
   playerTwoId: string;
 
@@ -32,139 +32,136 @@ export class FightService {
 // į IFighter?
 // Turbūt reikia leftArm ir rightArm, nes skirtingi img turėtų būti naudojami, ar bent jau reverse.
 
-  fighters: IFighter[] = [{
-    name: 'Simas',
-    id: '0',
-    class: 'warrior',
-    hp: 100,
-    attack: 'none',
-    defence: 'none',
-    weaponLeft: {
-      name: 'Fists',
-      id: '0',
-      damage: 10,
-      oneHanded: true,
-      image: 'Fists.svg'
-    },
-    weaponRight: {
-      name: 'Fists',
-      id: '0',
-      damage: 10,
-      oneHanded: true,
-      image: 'Fists.svg'
-    },
-    armorArms: {
-      protec: 'arms',
-      criticalDmgCounter: 2,
-      criticalDmg: 0,
-      name: 'none',
-      id: '0',
-      armor: 0,
-      durability: 0,
-      image: './assets/images/body/arms.svg'
-    },
-    armorLegs: {
-      protec: 'legs',
-      criticalDmgCounter: 2,
-      criticalDmg: 0,
-      name: 'none',
-      id: '0',
-      armor: 0,
-      durability: 0,
-      image: './assets/images/body/legs.svg'
-    },
-    armorTorso: {
-      protec: 'torso',
-      criticalDmgCounter: 2,
-      criticalDmg: 0,
-      name: 'none',
-      id: '0',
-      armor: 0,
-      durability: 0,
-      image: './assets/images/body/torso.svg'
-    },
-    armorHead: {
-      protec: 'head',
-      criticalDmgCounter: 2,
-      criticalDmg: 0,
-      name: 'none',
-      id: '0',
-      armor: 0,
-      durability: 0,
-      image: './assets/images/body/head.svg'
-    }
-  },
-  {
-    name: 'Zbignev',
-    id: '1',
-    class: 'warrior',
-    hp: 100,
-    attack: 'none',
-    defence: 'none',
-    weaponLeft: {
-      name: 'Fists',
-      id: '0',
-      damage: 10,
-      oneHanded: true,
-      image: 'fists.svg'
-    },
-    weaponRight: {
-      name: 'Fists',
-      id: '0',
-      damage: 10,
-      oneHanded: true,
-      image: 'fists.svg'
-    },
-    armorArms: {
-      protec: 'arms',
-      criticalDmgCounter: 2,
-      criticalDmg: 0,
-      name: 'none',
-      id: '0',
-      armor: 0,
-      durability: 0,
-      image: './assets/images/body/arms.svg'
-    },
-    armorLegs: {
-      protec: 'legs',
-      criticalDmgCounter: 2,
-      criticalDmg: 0,
-      name: 'none',
-      id: '0',
-      armor: 0,
-      durability: 0,
-      image: './assets/images/body/legs.svg'
-    },
-    armorTorso: {
-      protec: 'torso',
-      criticalDmgCounter: 2,
-      criticalDmg: 0,
-      name: 'none',
-      id: '0',
-      armor: 0,
-      durability: 0,
-      image: './assets/images/body/torso.svg'
-    },
-    armorHead: {
-      protec: 'head',
-      criticalDmgCounter: 2,
-      criticalDmg: 0,
-      name: 'none',
-      id: '0',
-      armor: 0,
-      durability: 0,
-      image: './assets/images/body/head.svg'
-    }
-  }];
+  // fighters: IFighter[] = [{
+  //   name: 'Simas',
+  //   id: '0',
+  //   class: 'warrior',
+  //   hp: 100,
+  //   attack: 'none',
+  //   defence: 'none',
+  //   weaponLeft: {
+  //     name: 'Fists',
+  //     id: '0',
+  //     damage: 10,
+  //     oneHanded: true,
+  //     image: 'Fists.svg'
+  //   },
+  //   weaponRight: {
+  //     name: 'Fists',
+  //     id: '0',
+  //     damage: 10,
+  //     oneHanded: true,
+  //     image: 'Fists.svg'
+  //   },
+  //   armorArms: {
+  //     protec: 'arms',
+  //     criticalDmgCounter: 2,
+  //     criticalDmg: 0,
+  //     name: 'none',
+  //     id: '0',
+  //     armor: 0,
+  //     durability: 0,
+  //     image: './assets/images/body/arms.svg'
+  //   },
+  //   armorLegs: {
+  //     protec: 'legs',
+  //     criticalDmgCounter: 2,
+  //     criticalDmg: 0,
+  //     name: 'none',
+  //     id: '0',
+  //     armor: 0,
+  //     durability: 0,
+  //     image: './assets/images/body/legs.svg'
+  //   },
+  //   armorTorso: {
+  //     protec: 'torso',
+  //     criticalDmgCounter: 2,
+  //     criticalDmg: 0,
+  //     name: 'none',
+  //     id: '0',
+  //     armor: 0,
+  //     durability: 0,
+  //     image: './assets/images/body/torso.svg'
+  //   },
+  //   armorHead: {
+  //     protec: 'head',
+  //     criticalDmgCounter: 2,
+  //     criticalDmg: 0,
+  //     name: 'none',
+  //     id: '0',
+  //     armor: 0,
+  //     durability: 0,
+  //     image: './assets/images/body/head.svg'
+  //   }
+  // },
+  // {
+  //   name: 'Zbignev',
+  //   id: '1',
+  //   class: 'warrior',
+  //   hp: 100,
+  //   attack: 'none',
+  //   defence: 'none',
+  //   weaponLeft: {
+  //     name: 'Fists',
+  //     id: '0',
+  //     damage: 10,
+  //     oneHanded: true,
+  //     image: 'fists.svg'
+  //   },
+  //   weaponRight: {
+  //     name: 'Fists',
+  //     id: '0',
+  //     damage: 10,
+  //     oneHanded: true,
+  //     image: 'fists.svg'
+  //   },
+  //   armorArms: {
+  //     protec: 'arms',
+  //     criticalDmgCounter: 2,
+  //     criticalDmg: 0,
+  //     name: 'none',
+  //     id: '0',
+  //     armor: 0,
+  //     durability: 0,
+  //     image: './assets/images/body/arms.svg'
+  //   },
+  //   armorLegs: {
+  //     protec: 'legs',
+  //     criticalDmgCounter: 2,
+  //     criticalDmg: 0,
+  //     name: 'none',
+  //     id: '0',
+  //     armor: 0,
+  //     durability: 0,
+  //     image: './assets/images/body/legs.svg'
+  //   },
+  //   armorTorso: {
+  //     protec: 'torso',
+  //     criticalDmgCounter: 2,
+  //     criticalDmg: 0,
+  //     name: 'none',
+  //     id: '0',
+  //     armor: 0,
+  //     durability: 0,
+  //     image: './assets/images/body/torso.svg'
+  //   },
+  //   armorHead: {
+  //     protec: 'head',
+  //     criticalDmgCounter: 2,
+  //     criticalDmg: 0,
+  //     name: 'none',
+  //     id: '0',
+  //     armor: 0,
+  //     durability: 0,
+  //     image: './assets/images/body/head.svg'
+  //   }
+  // }];
 
   constructor(private _weaponry: Weaponry,
               private _armory: Armory,
-              private _room: RoomComponent,
               private _lobbyService: LobbyService) { }
 
   public initFighters() {
-    // should init the fighters
-    // get data from firebase etc.
   }
 
   // Man reikia pačiam įrašyti ROOM number, kad pagauti ten esančius vartotojus. 
@@ -176,6 +173,8 @@ export class FightService {
       this.room = room;
       this.playerOneId = this.room.player1;
       this.playerTwoId = this.room.player2;
+      console.log('getPlayersUids, One: ' + this.playerOneId);
+      console.log('getPlayersUids, Two: ' + this.playerTwoId);
     });
   }
 
@@ -187,31 +186,55 @@ export class FightService {
       this._lobbyService.getPlayer(playerId).subscribe(player => {
         this.fighterOne = player.fighter;
         this.playerOne = player;
+        console.log('getPlayers, One: ' + this.playerOne.email);
       });
     }
     if (playerId === this.playerTwoId) {
       this._lobbyService.getPlayer(playerId).subscribe(player => {
         this.fighterTwo = player.fighter;
         this.playerTwo = player;
+        console.log('getPlayers, Two: ' + this.playerTwo.email);
       });
     }
   }
 
-  
+  // Susisiekia su lobbyService esančia update funkcija ir nusiunčia jai naują data.
+  public updatePlayer(playerId: string, data: IUser) {
+    this._lobbyService.updatePlayer(playerId, data);
+    console.log('updatePlayer: success');
+  }
 
-  public getFightersHP(id: string): number {
-    return this.fighters[this.getFighterIndex(id)].hp;
+  // public getFightersHP(id: string): number {
+  //   return this.fighters[this.getFighterIndex(id)].hp;
+  // }
+
+  public getFightersHP(userId: string) {
+    return this.getFighter(userId).fighter.hp;
   }
 
   // If fighter1.attack === fighter2.defence { attack is blocked and no harm is done }
-  public assignAttack(fighterId: string, bodyPart: string) {
-    this.fighters[this.getFighterIndex(fighterId)].attack = bodyPart;
-    console.log('attack ' + bodyPart);
+  //PAKEISTA
+  public assignAttack(playerId: string, bodyPart: string) {
+    if (playerId === this.playerOneId) {
+      this.playerOne.fighter.attack = bodyPart;
+      console.log('playerOne attack: ' + bodyPart);
+    }
+    if (playerId === this.playerTwoId) {
+      this.playerTwo.fighter.attack = bodyPart;
+      console.log('playerTwo attack: ' + bodyPart);
+    }
   }
 
-  public assignDefence(fighterId: string, bodyPart: string) {
-    this.fighters[this.getFighterIndex(fighterId)].defence = bodyPart;
-    console.log('defence ' + bodyPart);
+  //PAKEISTA
+  public assignDefence(playerId: string, bodyPart: string) {
+    if (playerId === this.playerOneId) {
+      this.playerOne.fighter.defence = bodyPart;
+      console.log('playerOne defence: ' + bodyPart);
+    }
+    if (playerId === this.playerTwoId) {
+      this.playerTwo.fighter.defence = bodyPart;
+      console.log('playerTwo defence: ' + bodyPart);
+    }
   }
 
   // weaponRight.damage - because we always assign weapon to rightArm, even when it is twoHanded
@@ -219,89 +242,84 @@ export class FightService {
   // Fighter's unique id's (will add two parameters to function).
   // First we determine if attack hasn't been defended. Then we check armor.durability (if armor hasn't been destroyed)
   // And at the end we calculate damage delivered to fighter.hp and rewrite it in the object.
-  public calculateCombat(fighterOneId: string, fighterTwoId: string) {
-    if (this.fighters[this.getFighterIndex(fighterOneId)].attack !==
-      this.fighters[this.getFighterIndex(fighterTwoId)].defence) {
-      this.changeAttackedPartArmorDurability(fighterOneId, fighterTwoId);
-      this.changeCriticalCounterAndDmg(fighterOneId, fighterTwoId);
-      this.fighters[this.getFighterIndex(fighterTwoId)].hp -=
-      (this.fighters[this.getFighterIndex(fighterOneId)].weaponRight.damage +
-      this.getCriticalDmg(fighterOneId, fighterTwoId) - this.getAttackedPartArmor(fighterOneId, fighterTwoId));
+  //PAKEISTA
+  public calculateCombat(playerOneId: string, playerTwoId: string) {
+    if (this.playerOne.fighter.attack !== this.playerTwo.fighter.defence) {
+      this.changeAttackedPartArmorDurability(playerOneId, playerTwoId);
+      this.changeCriticalCounterAndDmg(playerOneId, playerTwoId);
+      this.playerTwo.fighter.hp -= (this.playerOne.fighter.weaponRight.damage +
+      this.getCriticalDmg(playerOneId, playerTwoId) - this.getAttackedPartArmor(playerOneId, playerTwoId));
     }
-    if (this.fighters[this.getFighterIndex(fighterTwoId)].attack !==
-      this.fighters[this.getFighterIndex(fighterOneId)].defence) {
-      this.changeAttackedPartArmorDurability(fighterTwoId, fighterOneId);
-      this.changeCriticalCounterAndDmg(fighterTwoId, fighterOneId);
-      this.fighters[this.getFighterIndex(fighterOneId)].hp -=
-      (this.fighters[this.getFighterIndex(fighterTwoId)].weaponRight.damage +
-      this.getCriticalDmg(fighterTwoId, fighterOneId) - this.getAttackedPartArmor(fighterTwoId, fighterOneId));
+    if (this.playerTwo.fighter.attack !== this.playerOne.fighter.defence) {
+      this.changeAttackedPartArmorDurability(playerTwoId, playerOneId);
+      this.changeCriticalCounterAndDmg(playerTwoId, playerOneId);
+      this.playerOne.fighter.hp -= (this.playerTwo.fighter.weaponRight.damage +
+      this.getCriticalDmg(playerTwoId, playerOneId) - this.getAttackedPartArmor(playerTwoId, playerOneId));
     }
-
   }
 
+  //NEW
+  private getFighter(userId: string) {
+    if (userId === this.playerOneId) {
+      return this.playerOne;
+    }
+    if (userId === this.playerTwoId) {
+      return this.playerTwo;
+    }
+  }
 
   // Different parts of fighters body can have different armor, thus we compare two strings from fighters[] objects
   // (attack and protec) to determin what kind of armor attacked body part has.
+  //PAKEISTA
   private getAttackedPartArmor(attackingFighterId: string, defendingFighterId: string): number {
     let armor = 0;
-    if (this.fighters[this.getFighterIndex(attackingFighterId)].attack ===
-    this.fighters[this.getFighterIndex(defendingFighterId)].armorHead.protec) {
-      armor = this.fighters[this.getFighterIndex(defendingFighterId)].armorHead.armor;
-      console.log('attacked part armor')
-      console.log('fighter name: ' + this.fighters[this.getFighterIndex(defendingFighterId)].name + ' head armor ' + armor)
-    } else if (this.fighters[this.getFighterIndex(attackingFighterId)].attack ===
-    this.fighters[this.getFighterIndex(defendingFighterId)].armorTorso.protec) {
-      armor = this.fighters[this.getFighterIndex(defendingFighterId)].armorTorso.armor;
-      console.log('attacked part armor')
-      console.log('fighter name: ' + this.fighters[this.getFighterIndex(defendingFighterId)].name + ' torso armor: ' + armor)
-    } else if (this.fighters[this.getFighterIndex(attackingFighterId)].attack ===
-    this.fighters[this.getFighterIndex(defendingFighterId)].armorArms.protec) {
-      armor = this.fighters[this.getFighterIndex(defendingFighterId)].armorArms.armor;
-      console.log('attacked part armor')
-      console.log('fighter name: ' + this.fighters[this.getFighterIndex(defendingFighterId)].name + ' torso armor: ' + armor)
-    } else if (this.fighters[this.getFighterIndex(attackingFighterId)].attack ===
-    this.fighters[this.getFighterIndex(defendingFighterId)].armorLegs.protec) {
-      armor = this.fighters[this.getFighterIndex(defendingFighterId)].armorLegs.armor;
-      console.log('attacked part armor')
-      console.log('fighter name: ' + this.fighters[this.getFighterIndex(defendingFighterId)].name + ' legs armor: ' + armor)
+    if (this.getFighter(attackingFighterId).fighter.attack ===
+    this.getFighter(defendingFighterId).fighter.armorHead.protec) {
+      armor = this.getFighter(defendingFighterId).fighter.armorHead.armor;
+    } else if (this.getFighter(attackingFighterId).fighter.attack ===
+    this.getFighter(defendingFighterId).fighter.armorTorso.protec) {
+      armor = this.getFighter(defendingFighterId).fighter.armorTorso.armor;
+    } else if (this.getFighter(attackingFighterId).fighter.attack ===
+    this.getFighter(defendingFighterId).fighter.armorArms.protec) {
+      armor = this.getFighter(defendingFighterId).fighter.armorArms.armor;
+    } else if (this.getFighter(attackingFighterId).fighter.attack ===
+    this.getFighter(defendingFighterId).fighter.armorLegs.protec) {
+      armor = this.getFighter(defendingFighterId).fighter.armorLegs.armor;
     } else {
       armor = 0;
     }
     return armor;
   }
 
+  //PAKEISTA
   private getCriticalDmg(attackingFighterId: string, defendingFighterId: string): number {
     let dmg = 0;
 
-    if (this.fighters[this.getFighterIndex(attackingFighterId)].attack ===
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorHead.protec) {
-      dmg = this.fighters[this.getFighterIndex(defendingFighterId)].armorHead.criticalDmg;
+    if (this.getFighter(attackingFighterId).fighter.attack ===
+      this.getFighter(defendingFighterId).fighter.armorHead.protec) {
+      dmg = this.getFighter(defendingFighterId).fighter.armorHead.criticalDmg;
 
-      console.log(this.fighters[this.getFighterIndex(defendingFighterId)].name + ' head crit dmg: ' + dmg)
       return dmg;
     }
 
-    if (this.fighters[this.getFighterIndex(attackingFighterId)].attack ===
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorTorso.protec) {
-      dmg = this.fighters[this.getFighterIndex(attackingFighterId)].armorTorso.criticalDmg;
+    if (this.getFighter(attackingFighterId).fighter.attack ===
+      this.getFighter(defendingFighterId).fighter.armorTorso.protec) {
+      dmg = this.getFighter(defendingFighterId).fighter.armorTorso.criticalDmg;
 
-      console.log(this.fighters[this.getFighterIndex(defendingFighterId)].name + ' torso crit dmg: ' + dmg)
       return dmg;
     }
 
-    if (this.fighters[this.getFighterIndex(attackingFighterId)].attack ===
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorArms.protec) {
-      dmg = this.fighters[this.getFighterIndex(defendingFighterId)].armorArms.criticalDmg;
+    if (this.getFighter(attackingFighterId).fighter.attack ===
+      this.getFighter(defendingFighterId).fighter.armorArms.protec) {
+      dmg = this.getFighter(defendingFighterId).fighter.armorArms.criticalDmg;
 
-      console.log(this.fighters[this.getFighterIndex(defendingFighterId)].name + ' arms crit dmg: ' + dmg)
       return dmg;
     }
 
-    if (this.fighters[this.getFighterIndex(attackingFighterId)].attack ===
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorLegs.protec) {
-      dmg = this.fighters[this.getFighterIndex(defendingFighterId)].armorLegs.criticalDmg;
+    if (this.getFighter(attackingFighterId).fighter.attack ===
+      this.getFighter(defendingFighterId).fighter.armorLegs.protec) {
+      dmg = this.getFighter(defendingFighterId).fighter.armorLegs.criticalDmg;
 
-      console.log(this.fighters[this.getFighterIndex(defendingFighterId)].name + ' legs crit dmg: ' + dmg)
       return dmg;
     }
   }
@@ -309,119 +327,110 @@ export class FightService {
   // Different armor has different durability (times it can be hit before it is destroyed).
   // NOTE: armor is destroyed only for the time of the combat, no changes are applyed to DB.
   // In future we could change how damaged body part looks (change svg).
+  //PAKEISTA
   private changeAttackedPartArmorDurability(attackingFighterId: string, defendingFighterId: string) {
 
-    if (this.fighters[this.getFighterIndex(attackingFighterId)].attack ===
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorHead.protec) {
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorHead.durability -= 1;
+    if (this.getFighter(attackingFighterId).fighter.attack ===
+      this.getFighter(defendingFighterId).fighter.armorHead.protec) {
+      this.getFighter(defendingFighterId).fighter.armorHead.durability -= 1;
 
-      console.log(this.fighters[this.getFighterIndex(defendingFighterId)].name + ' head armor dur: ' +
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorHead.durability)
-
-      if (this.fighters[this.getFighterIndex(defendingFighterId)].armorHead.durability < 0) {
-        this.fighters[this.getFighterIndex(defendingFighterId)].armorHead.armor = 0;
+      if (this.getFighter(defendingFighterId).fighter.armorHead.durability < 0) {
+        this.getFighter(defendingFighterId).fighter.armorHead.armor = 0;
       }
     }
 
-    if (this.fighters[this.getFighterIndex(attackingFighterId)].attack ===
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorTorso.protec) {
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorTorso.durability -= 1;
+    if (this.getFighter(attackingFighterId).fighter.attack ===
+      this.getFighter(defendingFighterId).fighter.armorTorso.protec) {
+      this.getFighter(defendingFighterId).fighter.armorTorso.durability -= 1;
 
-      console.log(this.fighters[this.getFighterIndex(defendingFighterId)].name + ' torso armor dur: ' +
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorTorso.durability)
-
-      if (this.fighters[this.getFighterIndex(defendingFighterId)].armorTorso.durability < 0) {
-        this.fighters[this.getFighterIndex(defendingFighterId)].armorTorso.armor = 0;
+      if (this.getFighter(defendingFighterId).fighter.armorTorso.durability < 0) {
+        this.getFighter(defendingFighterId).fighter.armorTorso.armor = 0;
       }
     }
 
-    if (this.fighters[this.getFighterIndex(attackingFighterId)].attack ===
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorArms.protec) {
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorArms.durability -= 1;
+    if (this.getFighter(attackingFighterId).fighter.attack ===
+      this.getFighter(defendingFighterId).fighter.armorArms.protec) {
+      this.getFighter(defendingFighterId).fighter.armorArms.durability -= 1;
 
-      console.log(this.fighters[this.getFighterIndex(defendingFighterId)].name + ' arms armor dur: ' +
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorArms.durability)
-
-      if (this.fighters[this.getFighterIndex(defendingFighterId)].armorArms.durability < 0) {
-        this.fighters[this.getFighterIndex(defendingFighterId)].armorArms.armor = 0;
+      if (this.getFighter(defendingFighterId).fighter.armorArms.durability < 0) {
+        this.getFighter(defendingFighterId).fighter.armorArms.armor = 0;
       }
     }
 
-    if (this.fighters[this.getFighterIndex(attackingFighterId)].attack ===
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorLegs.protec) {
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorLegs.durability -= 1;
+    if (this.getFighter(attackingFighterId).fighter.attack ===
+      this.getFighter(defendingFighterId).fighter.armorLegs.protec) {
+      this.getFighter(defendingFighterId).fighter.armorLegs.durability -= 1;
 
-      console.log(this.fighters[this.getFighterIndex(defendingFighterId)].name + ' legs armor dur: ' +
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorLegs.durability)
-
-      if (this.fighters[this.getFighterIndex(defendingFighterId)].armorLegs.durability < 0) {
-        this.fighters[this.getFighterIndex(defendingFighterId)].armorLegs.armor = 0;
+      if (this.getFighter(defendingFighterId).fighter.armorLegs.durability < 0) {
+        this.getFighter(defendingFighterId).fighter.armorLegs.armor = 0;
       }
     }
   }
 
+  //PAKEISTA
   private changeCriticalCounterAndDmg(attackingFighterId: string, defendingFighterId: string) {
 
-    if (this.fighters[this.getFighterIndex(attackingFighterId)].attack ===
-    this.fighters[this.getFighterIndex(defendingFighterId)].armorHead.protec) {
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorHead.criticalDmgCounter -= 1;
+    if (this.getFighter(attackingFighterId).fighter.attack ===
+      this.getFighter(defendingFighterId).fighter.armorHead.protec) {
+      this.getFighter(defendingFighterId).fighter.armorHead.criticalDmgCounter -= 1;
 
-      console.log(this.fighters[this.getFighterIndex(defendingFighterId)].name + ' head crit counter ' + 
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorHead.criticalDmgCounter)
-
-      if (this.fighters[this.getFighterIndex(defendingFighterId)].armorHead.criticalDmgCounter < 0) {
-        this.fighters[this.getFighterIndex(defendingFighterId)].armorHead.criticalDmg += 5;
+      if (this.getFighter(defendingFighterId).fighter.armorHead.criticalDmgCounter < 0) {
+        this.getFighter(defendingFighterId).fighter.armorHead.criticalDmg += 5;
       }
     }
 
-    if (this.fighters[this.getFighterIndex(attackingFighterId)].attack ===
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorTorso.protec) {
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorTorso.criticalDmgCounter -= 1;
+    if (this.getFighter(attackingFighterId).fighter.attack ===
+      this.getFighter(defendingFighterId).fighter.armorTorso.protec) {
+      this.getFighter(defendingFighterId).fighter.armorTorso.criticalDmgCounter -= 1;
 
-      console.log(this.fighters[this.getFighterIndex(defendingFighterId)].name + ' torso crit counter ' + 
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorTorso.criticalDmgCounter)
-
-      if (this.fighters[this.getFighterIndex(defendingFighterId)].armorTorso.criticalDmgCounter < 0) {
-        this.fighters[this.getFighterIndex(defendingFighterId)].armorTorso.criticalDmg += 5;
+      if (this.getFighter(defendingFighterId).fighter.armorTorso.criticalDmgCounter < 0) {
+        this.getFighter(defendingFighterId).fighter.armorTorso.criticalDmg += 5;
       }
     }
 
-    if (this.fighters[this.getFighterIndex(attackingFighterId)].attack ===
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorArms.protec) {
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorArms.criticalDmgCounter -= 1;
+    if (this.getFighter(attackingFighterId).fighter.attack ===
+      this.getFighter(defendingFighterId).fighter.armorArms.protec) {
+      this.getFighter(defendingFighterId).fighter.armorArms.criticalDmgCounter -= 1;
 
-      console.log(this.fighters[this.getFighterIndex(defendingFighterId)].name + ' arms crit counter ' + 
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorArms.criticalDmgCounter)
-
-      if (this.fighters[this.getFighterIndex(defendingFighterId)].armorArms.criticalDmgCounter < 0) {
-        this.fighters[this.getFighterIndex(defendingFighterId)].armorArms.criticalDmg += 5;
+      if (this.getFighter(defendingFighterId).fighter.armorArms.criticalDmgCounter < 0) {
+        this.getFighter(defendingFighterId).fighter.armorArms.criticalDmg += 5;
       }
     }
 
-    if (this.fighters[this.getFighterIndex(attackingFighterId)].attack ===
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorLegs.protec) {
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorLegs.criticalDmgCounter -= 1;
+    if (this.getFighter(attackingFighterId).fighter.attack ===
+      this.getFighter(defendingFighterId).fighter.armorLegs.protec) {
+      this.getFighter(defendingFighterId).fighter.armorLegs.criticalDmgCounter -= 1;
 
-      console.log(this.fighters[this.getFighterIndex(defendingFighterId)].name + ' legs crit counter ' + 
-      this.fighters[this.getFighterIndex(defendingFighterId)].armorLegs.criticalDmgCounter)
-
-      if (this.fighters[this.getFighterIndex(defendingFighterId)].armorLegs.criticalDmgCounter < 0) {
-        this.fighters[this.getFighterIndex(defendingFighterId)].armorLegs.criticalDmg += 5;
+      if (this.getFighter(defendingFighterId).fighter.armorLegs.criticalDmgCounter < 0) {
+        this.getFighter(defendingFighterId).fighter.armorLegs.criticalDmg += 5;
       }
     }
   }
 
-  public assignWeapon(fighterId: string, weaponId: string, oneHanded: boolean) {
-    if (oneHanded) {
-      this.fighters[this.getFighterIndex(fighterId)].weaponRight = this.getOneHandedWeapon(weaponId);
-      console.log('assign weapon')
-      console.log(this.fighters[this.getFighterIndex(fighterId)].weaponRight.name + this.fighters[this.getFighterIndex(fighterId)].weaponRight.damage)
-    } else {
-      this.fighters[this.getFighterIndex(fighterId)].weaponLeft = this.getTwoHandedWeapon(weaponId);
-      this.fighters[this.getFighterIndex(fighterId)].weaponRight = this.getTwoHandedWeapon(weaponId);
-      console.log('assign weapon')
-      console.log(this.fighters[this.getFighterIndex(fighterId)].weaponRight.name + this.fighters[this.getFighterIndex(fighterId)].weaponRight.damage)
+  //PAKEISTA
+  public assignWeapon(playerId: string, weaponId: string, oneHanded: boolean) {
+    if (playerId === this.playerOneId) {
+      if (oneHanded) {
+        this.playerOne.fighter.weaponRight = this.getOneHandedWeapon(weaponId);
+        console.log('playerOne: Assign weaponRight');
+      } else {
+        this.playerOne.fighter.weaponLeft = this.getTwoHandedWeapon(weaponId);
+        this.playerOne.fighter.weaponRight = this.getTwoHandedWeapon(weaponId);
+        console.log('playerOne: Assign weaponLeft');
+      }
     }
+
+    if (playerId === this.playerTwoId) {
+      if (oneHanded) {
+        this.playerTwo.fighter.weaponRight = this.getOneHandedWeapon(weaponId);
+        console.log('playerTwo: Assign weaponRight');
+      } else {
+        this.playerTwo.fighter.weaponLeft = this.getTwoHandedWeapon(weaponId);
+        this.playerTwo.fighter.weaponRight = this.getTwoHandedWeapon(weaponId);
+        console.log('playerTwo: Assign weaponLeft');
+      }
+    }
+
   }
 
   private getOneHandedWeapon(id: string): IWeapon {
@@ -440,35 +449,48 @@ export class FightService {
     }
   }
 
-  public assignArmor(fighterId: string, armorId: string, protec: string) {
-    if (protec === 'head') {
-      this.fighters[this.getFighterIndex(fighterId)].armorHead = this.getHeadArmor(armorId);
-      console.log('armor: ' + this.fighters[this.getFighterIndex(fighterId)].armorHead.armor)
-      console.log('fighterName: ' + this.fighters[this.getFighterIndex(fighterId)].name)
-      console.log('id: ' + armorId + ' protec: ' + protec)
-      console.log('armor assigned')
-    } 
-    if (protec === 'torso') {
-      this.fighters[this.getFighterIndex(fighterId)].armorTorso = this.getTorsoArmor(armorId);
-      console.log('armor: ' + this.fighters[this.getFighterIndex(fighterId)].armorTorso.armor)
-      console.log('fighterName: ' + this.fighters[this.getFighterIndex(fighterId)].name)
-      console.log('id: ' + armorId + ' protec: ' + protec)
-      console.log('armor assigned')
-    } 
-    if (protec === 'arms') {
-      this.fighters[this.getFighterIndex(fighterId)].armorArms = this.getArmsArmor(armorId);
-      console.log('armor: ' + this.fighters[this.getFighterIndex(fighterId)].armorArms.armor)
-      console.log('fighterName: ' + this.fighters[this.getFighterIndex(fighterId)].name)
-      console.log('id: ' + armorId + ' protec: ' + protec)
-      console.log('armor assigned')
-    } 
-    if (protec === 'legs') {
-      this.fighters[this.getFighterIndex(fighterId)].armorLegs = this.getLegsArmor(armorId);
-      console.log('armor: ' + this.fighters[this.getFighterIndex(fighterId)].armorLegs.armor)
-      console.log('fighterName: ' + this.fighters[this.getFighterIndex(fighterId)].name)
-      console.log('id: ' + armorId + ' protec: ' + protec)
-      console.log('armor assigned')
+  //PAKEISTA
+  public assignArmor(playerId: string, armorId: string, protec: string) {
+    if (playerId === this.playerOneId) {
+
+      if (protec === 'head') {
+        this.playerOne.fighter.armorHead = this.getHeadArmor(armorId);
+        console.log('playerOne: Head armor assigned');
+      }
+      if (protec === 'torso') {
+        this.playerOne.fighter.armorTorso = this.getTorsoArmor(armorId);
+        console.log('playerOne: Torso armor assigned')
+      }
+      if (protec === 'arms') {
+        this.playerOne.fighter.armorArms = this.getArmsArmor(armorId);
+        console.log('playerOne: Arms armor assigned')
+      }
+      if (protec === 'legs') {
+        this.playerOne.fighter.armorLegs = this.getLegsArmor(armorId);
+        console.log('playerOne: Leg armor assigned')
+      }
     }
+
+    if (playerId === this.playerTwoId) {
+
+      if (protec === 'head') {
+        this.playerTwo.fighter.armorHead = this.getHeadArmor(armorId);
+        console.log('playerTwo: Head armor assigned');
+      }
+      if (protec === 'torso') {
+        this.playerTwo.fighter.armorTorso = this.getTorsoArmor(armorId);
+        console.log('playerTwo: Torso armor assigned')
+      }
+      if (protec === 'arms') {
+        this.playerTwo.fighter.armorArms = this.getArmsArmor(armorId);
+        console.log('playerTwo: Arms armor assigned')
+      }
+      if (protec === 'legs') {
+        this.playerTwo.fighter.armorLegs = this.getLegsArmor(armorId);
+        console.log('playerTwo: Leg armor assigned')
+      }
+    }
+
   }
 
   private getHeadArmor(id: string): IArmor {
@@ -507,14 +529,14 @@ export class FightService {
     }
   }
 
-  private getFighterIndex(id: string): number {
-    let i = 0;
-    for (const fighter of this.fighters) {
-      if (fighter.id === id) {
-        return i;
-      }
-      i++;
-    }
-  }
+  // private getFighterIndex(id: string): number {
+  //   let i = 0;
+  //   for (const fighter of this.fighters) {
+  //     if (player.id === id) {
+  //       return i;
+  //     }
+  //     i++;
+  //   }
+  // }
 
 }
