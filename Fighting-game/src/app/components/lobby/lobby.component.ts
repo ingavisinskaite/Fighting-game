@@ -14,7 +14,7 @@ export class LobbyComponent implements OnInit {
   joinedRoom: number;
   onlinePlayers: number;
   message = 'LOBBY';
-  roomPlayers: Array<IRoom>;
+  roomPlayers: Array<IRoom> = [];
   isInRoom: boolean = false;
   userId: string;
   currentPlayer: IUser;
@@ -79,7 +79,7 @@ export class LobbyComponent implements OnInit {
     return this.userId;
   }
 
-  public getRooms(): Array<IRoom> {
+  public getRooms() {
     this._lobbyService.getRooms().subscribe(rooms => {
       this.roomPlayers = rooms.map(r => {
         r.playerCount = r.players.length;
@@ -87,7 +87,6 @@ export class LobbyComponent implements OnInit {
         return room;
       });
     });
-    return this.roomPlayers;
   }
 
 }

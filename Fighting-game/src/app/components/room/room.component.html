@@ -17,7 +17,7 @@
   <div *ngIf="room">
 
     <mat-card class="chat">
-      <p *ngIf="room.chat.length === 0">Start chating!</p>
+      <p *ngIf="room.chat.length === 0">Start chatting!</p>
       <div *ngFor="let message of room.chat">
         <p>{{ message }}</p>
       </div>
