@@ -1,11 +1,6 @@
 import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import {
-  PasswordValidator,
-  ParentErrorStateMatcher,
-} from '../validators';
-import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-forms-page',
@@ -17,17 +12,22 @@ export class FormsComponent implements OnInit {
   imagePath: string;
   buttonClicked = false;
   userDetailsForm: FormGroup;
-  accountDetailsForm: FormGroup;
-
-  matchingPassGroup: FormGroup;
-
-  parentErrorStateMatcher = new ParentErrorStateMatcher();
+  userId: string;
+  currentPlayer: any;
 
   genders = [
     'Male',
     'Female',
     'Other'
   ];
+
+  playerObj = {
+    fullname: '',
+    bio: '',
+    birthday: '',
+    gender: '',
+    photoPath: ''
+  };
 
   validationMess = {
     fullname: [
@@ -44,69 +44,30 @@ export class FormsComponent implements OnInit {
     ],
   };
 
-  accValidationMess = {
-    email: [
-      { type: 'required', message: 'Email is required' },
-      { type: 'pattern', message: 'Enter a valid email' }
-    ],
-    confirm_password: [
-      { type: 'required', message: 'Confirm password is required' },
-      { type: 'areEqual', message: 'Password mismatch' }
-    ],
-    password: [
-      { type: 'required', message: 'Password is required' },
-      { type: 'minlength', message: 'Password must be at least 5 characters long' },
-      { type: 'pattern', message: 'Your password must contain at least one uppercase, one lowercase, and one number' }
-    ],
-    terms: [
-      { type: 'pattern', message: 'You must accept terms and conditions' }
-    ]
-  };
-
   constructor(private fb: FormBuilder,
               public authService: AuthService) { }
 
   ngOnInit() {
-    this.createForms();
-    console.log(document.getElementById('photo'));
+    this.createForms(this.playerObj);
+    this.loadData();
   }
 
-  createForms() {
-    // matching passwords validation
-    this.matchingPassGroup = new FormGroup({
-      password: new FormControl('', Validators.compose([
-        Validators.minLength(5),
-        Validators.required,
-        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
-      ])),
-      confirm_password: new FormControl('', Validators.required)
-    }, (formGroup: FormGroup) => {
-      return PasswordValidator.areEqual(formGroup);
-    });
-
-    // user details form validations
+  createForms(player) {
     this.userDetailsForm = this.fb.group({
-      fullname: ['Marcus Cassius', Validators.required ],
-      // tslint:disable-next-line:max-line-length
-      bio: ['Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', Validators.maxLength(256)],
-      birthday: ['', Validators.required],
-      gender: new FormControl(this.genders[0], Validators.required),
-      photoPath: new FormControl(),
-    });
-
-    // user links form validations
-    this.accountDetailsForm = this.fb.group({
-      email: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-      ])),
-      matching_passwords: this.matchingPassGroup,
-      terms: new FormControl(false, Validators.pattern('true'))
+      fullname: [player.fullname, Validators.required ],
+      bio: [player.bio, Validators.maxLength(256)],
+      birthday: [player.birthDate, Validators.required],
+      gender: new FormControl(player.gender, Validators.required),
+      photoPath: new FormControl(player.photoURL),
     });
   }
 
-  // onSubmitAccountDetails(value) {
-  // }
+  loadData() {
+    this.userId = this.authService.getUserId();
+    this.authService.getPlayer(this.userId).subscribe(player => {
+      this.createForms(player);
+    });
+  }
 
   onSubmitUserDetails(value) {
     this.authService.submitUser(value);

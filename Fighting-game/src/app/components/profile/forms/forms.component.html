@@ -1,15 +1,12 @@
-<div class="container">
-  <div class="row">
-    <div class="col-2">
-      <div class="user-details-container">
-        <img id="photo" class="user-image" [src]="setImageURL()"/>
-        <span class="user-title">{{ userDetailsForm.get('fullname').value }}</span>
-        <div class="user-bio"><span>{{ userDetailsForm.get('bio').value }}</span></div>
-      </div>
+<div class="row">
+    <div class="user-details-container">
+      <img id="photo" class="user-image" [src]="setImageURL()"/>
+      <span class="user-title">{{ userDetailsForm.get('fullname').value }}</span>
+      <div class="user-bio"><span>{{ userDetailsForm.get('bio').value }}</span></div>
     </div>
     <div id="forms">
       <div class="col">
-        <h2 class="section-title">User details</h2>
+        <h2>User details</h2>
         <form [formGroup]="userDetailsForm" (ngSubmit)="onSubmitUserDetails(userDetailsForm.value)">
           <mat-form-field class="full-width">
             <input matInput placeholder="Full Name" formControlName="fullname" required>
@@ -19,7 +16,7 @@
           </mat-form-field>
 
           <mat-form-field class="full-width">
-            <input matInput [matDatepicker]="picker" placeholder="Your birthday" formControlName="birthday" required>
+            <input [value]="userDetailsForm.value.birthday" matInput [matDatepicker]="picker" placeholder="Your birthday" formControlName="birthday" required>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-error *ngFor="let validation of validationMess.birthday">
@@ -28,7 +25,7 @@
           </mat-form-field>
 
           <mat-form-field class="full-width">
-            <mat-select placeholder="Gender">
+            <mat-select placeholder="Gender" formControlName="gender">
               <mat-option *ngFor="let gender of genders" [value]="gender">
                 {{ gender }}
               </mat-option>
@@ -54,52 +51,7 @@
           <button (click)="getImageURL(true, photoPath.value)" class="submit-btn" color="primary" mat-raised-button type="submit" [disabled]="!userDetailsForm.valid">
             Submit
           </button>
-
         </form>
       </div>
-
-      <!-- <div class="col">
-      <h2 class="section-title">Account details</h2>
-
-      <form [formGroup]="accountDetailsForm" novalidate (ngSubmit)="onSubmitAccountDetails(accountDetailsForm.value)">
-
-        <mat-form-field class="full-width">
-          <input matInput type="email" placeholder="Email" formControlName="email" required>
-          <mat-error *ngFor="let validation of accValidationMess.email">
-            <mat-error class="error-message" *ngIf="accountDetailsForm.get('email').hasError(validation.type) && (accountDetailsForm.get('email').dirty || accountDetailsForm.get('email').touched)">{{validation.message}}</mat-error>
-          </mat-error>
-        </mat-form-field>
-
-        <div formGroupName="matching_passwords">
-          <mat-form-field class="full-width">
-            <input matInput type="password" placeholder="Password" formControlName="password" required>
-            <mat-error *ngFor="let validation of accValidationMess.password">
-              <mat-error class="error-message" *ngIf="accountDetailsForm.get('matching_passwords').get('password').hasError(validation.type) && (accountDetailsForm.get('matching_passwords').get('password').dirty || accountDetailsForm.get('matching_passwords').get('password').touched)">{{validation.message}}</mat-error>
-            </mat-error>
-          </mat-form-field>
-
-          <mat-form-field class="full-width">
-            <input matInput type="password" placeholder="Confirm Password" formControlName="confirm_password"  [errorStateMatcher]="parentErrorStateMatcher" required>
-            <mat-error *ngFor="let validation of accValidationMess.confirm_password">
-              <mat-error class="error-message" *ngIf="(accountDetailsForm.get('matching_passwords').get('confirm_password').hasError(validation.type)|| accountDetailsForm.get('matching_passwords').hasError(validation.type)) && (accountDetailsForm.get('matching_passwords').get('confirm_password').dirty || accountDetailsForm.get('matching_passwords').get('confirm_password').touched)">{{validation.message}}</mat-error>
-            </mat-error>
-          </mat-form-field>
-
-        </div>
-
-        <mat-checkbox formControlName="terms">
-          I accept terms and conditions
-        </mat-checkbox>
-        <mat-error *ngFor="let validation of accValidationMess.terms">
-          <mat-error class="error-message" *ngIf="accountDetailsForm.get('terms').hasError(validation.type) && (accountDetailsForm.get('terms').dirty || accountDetailsForm.get('terms').touched)">{{validation.message}}</mat-error>
-        </mat-error>
-
-        <button class="submit-btn" color="primary" mat-raised-button type="submit" [disabled]="!accountDetailsForm.valid">
-          Submit
-        </button>
-
-      </form>
-      </div> -->
-  </div>
-  </div>
+    </div>
 </div>

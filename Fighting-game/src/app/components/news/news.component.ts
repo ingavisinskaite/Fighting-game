@@ -56,30 +56,4 @@ export class NewsComponent implements OnInit {
     console.log(author);
     this.dialog.open(EditNewsDialogComponent, {data: { id, author, version, content}});
   }
-  // public editForm(id: string) {
-  //   console.log(id)
-  // }
-
-  // setUpdatedName(event: any) {
-  //   // console.log(document.getElementById('f').innerHTML);
-  //   // event.target.textContent;
-  // }
-
-  // setUpdatedVersion(event: any) {
-  //   this.updatedVersion = event.target.textContent;
-  // }
-
-  // setUpdatedContent(event: any) {
-  //   this.updatedContent = event.target.textContent;
-  // }
-
-  // editForm(num) {
-  //   console.log(document.getElementById('f').innerHTML);
-  //   console.log(this.updatedName);
-  //   console.log(this.updatedVersion);
-  //   console.log(this.updatedContent);
-  //   // this.article.getNewsData().subscribe(data => {
-  //   //   this.article.updateArticle(data[num].id, this.updatedName, this.updatedVersion, this.updatedContent);
-  //   // });
-  // }
 }

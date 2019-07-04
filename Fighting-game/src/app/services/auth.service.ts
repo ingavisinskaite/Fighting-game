@@ -35,7 +35,7 @@ export class AuthService {
   constructor(public afAuth: AngularFireAuth,
               public router: Router,
               public afs: AngularFirestore,
-              private _snackBar: MatSnackBar
+              private _snackBar: MatSnackBar,
                 ) {
 
     this.afAuth.authState.subscribe(user => {
@@ -232,7 +232,6 @@ export class AuthService {
   submitUser(value) {
     this.getUserId();
     this.afs.collection('users').doc(this.userId).update({ fullname: value.fullname });
-    value.birthday = new Date().toLocaleDateString();
     this.afs.collection('users').doc(this.userId).update({ birthDate: value.birthday });
     this.afs.collection('users').doc(this.userId).update({ gender: value.gender });
     this.afs.collection('users').doc(this.userId).update({ bio: value.bio });
