@@ -33,7 +33,6 @@ export class LobbyComponent implements OnInit {
     this.joinedRoom = roomNum;
     const roomId = 'Room ' + roomNum;
     const selectedRoom = this.roomPlayers[roomNum - 1];
-    delete selectedRoom.playerCount;
     if (!this.isInRoom) {
       selectedRoom.players.push(userId);
       this.router.navigateByUrl('/room/' + roomNum);
@@ -44,8 +43,8 @@ export class LobbyComponent implements OnInit {
       this.message = 'You joined room ' + roomNum;
       this.joinedRoom = roomNum;
     } else {
-      selectedRoom.chat = [];
       this.joinedRoom = 0;
+      selectedRoom.playerCount -= 1;
       this.isInRoom = false;
       this.message = 'LOBBY';
       this._lobbyService.updateRoom(roomId, selectedRoom);
