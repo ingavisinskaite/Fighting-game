@@ -1,5 +1,17 @@
+$break-medium: 1000px;
+$break-medium-small: 850px;
+$break-small: 750px;
+$break-xs: 510px;
+$break-mobile: 450px;
+
 .roomPage {
     min-height: 80vh;
+    width: 98%;
+    background: url('https://media.giphy.com/media/nIFXEYqtgMmKA/giphy.gif');
+    background-size: cover;
+    margin: 0 10px;
+    padding-top: 20px;
+    position: relative;
 }
 
 .room {
@@ -8,18 +20,51 @@
 
 .players {
   width: 50vw;
-  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  padding: 5px;
+  margin-left: 15px;
+  @media screen and (max-width: $break-medium-small) {
+    font-size: 14px
+  }
+  @media screen and (max-width: $break-small) {
+    font-size: 12px
+  }
+  @media screen and (max-width: $break-xs) {
+    font-size: 10px
+  }
+  @media screen and (max-width: $break-mobile) {
+    width: 85vw;
+  }
 }
 
 #character {
-  width: 250px;
-  height: 400px;
+  width: 100%;
 }
 
 .character {
-  float: right;
-  margin-right: 150px;
-  display: inline-block;
+  width: 22%;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  position: absolute;
+  right: 134px;
+  top: 65px;
+  @media screen and (max-width: $break-medium) {
+    width: 24%;
+    right: 120px;
+  }
+  @media screen and (max-width: $break-medium-small) {
+    width: 28%;
+    right: 70px;
+  }
+  @media screen and (max-width: $break-small) {
+    width: 28%;
+    right: 50px;
+    top: 100px;
+  }
+  @media screen and (max-width: $break-mobile) {
+    display: none;
+  }
 }
 
 .message {
@@ -28,23 +73,65 @@
   border: 1px solid black;
   border-radius: 15px;
   padding: 7px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.message:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: 0.5s ease-in-out all;
+  cursor: pointer;
 }
 
 .leave {
   float: right;
-  margin-top: 20px;
   margin-right: 50px;
+  @media screen and (max-width: $break-mobile) {
+    position: absolute;
+    bottom: 20px;
+    left: 48%;
+  }
 }
 
 .chatMessages {
     margin-top: 20px;
     width: 62vw;
     z-index: -1;
+    margin-left: 15px;
+    @media screen and (max-width: $break-medium-small) {
+      font-size: 14px
+    }
+    @media screen and (max-width: $break-small) {
+      font-size: 12px
+    }
+    @media screen and (max-width: $break-xs) {
+      font-size: 10px
+    }
 }
 
 .chat {
-    width: 58vw;
+    width: 50vw;
     display: block;
     margin-top: 5px;
-    z-index: -1;
+    background-color: rgba(255, 255, 255, 0.5);
+    height: 300px;
+    margin-left: 15px;
+    overflow-y: auto;
+    padding-top: 5px;
+    @media screen and (max-width: $break-medium-small) {
+      font-size: 14px
+    }
+    @media screen and (max-width: $break-small) {
+      font-size: 12px
+    }
+    @media screen and (max-width: $break-xs) {
+      font-size: 10px
+    }
+    @media screen and (max-width: $break-mobile) {
+      width: 85vw;
+    }
+}
+
+hr {
+  background-color: grey;
+  border: 1px solid grey;
 }
