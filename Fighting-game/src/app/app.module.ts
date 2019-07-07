@@ -1,3 +1,4 @@
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { CannotFoundComponent } from './components/404/404.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
@@ -101,7 +102,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     MatSelectModule,
     MatGridListModule,
     MatTableModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    FlexLayoutModule
   ],
   entryComponents: [DeleteNewsDialogComponent, EditNewsDialogComponent],
   providers: [NewsService, FightService, Weaponry, Armory, AuthService, LobbyService],
