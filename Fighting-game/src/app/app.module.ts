@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CannotFoundComponent } from './components/404/404.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -24,7 +25,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatCheckboxModule,
   MatFormFieldModule,
@@ -104,6 +104,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     MatTableModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     FlexLayoutModule
+
   ],
   entryComponents: [DeleteNewsDialogComponent, EditNewsDialogComponent],
   providers: [NewsService, FightService, Weaponry, Armory, AuthService, LobbyService],
