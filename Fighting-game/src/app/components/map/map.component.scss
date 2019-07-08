@@ -1,7 +1,7 @@
 $break-medium: 1240px;
 $break-medium-small: 900px;
 $break-small: 650px;
-$break-mobile: 400px;
+$break-mobile: 450px;
 
 .map {
   position: relative;
@@ -9,11 +9,21 @@ $break-mobile: 400px;
   margin-left: 10px;
   margin-right: 10px;
 
-  >img {
+  .map-image {
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
     display: block;
+    @media screen and (max-width: $break-mobile) {
+      display: none;
+    }
+  }
+  .map-mobile {
+    display: none;
+    @media screen and (max-width: $break-mobile) {
+      display: block;
+      max-width: 100%;
+    }
   }
 }
 
@@ -47,7 +57,9 @@ $break-mobile: 400px;
   }
 
   @media screen and (max-width: $break-mobile) {
-    width: 25px;
+    width: 12vw;
+    top: 9%;
+    left: 50%;
   }
 }
 
@@ -81,8 +93,10 @@ $break-mobile: 400px;
   }
 
   @media screen and (max-width: $break-mobile) {
-    width: 25px;
-    padding: 3px;
+    width: 12vw;
+    padding: 6px;
+    top: 69%;
+    left: 62%;
   }
 }
 
