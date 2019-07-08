@@ -1,6 +1,7 @@
 import { IWeapon, IArmor } from '.';
 
 export interface IFighter {
+    ready: boolean;
     name: string;
     class: string;
     hp: number;

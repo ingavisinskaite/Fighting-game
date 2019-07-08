@@ -38,6 +38,7 @@ export class AuthService {
     armorArms: [],
     armorLegs: [],
     fighter: {
+      ready: false,
       name: '',
       class: 'Fighter',
       hp: 100,
@@ -59,7 +60,7 @@ export class AuthService {
       },
       armorHead: {
         protec: 'head',
-        criticalDmgCounter: 0,
+        criticalDmgCounter: 2,
         criticalDmg: 0,
         name: '',
         id: '',
@@ -69,7 +70,7 @@ export class AuthService {
       },
       armorTorso: {
         protec: 'torso',
-        criticalDmgCounter: 0,
+        criticalDmgCounter: 2,
         criticalDmg: 0,
         name: '',
         id: '',
@@ -79,7 +80,7 @@ export class AuthService {
       },
       armorArms: {
         protec: 'arms',
-        criticalDmgCounter: 0,
+        criticalDmgCounter: 2,
         criticalDmg: 0,
         name: '',
         id: '',
@@ -89,7 +90,7 @@ export class AuthService {
       },
       armorLegs: {
         protec: 'legs',
-        criticalDmgCounter: 0,
+        criticalDmgCounter: 2,
         criticalDmg: 0,
         name: '',
         id: '',
@@ -167,6 +168,7 @@ export class AuthService {
       armorArms: [],
       armorLegs: [],
       fighter: {
+        ready: false,
         name: '',
         class: 'Fighter',
         hp: 100,
@@ -188,7 +190,7 @@ export class AuthService {
         },
         armorHead: {
           protec: 'head',
-          criticalDmgCounter: 0,
+          criticalDmgCounter: 2,
           criticalDmg: 0,
           name: '',
           id: '',
@@ -198,7 +200,7 @@ export class AuthService {
         },
         armorTorso: {
           protec: 'torso',
-          criticalDmgCounter: 0,
+          criticalDmgCounter: 2,
           criticalDmg: 0,
           name: '',
           id: '',
@@ -208,7 +210,7 @@ export class AuthService {
         },
         armorArms: {
           protec: 'arms',
-          criticalDmgCounter: 0,
+          criticalDmgCounter: 2,
           criticalDmg: 0,
           name: '',
           id: '',
@@ -218,7 +220,7 @@ export class AuthService {
         },
         armorLegs: {
           protec: 'legs',
-          criticalDmgCounter: 0,
+          criticalDmgCounter: 2,
           criticalDmg: 0,
           name: '',
           id: '',
