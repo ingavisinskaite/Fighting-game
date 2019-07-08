@@ -1,34 +1,41 @@
 <h1 class="room">Room {{ roomNum }}</h1>
 <hr>
-<div class="roomPage">
+<div class="roomPage" fxLayout="row" fxLayoutAlign="start center" >
 
-  <button class="leave" mat-raised-button color="warn" (click)="leaveRoom()">Leave</button>
-  <div *ngIf="room" class="players">
-    <h3>Players</h3>
-    <div *ngFor="let player of players">
-      <p><strong>Player: </strong>{{ player }}</p>
+  <div fxFlex>
+
+    <div *ngIf="room" class="players">
+      <h3>Players</h3>
+      <div *ngFor="let player of players">
+        <p><strong>Player: </strong>{{ player }}</p>
+      </div>
     </div>
+
+
+    <div *ngIf="room">
+
+      <mat-card class="chat">
+        <p *ngIf="room.chat.length === 0">Start chatting!</p>
+        <div *ngFor="let message of room.chat">
+          <p>{{ message }}</p>
+        </div>
+      </mat-card>
+
+      <div class="chatMessages">
+        <div class="message" (click)="sendMessage('Hello')">Hello</div>
+        <div class="message" (click)="sendMessage('Bye')">Bye</div>
+        <div class="message" (click)="sendMessage('Nice to meet you')">Nice to meet you</div>
+      </div>
+
+    </div>
+
   </div>
-  <div class="character">
+
+  <div class="character" fxFlex>
     <img id="character"
       src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/359/420/618/636272697874197438.png">
   </div>
 
-  <div *ngIf="room">
-
-    <mat-card class="chat">
-      <p *ngIf="room.chat.length === 0">Start chatting!</p>
-      <div *ngFor="let message of room.chat">
-        <p>{{ message }}</p>
-      </div>
-    </mat-card>
-
-    <div class="chatMessages">
-      <div class="message" (click)="sendMessage('Hello')">Hello</div>
-      <div class="message" (click)="sendMessage('Bye')">Bye</div>
-      <div class="message" (click)="sendMessage('Nice to meet you')">Nice to meet you</div>
-    </div>
-
-  </div>
+  <button class="leave" mat-raised-button color="warn" (click)="leaveRoom()">Leave</button>
 
 </div>

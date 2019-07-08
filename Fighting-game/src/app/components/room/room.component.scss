@@ -24,18 +24,18 @@ $break-mobile: 450px;
   border-radius: 5px;
   padding: 5px;
   margin-left: 15px;
-  @media screen and (max-width: $break-medium-small) {
-    font-size: 14px
-  }
-  @media screen and (max-width: $break-small) {
-    font-size: 12px
-  }
-  @media screen and (max-width: $break-xs) {
-    font-size: 10px
-  }
-  @media screen and (max-width: $break-mobile) {
-    width: 85vw;
-  }
+  // @media screen and (max-width: $break-medium-small) {
+  //   font-size: 14px
+  // }
+  // @media screen and (max-width: $break-small) {
+  //   font-size: 12px
+  // }
+  // @media screen and (max-width: $break-xs) {
+  //   font-size: 10px
+  // }
+  // @media screen and (max-width: $break-mobile) {
+  //   width: 85vw;
+  // }
 }
 
 #character {
@@ -49,22 +49,22 @@ $break-mobile: 450px;
   position: absolute;
   right: 134px;
   top: 65px;
-  @media screen and (max-width: $break-medium) {
-    width: 24%;
-    right: 120px;
-  }
-  @media screen and (max-width: $break-medium-small) {
-    width: 28%;
-    right: 70px;
-  }
-  @media screen and (max-width: $break-small) {
-    width: 28%;
-    right: 50px;
-    top: 100px;
-  }
-  @media screen and (max-width: $break-mobile) {
-    display: none;
-  }
+  // @media screen and (max-width: $break-medium) {
+  //   width: 24%;
+  //   right: 120px;
+  // }
+  // @media screen and (max-width: $break-medium-small) {
+  //   width: 28%;
+  //   right: 70px;
+  // }
+  // @media screen and (max-width: $break-small) {
+  //   width: 28%;
+  //   right: 50px;
+  //   top: 100px;
+  // }
+  // @media screen and (max-width: $break-mobile) {
+  //   display: none;
+  // }
 }
 
 .message {
@@ -85,11 +85,11 @@ $break-mobile: 450px;
 .leave {
   float: right;
   margin-right: 50px;
-  @media screen and (max-width: $break-mobile) {
-    position: absolute;
-    bottom: 20px;
-    left: 48%;
-  }
+  // @media screen and (max-width: $break-mobile) {
+  //   position: absolute;
+  //   bottom: 20px;
+  //   left: 48%;
+  // }
 }
 
 .chatMessages {
@@ -97,15 +97,15 @@ $break-mobile: 450px;
     width: 62vw;
     z-index: -1;
     margin-left: 15px;
-    @media screen and (max-width: $break-medium-small) {
-      font-size: 14px
-    }
-    @media screen and (max-width: $break-small) {
-      font-size: 12px
-    }
-    @media screen and (max-width: $break-xs) {
-      font-size: 10px
-    }
+    // @media screen and (max-width: $break-medium-small) {
+    //   font-size: 14px
+    // }
+    // @media screen and (max-width: $break-small) {
+    //   font-size: 12px
+    // }
+    // @media screen and (max-width: $break-xs) {
+    //   font-size: 10px
+    // }
 }
 
 .chat {
@@ -117,18 +117,18 @@ $break-mobile: 450px;
     margin-left: 15px;
     overflow-y: auto;
     padding-top: 5px;
-    @media screen and (max-width: $break-medium-small) {
-      font-size: 14px
-    }
-    @media screen and (max-width: $break-small) {
-      font-size: 12px
-    }
-    @media screen and (max-width: $break-xs) {
-      font-size: 10px
-    }
-    @media screen and (max-width: $break-mobile) {
-      width: 85vw;
-    }
+    // @media screen and (max-width: $break-medium-small) {
+    //   font-size: 14px
+    // }
+    // @media screen and (max-width: $break-small) {
+    //   font-size: 12px
+    // }
+    // @media screen and (max-width: $break-xs) {
+    //   font-size: 10px
+    // }
+    // @media screen and (max-width: $break-mobile) {
+    //   width: 85vw;
+    // }
 }
 
 hr {
