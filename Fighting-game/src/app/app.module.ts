@@ -1,3 +1,4 @@
+import { ShopService } from './services/shop.service';
 import { CannotFoundComponent } from './components/404/404.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
@@ -115,7 +116,7 @@ import { FormsComponent } from './components/profile/forms/forms.component';
   ],
 
   entryComponents: [ShopComponent, FistsComponent, DaggerComponent, SwordComponent, FlailComponent],
-  providers: [FightService, Weaponry, Armory, AuthService, LobbyService],
+  providers: [FightService, Weaponry, Armory, AuthService, LobbyService, ShopService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

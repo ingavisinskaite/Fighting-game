@@ -1,9 +1,12 @@
+import { IWeapon } from './../../models/weapon.model';
+import { Weaponry } from './../../classes/weapons.class';
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { FistsComponent } from './fists/fists.component';
 import { DaggerComponent } from './dagger/dagger.component';
 import { SwordComponent } from './sword/sword.component';
 import { FlailComponent } from './flail/flail.component';
+import { ShopService } from './../../services/shop.service';
 
 @Component({
   selector: 'app-shop',
@@ -16,6 +19,11 @@ export class ShopComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  // addweapon(): void {
+  //   this.IWeapon.Id.addweapon(this.IWeapon.Id);
+  //   console.log('ok');
+  // }
 
   openDialogFists() {
     const dialogRef = this.dialog.open(FistsComponent);

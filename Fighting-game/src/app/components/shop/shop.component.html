@@ -3,8 +3,9 @@
   <div class="container">
       <p>Choose your Tool</p>
       <div>
+      <div>
           <button mat-button (click)="openDialogFists()">Fists</button>
-          <img class="item" src="../../assets/images/weapons/knuckles.svg" alt="sword" (click)="openDialogFists()">
+          <img class="item" src="../../assets/images/weapons/knuckles.svg" alt="sword" (click)="addweapon()">
       </div>
       <div>
           <button mat-button (click)="openDialogSword()">Sword</button>
@@ -18,6 +19,8 @@
           <button mat-button (click)="openDialogFlail()">Flail</button>
           <img class="item" src="../../assets/images/weapons/flail.svg" alt="sword" (click)="openDialogFlail()">
       </div>
+    </div>
+    <div>
       <div>
         <button mat-button (click)="openDialogFists()">Leather Helmet</button>
         <img class="item" src="../../assets/images/body/head.svg" alt="head" (click)="openDialogFists()">

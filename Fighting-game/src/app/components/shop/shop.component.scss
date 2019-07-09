@@ -15,9 +15,9 @@
     border: 1px dashed grey;
     padding: 1rem;
 }
-.container > div{
+.container > div > div{
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 2rem;
