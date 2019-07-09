@@ -1,6 +1,6 @@
 <div class="row">
     <div class="user-details-container">
-      <img id="photo" class="user-image" [src]="setImageURL()"/>
+      <img id="photo" class="user-image" *ngIf="this.img" [src]="this.img"/>
       <span class="user-title">{{ userDetailsForm.get('fullname').value }}</span>
       <div class="user-bio"><span>{{ userDetailsForm.get('bio').value }}</span></div>
     </div>
@@ -16,7 +16,7 @@
           </mat-form-field>
 
           <mat-form-field class="full-width">
-            <input [value]="userDetailsForm.value.birthday" matInput [matDatepicker]="picker" placeholder="Your birthday" formControlName="birthday" required>
+            <input matInput [matDatepicker]="picker" placeholder="Your birthday" formControlName="birthday" required>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-error *ngFor="let validation of validationMess.birthday">
@@ -48,7 +48,7 @@
             <input #photoPath matInput placeholder="Profile photo URL" formControlName="photoPath">
 
           </mat-form-field>
-          <button (click)="getImageURL(true, photoPath.value)" class="submit-btn" color="primary" mat-raised-button type="submit" [disabled]="!userDetailsForm.valid">
+          <button class="submit-btn" color="primary" mat-raised-button type="submit" [disabled]="!userDetailsForm.valid">
             Submit
           </button>
         </form>

@@ -1,4 +1,4 @@
-import { NewsService } from './../../services';
+import { NewsService, AuthService } from './../../services';
 import { FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatTableDataSource } from '@angular/material';
@@ -32,10 +32,20 @@ export class NewsComponent implements OnInit {
   displayedColumns: string[] = ['author', 'version', 'content', 'actions'];
   dataSource = new MatTableDataSource<INews>();
 
-  constructor(private article: NewsService, private dialog: MatDialog) {}
+  constructor(private auth: AuthService, private article: NewsService, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.getNews();
+    this.isAdmin();
+  }
+
+  private isAdmin() {
+    const id = this.auth.getUserId();
+    this.auth.getPlayer(id).subscribe(player => {
+      if (!player.isAdmin) {
+        this.displayedColumns = ['author', 'version', 'content'];
+      }
+    });
   }
 
   private getNews(): Subscription {
@@ -53,7 +63,6 @@ export class NewsComponent implements OnInit {
   }
 
   editForm(id: string, author: string, version: string, content: string): void {
-    console.log(author);
     this.dialog.open(EditNewsDialogComponent, {data: { id, author, version, content}});
   }
 }

@@ -1,6 +1,7 @@
 import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material';
 
 @Component({
   selector: 'app-forms-page',
@@ -10,6 +11,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 })
 export class FormsComponent implements OnInit {
   imagePath: string;
+  img: string;
   buttonClicked = false;
   userDetailsForm: FormGroup;
   userId: string;
@@ -28,6 +30,7 @@ export class FormsComponent implements OnInit {
     gender: '',
     photoPath: ''
   };
+  url = '';
 
   validationMess = {
     fullname: [
@@ -53,35 +56,37 @@ export class FormsComponent implements OnInit {
   }
 
   createForms(player) {
+    let convertedDate;
+    if (player.birthDate) {
+      convertedDate = new Date(player.birthDate.seconds * 1000).toISOString();
+    }
     this.userDetailsForm = this.fb.group({
       fullname: [player.fullname, Validators.required ],
       bio: [player.bio, Validators.maxLength(256)],
-      birthday: [player.birthDate, Validators.required],
+      birthday: [convertedDate, Validators.required],
       gender: new FormControl(player.gender, Validators.required),
       photoPath: new FormControl(player.photoURL),
     });
+
   }
 
   loadData() {
     this.userId = this.authService.getUserId();
     this.authService.getPlayer(this.userId).subscribe(player => {
       this.createForms(player);
+      this.setImageURL(player.photoURL);
     });
   }
 
   onSubmitUserDetails(value) {
     this.authService.submitUser(value);
+    console.log(value.birthday);
   }
 
-  getImageURL(clicked, path) {
-    this.buttonClicked = clicked;
-    this.imagePath = path;
-  }
-
-  setImageURL() {
-    if (!this.buttonClicked) {
-      this.imagePath = '../../../assets/ddd.png';
+  setImageURL(url) {
+    this.img = url;
+    if (!this.img) {
+        this.img = '../../../assets/ddd.png';
     }
-    return this.imagePath;
   }
 }
