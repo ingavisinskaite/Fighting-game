@@ -1,16 +1,16 @@
 import { IWeapon, IArmor } from '.';
 
 export interface IFighter {
+    ready: boolean;
     name: string;
-    id: string;
     class: string;
     hp: number;
     attack: string;
     defence: string;
-    weaponLeft: IWeapon;
     weaponRight: IWeapon;
+    weaponLeft: IWeapon;
     armorHead: IArmor;
-    armorLegs: IArmor;
-    armorArms: IArmor;
     armorTorso: IArmor;
+    armorArms: IArmor;
+    armorLegs: IArmor;
 }

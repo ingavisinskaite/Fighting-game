@@ -1,6 +1,6 @@
 import { IArmor, IWeapon, IFighter } from '../index';
 
-export interface IUser {
+export interface IPlayer {
     uid?: string;
     email: string;
     displayName: string;
@@ -15,8 +15,4 @@ export interface IUser {
     armorArms: Array<IArmor>;
     armorLegs: Array<IArmor>;
     fighter: IFighter;
-    fullname: string;
-    birthDate: string;
-    gender: string;
-    bio: string;
 }

@@ -1,7 +1,7 @@
+import { Upload } from './../../../models/upload.model';
 import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { MatNativeDateModule } from '@angular/material';
 
 @Component({
   selector: 'app-forms-page',
@@ -16,6 +16,9 @@ export class FormsComponent implements OnInit {
   userDetailsForm: FormGroup;
   userId: string;
   currentPlayer: any;
+
+  selectedFiles: FileList;
+  currentUpload: Upload;
 
   genders = [
     'Male',
@@ -48,7 +51,8 @@ export class FormsComponent implements OnInit {
   };
 
   constructor(private fb: FormBuilder,
-              public authService: AuthService) { }
+              public authService: AuthService,
+              /* private upSvc: UploadService */) { }
 
   ngOnInit() {
     this.createForms(this.playerObj);
@@ -89,4 +93,23 @@ export class FormsComponent implements OnInit {
         this.img = '../../../assets/ddd.png';
     }
   }
+
+  detectFiles(event) {
+    this.selectedFiles = event.target.files;
+}
+
+uploadSingle() {
+  // const file = this.selectedFiles.item(0);
+  // this.currentUpload = new Upload(file);
+  // this.upSvc.pushUpload(this.selectedFiles);
+}
+
+uploadMulti() {
+  const files = this.selectedFiles;
+  // const filesIndex = _.range(files.length);
+  // _.each(filesIndex, (idx) => {
+  //   this.currentUpload = new Upload(files[idx]);
+  //   this.upSvc.pushUpload(this.currentUpload); }
+  // );
+}
 }
