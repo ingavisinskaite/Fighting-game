@@ -1,19 +1,11 @@
 <h1 class="room">Room {{ roomNum }}</h1>
 <hr>
-<div class="roomPage"> 
+<div class="roomPage" fxLayout="column">
 
-  <button *ngIf="!lookingForFight" (click)="lookForAFight()">Look for a fight</button>
-  <button *ngIf="lookingForFight" (click)="stopLookingForAFight()">Stop looking</button>
-  <button class="leave" mat-raised-button color="warn" (click)="leaveRoom()">Leave</button>
-  <div *ngIf="room" class="players">
-    <h3>Players</h3>
-    <div *ngFor="let player of players">
-      <p><strong>Player: </strong>{{ player }}</p>
-    </div>
-  </div>
-  <div class="character">
-    <img id="character"
-      src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/359/420/618/636272697874197438.png">
+  <div class="column">
+    <button *ngIf="!lookingForFight" (click)="lookForAFight()">Look for a fight</button>
+    <button *ngIf="lookingForFight" (click)="stopLookingForAFight()">Stop looking</button>
+    <button class="leave" mat-raised-button color="warn" (click)="leaveRoom()">Leave</button>
   </div>
 
   <div class="column" fxLayout="row" fxLayoutAlign="space-around center" fxFlex="80">
@@ -48,7 +40,8 @@
 
     </div>
 
-    <img id="character" fxFlex="25" src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/359/420/618/636272697874197438.png">
+    <img id="character" fxFlex="25"
+      src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/359/420/618/636272697874197438.png">
 
   </div>
 
