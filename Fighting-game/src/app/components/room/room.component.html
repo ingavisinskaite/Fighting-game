@@ -1,7 +1,9 @@
 <h1 class="room">Room {{ roomNum }}</h1>
 <hr>
-<div class="roomPage">
+<div class="roomPage"> 
 
+  <button *ngIf="!lookingForFight" (click)="lookForAFight()">Look for a fight</button>
+  <button *ngIf="lookingForFight" (click)="stopLookingForAFight()">Stop looking</button>
   <button class="leave" mat-raised-button color="warn" (click)="leaveRoom()">Leave</button>
   <div *ngIf="room" class="players">
     <h3>Players</h3>

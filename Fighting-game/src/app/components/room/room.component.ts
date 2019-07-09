@@ -17,6 +17,9 @@ export class RoomComponent implements OnInit {
   room: IRoom;
   formatedDate: string;
   currentPlayer: IUser;
+  lookingForFight = false;
+  playersWaiting: Array<string>;
+  joinedPlayers = [];
 
   constructor(private _lobbyService: LobbyService,
     private _authService: AuthService,
@@ -27,15 +30,31 @@ export class RoomComponent implements OnInit {
     this.roomNum = this._activatedRoute.snapshot.params.roomNum; //ROOM number
     this.getCurrentUserId();
     this.getRoomPlayers(this.roomNum);
+    setInterval(() => this.checkIfJoined(), 3000);
   }
 
   private getRoomPlayers(roomNum: number): IRoom {
     const roomId = 'Room ' + roomNum;
     this._lobbyService.getRoom(roomId).subscribe(room => {
       this.room = room;
+      this.playersWaiting = room.playersWaiting;
       this.players = room.players;
     });
     return this.room;
+  }
+
+  public lookForAFight() {
+      this.room.playersWaiting.push(this.currentUserId);
+      this.updateRoom(this.roomNum, this.room);
+      this.joinRandomPlayers();
+      this.lookingForFight = true;
+  }
+
+  public stopLookingForAFight() {
+      const currentUserPosition = this.room.playersWaiting.indexOf(this.currentUserId);
+      this.room.playersWaiting.splice(currentUserPosition, 1);
+      this.updateRoom(this.roomNum, this.room);
+      this.lookingForFight = false;
   }
 
   public sendMessage(message: string): void {
@@ -44,6 +63,24 @@ export class RoomComponent implements OnInit {
     const playerSentMessage = this.formatedDate + ' ' + this.currentUserId + ': ' + sentMessage;
     this.room.chat.push(playerSentMessage);
     this.updateRoom(this.roomNum, this.room);
+  }
+
+  private joinRandomPlayers() {
+    if (this.playersWaiting.length > 1) {
+      this.joinedPlayers = this.playersWaiting.sort(() => .5 - Math.random()).slice(0, 2);
+      this.room.matchedPlayers = this.joinedPlayers;
+      this.updateRoom(this.roomNum, this.room);
+      this.checkIfJoined();
+    }
+  }
+
+  private checkIfJoined() {
+    if (this.room.matchedPlayers.indexOf(this.currentUserId) > -1) {
+      this.stopLookingForAFight();
+      this.leaveRoom();
+      this._router.navigateByUrl('/arena');
+      this.joinedPlayers = [];
+    }
   }
 
   private getCurrentUserId(): string {
