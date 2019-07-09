@@ -9,27 +9,9 @@ $break-mobile: 450px;
     div {
         display: inline-block;
         border: 2px solid black;
-        width: 23%;
-        height: 260px;
-        margin: 10px;
         text-align: center;
-        margin-top: 100px;
         background-color: rgba(255, 255, 255, 0.6);
         position: relative;
-
-        @media screen and (max-width: $break-medium) {
-            width: 22%;
-          }
-
-          @media screen and (max-width: $break-medium-small) {
-            margin: 8px;
-            margin-top: 100px;
-            width: 21%
-          }
-
-          @media screen and (max-width: $break-small) {
-            width: 20%;
-          }
     }
 
     div:hover {
@@ -44,9 +26,6 @@ $break-mobile: 450px;
         right: 5px;
     }
 
-    h3 {
-        margin-top: 70px;
-    }
 }
 
 h1 {
