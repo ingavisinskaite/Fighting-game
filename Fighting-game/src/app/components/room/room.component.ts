@@ -1,7 +1,7 @@
 import { IUser } from './../../models/user/user.model';
 import { AuthService } from './../../services/auth.service';
 import { LobbyService } from './../../services/lobby.service';
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IRoom } from 'src/app/models/room.model';
 
@@ -20,6 +20,7 @@ export class RoomComponent implements OnInit {
   lookingForFight = false;
   playersWaiting: Array<string>;
   joinedPlayers = [];
+  playersUserNames = [];
 
   constructor(private _lobbyService: LobbyService,
     private _authService: AuthService,
@@ -55,6 +56,15 @@ export class RoomComponent implements OnInit {
       this.room.playersWaiting.splice(currentUserPosition, 1);
       this.updateRoom(this.roomNum, this.room);
       this.lookingForFight = false;
+  }
+
+  private getRoomPlayersUserNames(): Array<string> { // when we have player username
+    for (const player of this.players) {
+      this._authService.getPlayer(player).subscribe(user => {
+        this.playersUserNames.push(user.displayName);
+      });
+      return this.playersUserNames;
+    }
   }
 
   public sendMessage(message: string): void {
