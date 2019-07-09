@@ -57,14 +57,6 @@ export class AuthService {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.sendVerificationMail();
-<<<<<<< HEAD
-        // this.router.navigate(['profile']);
-        this.setUserData(result.user);
-        this.router.navigate(['login']);
-        this._snackBar.open('You succesfully signed up, now you can login', 'Ok');
-      } ).catch((error) => {
-        this._snackBar.open(error, 'Ok'); //
-=======
         this.loggedIn = 'false';
         localStorage.setItem('loggedIn', this.loggedIn);
         this.setUserData(result.user, false);
@@ -72,7 +64,6 @@ export class AuthService {
         this.router.navigate(['/login']);
       }).catch((error) => {
         this._snackBar.open(error, 'Ok');
->>>>>>> 4acac992fd9c243c818581c66b20b52aecf8ddb9
       });
   }
 

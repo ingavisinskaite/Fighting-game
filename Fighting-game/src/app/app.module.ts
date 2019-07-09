@@ -1,3 +1,5 @@
+
+
 import { CannotFoundComponent } from './components/404/404.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
@@ -5,6 +7,8 @@ import { LobbyComponent } from './components/lobby/lobby.component';
 import { LobbyService, AuthService } from './services';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
+import {AngularFireStorageModule} from '@angular/fire/storage';
 
 import { Weaponry, Armory } from './classes';
 import { FightService } from './services/fight.service';
@@ -47,6 +51,7 @@ import {
 
 
 
+
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MainComponent } from './components/main/main.component';
@@ -54,6 +59,7 @@ import { MapComponent } from './components/map/map.component';
 import { NewsComponent } from './components/news/news.component';
 import { RoomComponent } from './components/room/room.component';
 import { FormsComponent } from './components/profile/forms/forms.component';
+
 
 
 @NgModule({
@@ -93,7 +99,8 @@ import { FormsComponent } from './components/profile/forms/forms.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatGridListModule
+    MatGridListModule,
+    AngularFireStorageModule,
   ],
 
   providers: [FightService, Weaponry, Armory, AuthService, LobbyService],
