@@ -1,3 +1,4 @@
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CannotFoundComponent } from './components/404/404.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -27,6 +28,8 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+
 import {
   MatCheckboxModule,
   MatFormFieldModule,
@@ -65,8 +68,6 @@ import { RoomComponent } from './components/room/room.component';
 import { FormsComponent } from './components/profile/forms/forms.component';
 import { DeleteNewsDialogComponent } from './dialogs/delete-news-dialog/delete-news-dialog.component';
 import { EditNewsDialogComponent } from './dialogs/edit-news-dialog/edit-news-dialog.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
-
 
 
 @NgModule({
