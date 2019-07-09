@@ -1,3 +1,4 @@
+import { Upload } from './../../../models/upload.model';
 import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
@@ -6,6 +7,8 @@ import {
   ParentErrorStateMatcher,
 } from '../validators';
 import { stringify } from '@angular/compiler/src/util';
+import { UploadService } from '../../../services/upload.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-forms-page',
@@ -18,6 +21,9 @@ export class FormsComponent implements OnInit {
   buttonClicked = false;
   userDetailsForm: FormGroup;
   accountDetailsForm: FormGroup;
+
+  selectedFiles: FileList;
+  currentUpload: Upload;
 
   matchingPassGroup: FormGroup;
 
@@ -64,7 +70,8 @@ export class FormsComponent implements OnInit {
   };
 
   constructor(private fb: FormBuilder,
-              public authService: AuthService) { }
+              public authService: AuthService,
+              private upSvc: UploadService) { }
 
   ngOnInit() {
     this.createForms();
@@ -123,4 +130,23 @@ export class FormsComponent implements OnInit {
     }
     return this.imagePath;
   }
+
+  detectFiles(event) {
+    this.selectedFiles = event.target.files;
+}
+
+uploadSingle() {
+  // const file = this.selectedFiles.item(0);
+  // this.currentUpload = new Upload(file);
+  this.upSvc.pushUpload(this.selectedFiles);
+}
+
+uploadMulti() {
+  const files = this.selectedFiles;
+  const filesIndex = _.range(files.length);
+  // _.each(filesIndex, (idx) => {
+  //   this.currentUpload = new Upload(files[idx]);
+  //   this.upSvc.pushUpload(this.currentUpload); }
+  // );
+}
 }

@@ -24,7 +24,7 @@ export class RoomComponent implements OnInit {
     private _router: Router) { }
 
   ngOnInit() {
-    this.roomNum = this._activatedRoute.snapshot.params.roomNum;
+    this.roomNum = this._activatedRoute.snapshot.params.roomNum; //ROOM number
     this.getCurrentUserId();
     this.getRoomPlayers(this.roomNum);
   }

@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from 'firebase';
+import * as firebase from 'firebase';
+import { IWeapon, IArmor } from '../models';
 import { auth } from 'firebase/app';
 import { Observable } from 'rxjs';
 
@@ -23,6 +25,80 @@ export class AuthService {
     online: false,
     emailVerified: false,
     room: -1,
+    weaponRight: [{
+      name: 'Fists',
+      id: '0',
+      damage: 10,
+      oneHanded: true,
+      image: '/assets/images/weapons/knuckles.svg'
+    }],
+    weaponLeft: [],
+    armorHead: [],
+    armorTorso: [],
+    armorArms: [],
+    armorLegs: [],
+    fighter: {
+      ready: false,
+      name: '',
+      class: 'Fighter',
+      hp: 100,
+      attack: '',
+      defence: '',
+      weaponRight: {
+        name: '',
+        id: '',
+        damage: 0,
+        oneHanded: true,
+        image: ''
+      },
+      weaponLeft: {
+        name: '',
+        id: '',
+        damage: 0,
+        oneHanded: true,
+        image: ''
+      },
+      armorHead: {
+        protec: 'head',
+        criticalDmgCounter: 2,
+        criticalDmg: 0,
+        name: '',
+        id: '',
+        armor: 0,
+        durability: 0,
+        image: './assets/images/body/head.svg'
+      },
+      armorTorso: {
+        protec: 'torso',
+        criticalDmgCounter: 2,
+        criticalDmg: 0,
+        name: '',
+        id: '',
+        armor: 0,
+        durability: 0,
+        image: './assets/images/body/torso.svg'
+      },
+      armorArms: {
+        protec: 'arms',
+        criticalDmgCounter: 2,
+        criticalDmg: 0,
+        name: '',
+        id: '',
+        armor: 0,
+        durability: 0,
+        image: './assets/images/body/arms.svg'
+      },
+      armorLegs: {
+        protec: 'legs',
+        criticalDmgCounter: 2,
+        criticalDmg: 0,
+        name: '',
+        id: '',
+        armor: 0,
+        durability: 0,
+        image: './assets/images/body/legs.svg'
+      }
+    },
     fullname: '',
     birthDate: '',
     gender: '',
@@ -79,6 +155,80 @@ export class AuthService {
       email: newUser.email,
       displayName: newUser.displayName,
       photoURL: newUser.photoURL,
+      weaponRight: [{
+        name: 'Fists',
+        id: '0',
+        damage: 10,
+        oneHanded: true,
+        image: '/assets/images/weapons/knuckles.svg'
+      }],
+      weaponLeft: [],
+      armorHead: [],
+      armorTorso: [],
+      armorArms: [],
+      armorLegs: [],
+      fighter: {
+        ready: false,
+        name: '',
+        class: 'Fighter',
+        hp: 100,
+        attack: '',
+        defence: '',
+        weaponRight: {
+          name: '',
+          id: '',
+          damage: 0,
+          oneHanded: true,
+          image: ''
+        },
+        weaponLeft: {
+          name: '',
+          id: '',
+          damage: 0,
+          oneHanded: true,
+          image: ''
+        },
+        armorHead: {
+          protec: 'head',
+          criticalDmgCounter: 2,
+          criticalDmg: 0,
+          name: '',
+          id: '',
+          armor: 0,
+          durability: 0,
+          image: './assets/images/body/head.svg'
+        },
+        armorTorso: {
+          protec: 'torso',
+          criticalDmgCounter: 2,
+          criticalDmg: 0,
+          name: '',
+          id: '',
+          armor: 0,
+          durability: 0,
+          image: './assets/images/body/torso.svg'
+        },
+        armorArms: {
+          protec: 'arms',
+          criticalDmgCounter: 2,
+          criticalDmg: 0,
+          name: '',
+          id: '',
+          armor: 0,
+          durability: 0,
+          image: './assets/images/body/arms.svg'
+        },
+        armorLegs: {
+          protec: 'legs',
+          criticalDmgCounter: 2,
+          criticalDmg: 0,
+          name: '',
+          id: '',
+          armor: 0,
+          durability: 0,
+          image: './assets/images/body/legs.svg'
+        }
+      },
       online: isOnline,
       emailVerified: newUser.emailVerified,
       room: -1,
@@ -195,7 +345,7 @@ export class AuthService {
     return playerState;
   }
 
-
+  // Is local storage ima current user
   public getUserId() {
     this.userId = localStorage.getItem('user');
     return this.userId;
