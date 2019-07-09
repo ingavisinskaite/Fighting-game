@@ -88,68 +88,6 @@ export class FightService {
     return this._authService.updatePlayer(playerId, data);
   }
 
-  // NEW
-  public getFightersHP(userId: string) {
-    this.currentPlayerHP = this.getFighter(userId).fighter.hp;
-  }
-
-  // NEW
-  private getFighter(userId: string) {
-    if (userId === this.playerOneId) {
-      return this.playerOne;
-    }
-    if (userId === this.playerTwoId) {
-      return this.playerTwo;
-    }
-  }
-
-  // PAKEISTA
-  public assignAttack(playerId: string, bodyPart: string) {
-    if (playerId === this.playerOneId) {
-      this.playerOne.fighter.attack = bodyPart;
-      console.log('playerOne attack: ' + bodyPart);
-    }
-    if (playerId === this.playerTwoId) {
-      this.playerTwo.fighter.attack = bodyPart;
-      console.log('playerTwo attack: ' + bodyPart);
-    }
-  }
-
-  // PAKEISTA
-  public assignDefence(playerId: string, bodyPart: string) {
-    if (playerId === this.playerOneId) {
-      this.playerOne.fighter.defence = bodyPart;
-      console.log('playerOne defence: ' + bodyPart);
-    }
-    if (playerId === this.playerTwoId) {
-      this.playerTwo.fighter.defence = bodyPart;
-      console.log('playerTwo defence: ' + bodyPart);
-    }
-  }
-
-  // weaponRight.damage - because we always assign weapon to rightArm, even when it is twoHanded
-  // For now we use Fighter Index to access objects from fighters Array. When we connect to DB we'll use
-  // Fighter's unique id's (will add two parameters to function).
-  // First we determine if attack hasn't been defended. Then we check armor.durability (if armor hasn't been destroyed)
-  // And at the end we calculate damage delivered to fighter.hp and rewrite it in the object.
-  // PAKEISTA
-
-
-  // public calculateCombat(playerOneId: string, playerTwoId: string) {
-  //   if (this.playerOne.fighter.attack !== this.playerTwo.fighter.defence) {
-  //     this.changeAttackedPartArmorDurability(playerOneId, playerTwoId);
-  //     this.changeCriticalCounterAndDmg(playerOneId, playerTwoId);
-  //     this.playerTwo.fighter.hp -= (this.playerOne.fighter.weaponRight.damage +
-  //     this.getCriticalDmg(playerOneId, playerTwoId) - this.getAttackedPartArmor(playerOneId, playerTwoId));
-  //   }
-  //   if (this.playerTwo.fighter.attack !== this.playerOne.fighter.defence) {
-  //     this.changeAttackedPartArmorDurability(playerTwoId, playerOneId);
-  //     this.changeCriticalCounterAndDmg(playerTwoId, playerOneId);
-  //     this.playerOne.fighter.hp -= (this.playerTwo.fighter.weaponRight.damage +
-  //     this.getCriticalDmg(playerTwoId, playerOneId) - this.getAttackedPartArmor(playerTwoId, playerOneId));
-  //   }
-  // }
-
   public calculateCombat(currentPlayerPar: IUser, opponentPlayer: IUser): IUser {
 
     let currentPlayer = currentPlayerPar;
@@ -159,7 +97,6 @@ export class FightService {
       currentPlayer = this.changeCriticalCounterAndDmg(opponentPlayer, currentPlayer);
       currentPlayer.fighter.hp -= (opponentPlayer.fighter.weaponRight.damage +
       this.getCriticalDmg(opponentPlayer, currentPlayer) - this.getAttackedPartArmor(opponentPlayer, currentPlayer));
-      console.log('fight: ' + 'weapon ' + opponentPlayer.fighter.weaponRight.damage + 'critical ' + this.getCriticalDmg(opponentPlayer, currentPlayer) + 'armor ' + this.getAttackedPartArmor(opponentPlayer, currentPlayer));
     }
     return currentPlayer;
   }
@@ -310,126 +247,157 @@ export class FightService {
     return currentPlayer;
   }
 
-  // PAKEISTA
-  public assignWeapon(playerId: string, weaponId: string, oneHanded: boolean) {
-    if (playerId === this.playerOneId) {
-      if (oneHanded) {
-        this.playerOne.fighter.weaponRight = this.getOneHandedWeapon(weaponId);
-        console.log('playerOne: Assign weaponRight');
-      } else {
-        this.playerOne.fighter.weaponLeft = this.getTwoHandedWeapon(weaponId);
-        this.playerOne.fighter.weaponRight = this.getTwoHandedWeapon(weaponId);
-        console.log('playerOne: Assign weaponLeft');
-      }
-    }
-
-    if (playerId === this.playerTwoId) {
-      if (oneHanded) {
-        this.playerTwo.fighter.weaponRight = this.getOneHandedWeapon(weaponId);
-        console.log('playerTwo: Assign weaponRight');
-      } else {
-        this.playerTwo.fighter.weaponLeft = this.getTwoHandedWeapon(weaponId);
-        this.playerTwo.fighter.weaponRight = this.getTwoHandedWeapon(weaponId);
-        console.log('playerTwo: Assign weaponLeft');
-      }
-    }
-
-  }
-
-  private getOneHandedWeapon(id: string): IWeapon {
-    for (const weapon of this._weaponry.oneHanded) {
-      if (weapon.id === id) {
-        return weapon;
-      }
-    }
-  }
-
-  private getTwoHandedWeapon(id: string): IWeapon {
-    for (const weapon of this._weaponry.twoHanded) {
-      if (weapon.id === id) {
-        return weapon;
-      }
-    }
-  }
+  
+  // // NEW
+  // private getFighter(userId: string) {
+  //   if (userId === this.playerOneId) {
+  //     return this.playerOne;
+  //   }
+  //   if (userId === this.playerTwoId) {
+  //     return this.playerTwo;
+  //   }
+  // }
 
   // PAKEISTA
-  public assignArmor(playerId: string, armorId: string, protec: string) {
-    if (playerId === this.playerOneId) {
+  // public assignAttack(playerId: string, bodyPart: string) {
+  //   if (playerId === this.playerOneId) {
+  //     this.playerOne.fighter.attack = bodyPart;
+  //     console.log('playerOne attack: ' + bodyPart);
+  //   }
+  //   if (playerId === this.playerTwoId) {
+  //     this.playerTwo.fighter.attack = bodyPart;
+  //     console.log('playerTwo attack: ' + bodyPart);
+  //   }
+  // }
 
-      if (protec === 'head') {
-        this.playerOne.fighter.armorHead = this.getHeadArmor(armorId);
-        console.log('playerOne: Head armor assigned');
-      }
-      if (protec === 'torso') {
-        this.playerOne.fighter.armorTorso = this.getTorsoArmor(armorId);
-        console.log('playerOne: Torso armor assigned');
-      }
-      if (protec === 'arms') {
-        this.playerOne.fighter.armorArms = this.getArmsArmor(armorId);
-        console.log('playerOne: Arms armor assigned');
-      }
-      if (protec === 'legs') {
-        this.playerOne.fighter.armorLegs = this.getLegsArmor(armorId);
-        console.log('playerOne: Leg armor assigned');
-      }
-    }
+  // PAKEISTA
+  // public assignDefence(playerId: string, bodyPart: string) {
+  //   if (playerId === this.playerOneId) {
+  //     this.playerOne.fighter.defence = bodyPart;
+  //     console.log('playerOne defence: ' + bodyPart);
+  //   }
+  //   if (playerId === this.playerTwoId) {
+  //     this.playerTwo.fighter.defence = bodyPart;
+  //     console.log('playerTwo defence: ' + bodyPart);
+  //   }
+  // }
+  
+  // PAKEISTA
+  // public assignWeapon(playerId: string, weaponId: string, oneHanded: boolean) {
+  //   if (playerId === this.playerOneId) {
+  //     if (oneHanded) {
+  //       this.playerOne.fighter.weaponRight = this.getOneHandedWeapon(weaponId);
+  //       console.log('playerOne: Assign weaponRight');
+  //     } else {
+  //       this.playerOne.fighter.weaponLeft = this.getTwoHandedWeapon(weaponId);
+  //       this.playerOne.fighter.weaponRight = this.getTwoHandedWeapon(weaponId);
+  //       console.log('playerOne: Assign weaponLeft');
+  //     }
+  //   }
 
-    if (playerId === this.playerTwoId) {
+  //   if (playerId === this.playerTwoId) {
+  //     if (oneHanded) {
+  //       this.playerTwo.fighter.weaponRight = this.getOneHandedWeapon(weaponId);
+  //       console.log('playerTwo: Assign weaponRight');
+  //     } else {
+  //       this.playerTwo.fighter.weaponLeft = this.getTwoHandedWeapon(weaponId);
+  //       this.playerTwo.fighter.weaponRight = this.getTwoHandedWeapon(weaponId);
+  //       console.log('playerTwo: Assign weaponLeft');
+  //     }
+  //   }
 
-      if (protec === 'head') {
-        this.playerTwo.fighter.armorHead = this.getHeadArmor(armorId);
-        console.log('playerTwo: Head armor assigned');
-      }
-      if (protec === 'torso') {
-        this.playerTwo.fighter.armorTorso = this.getTorsoArmor(armorId);
-        console.log('playerTwo: Torso armor assigned');
-      }
-      if (protec === 'arms') {
-        this.playerTwo.fighter.armorArms = this.getArmsArmor(armorId);
-        console.log('playerTwo: Arms armor assigned');
-      }
-      if (protec === 'legs') {
-        this.playerTwo.fighter.armorLegs = this.getLegsArmor(armorId);
-        console.log('playerTwo: Leg armor assigned');
-      }
-    }
+  // }
 
-  }
+  // private getOneHandedWeapon(id: string): IWeapon {
+  //   for (const weapon of this._weaponry.oneHanded) {
+  //     if (weapon.id === id) {
+  //       return weapon;
+  //     }
+  //   }
+  // }
 
-  private getHeadArmor(id: string): IArmor {
-    for (const armor of this._armory.head) {
-      if (armor.id === id) {
-        // console.log('getHead: ' + armor.name + armor.armor + ' ' + 'protec:' + armor.protec);
-        return armor;
-      }
-    }
-  }
+  // private getTwoHandedWeapon(id: string): IWeapon {
+  //   for (const weapon of this._weaponry.twoHanded) {
+  //     if (weapon.id === id) {
+  //       return weapon;
+  //     }
+  //   }
+  // }
 
-  private getTorsoArmor(id: string): IArmor {
-    for (const armor of this._armory.torso) {
-      if (armor.id === id) {
-        // console.log('getTorso: ' + armor.name + armor.armor + ' ' + 'protec:' + armor.protec);
-        return armor;
-      }
-    }
-  }
+  // PAKEISTA
+  // public assignArmor(playerId: string, armorId: string, protec: string) {
+  //   if (playerId === this.playerOneId) {
 
-  private getArmsArmor(id: string): IArmor {
-    for (const armor of this._armory.arms) {
-      if (armor.id === id) {
-        // console.log('getArms: ' + armor.name + armor.armor + ' ' + 'protec:' + armor.protec);
-        return armor;
-      }
-    }
-  }
+  //     if (protec === 'head') {
+  //       this.playerOne.fighter.armorHead = this.getHeadArmor(armorId);
+  //       console.log('playerOne: Head armor assigned');
+  //     }
+  //     if (protec === 'torso') {
+  //       this.playerOne.fighter.armorTorso = this.getTorsoArmor(armorId);
+  //       console.log('playerOne: Torso armor assigned');
+  //     }
+  //     if (protec === 'arms') {
+  //       this.playerOne.fighter.armorArms = this.getArmsArmor(armorId);
+  //       console.log('playerOne: Arms armor assigned');
+  //     }
+  //     if (protec === 'legs') {
+  //       this.playerOne.fighter.armorLegs = this.getLegsArmor(armorId);
+  //       console.log('playerOne: Leg armor assigned');
+  //     }
+  //   }
 
-  private getLegsArmor(id: string): IArmor {
-    for (const armor of this._armory.legs) {
-      if (armor.id === id) {
-        // console.log('getLegs: ' + armor.name + armor.armor + ' ' + 'protec:' + armor.protec);
-        return armor;
-      }
-    }
-  }
+  //   if (playerId === this.playerTwoId) {
+
+  //     if (protec === 'head') {
+  //       this.playerTwo.fighter.armorHead = this.getHeadArmor(armorId);
+  //       console.log('playerTwo: Head armor assigned');
+  //     }
+  //     if (protec === 'torso') {
+  //       this.playerTwo.fighter.armorTorso = this.getTorsoArmor(armorId);
+  //       console.log('playerTwo: Torso armor assigned');
+  //     }
+  //     if (protec === 'arms') {
+  //       this.playerTwo.fighter.armorArms = this.getArmsArmor(armorId);
+  //       console.log('playerTwo: Arms armor assigned');
+  //     }
+  //     if (protec === 'legs') {
+  //       this.playerTwo.fighter.armorLegs = this.getLegsArmor(armorId);
+  //       console.log('playerTwo: Leg armor assigned');
+  //     }
+  //   }
+
+  // }
+
+  // private getHeadArmor(id: string): IArmor {
+  //   for (const armor of this._armory.head) {
+  //     if (armor.id === id) {
+  //       return armor;
+  //     }
+  //   }
+  // }
+
+  // private getTorsoArmor(id: string): IArmor {
+  //   for (const armor of this._armory.torso) {
+  //     if (armor.id === id) {
+  //       return armor;
+  //     }
+  //   }
+  // }
+
+  // private getArmsArmor(id: string): IArmor {
+  //   for (const armor of this._armory.arms) {
+  //     if (armor.id === id) {
+  //       return armor;
+  //     }
+  //   }
+  // }
+
+  // private getLegsArmor(id: string): IArmor {
+  //   for (const armor of this._armory.legs) {
+  //     if (armor.id === id) {
+  //       return armor;
+  //     }
+  //   }
+  // }
 
 }

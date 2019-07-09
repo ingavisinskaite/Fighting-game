@@ -69,22 +69,50 @@ export class ArenaComponent implements OnInit {
 
   // CHOOSING WEAPON, ARMOR, ATTACK and DEFENCE
 
-  chooseWeapon(fighterId: string, weaponId: string, oneHanded: boolean) {
-    this._fight.assignWeapon(fighterId, weaponId, oneHanded);
+ public chooseWeapon(weaponId: string) {
+    for (const weapon of this.currentPlayer.weaponRight) {
+      if (weapon.id === weaponId) {
+        this.currentPlayer.fighter.weaponRight = weapon;
+      }
+    }
   }
 
-  chooseArmor(fighterId: string, armorId: string, protec: string) {
-    this._fight.assignArmor(fighterId, armorId, protec);
-    // console.log('armor id:' + armorId);
+  public chooseArmor(protec: string, armorId: string) {
+    if (protec === 'head') {
+      for (const armor of this.currentPlayer.armorHead) {
+        if (armor.id === armorId) {
+          this.currentPlayer.fighter.armorHead = armor;
+        }
+      }
+    }
+    if (protec === 'torso') {
+      for (const armor of this.currentPlayer.armorTorso) {
+        if (armor.id === armorId) {
+          this.currentPlayer.fighter.armorTorso = armor;
+        }
+      }
+    }
+    if (protec === 'arms') {
+      for (const armor of this.currentPlayer.armorArms) {
+        if (armor.id === armorId) {
+          this.currentPlayer.fighter.armorArms = armor;
+        }
+      }
+    }
+    if (protec === 'legs') {
+      for (const armor of this.currentPlayer.armorLegs) {
+        if (armor.id === armorId) {
+          this.currentPlayer.fighter.armorLegs = armor;
+        }
+      }
+    }
   }
 
-  chooseAttack(fighterId: string, bodyPart: string) {
-    // this._fight.assignAttack(fighterId, bodyPart);
+  public chooseAttack(bodyPart: string) {
     this.currentPlayer.fighter.attack = bodyPart;
   }
 
-  chooseDefence(fighterId: string, bodyPart: string) {
-    // this._fight.assignDefence(fighterId, bodyPart);
+  public chooseDefence(bodyPart: string) {
     this.currentPlayer.fighter.defence = bodyPart;
   }
 
@@ -121,7 +149,5 @@ export class ArenaComponent implements OnInit {
   private calculateCurrentLosses(player: IUser): IUser {
     return this._fight.calculateCombat(this.currentPlayer, player);
   }
-
-
 
 }
