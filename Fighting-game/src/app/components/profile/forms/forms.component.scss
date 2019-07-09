@@ -1,29 +1,24 @@
 app-forms-page {
-  .container {
-    margin-top: 50px;
-  }
   .row {
     width: 100%;
+    display: table;
+    clear: both;
   }
+
   .col {
-    flex: 1;
-    margin: 100px; 
+    padding: 50px; 
   }  
 
   #forms {
-    display: flex;
+    float: left;
+    width: 50%;
   }
-  // .col-2 {
-  //   display: inline-block;
-  //   margin: auto;
-  // }
-  // .section-title {
-  //   margin-bottom: 20px;
-  // }
 
   .user-details-container {
-    padding: 20px;
     text-align: center;
+    float: left;
+    width: 50%;
+    padding-top: 80px; 
 
     .user-image {
       width: 20%;
@@ -33,7 +28,6 @@ app-forms-page {
     .user-title {
       font-size: 50px;
       font-weight: 500;
-      margin-top: 30px;
       display: block;
     }
 
@@ -43,6 +37,7 @@ app-forms-page {
       display: block;
       color: rgba(0, 0, 0, 0.70);
     }
+    
     .user-bio > span {
       width: 200px;
     }
@@ -70,4 +65,22 @@ app-forms-page {
   .submit-btn {
     margin-top: 30px;
   }
+}
+@media (max-width: 1024px) {
+  #forms, .user-details-container {
+    width: 100% !important;
+  }
+.upl{
+  height: 50px;
+}
+.upl1{
+  height: 50px;
+}
+
+.file-container{
+  width: 250px;
+  height: 250px;
+  border: 1px solid black;
+  background-color: gray;
+}
 }
