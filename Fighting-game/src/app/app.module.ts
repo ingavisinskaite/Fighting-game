@@ -69,7 +69,6 @@ import { FormsComponent } from './components/profile/forms/forms.component';
 import { DeleteNewsDialogComponent } from './dialogs/delete-news-dialog/delete-news-dialog.component';
 import { EditNewsDialogComponent } from './dialogs/edit-news-dialog/edit-news-dialog.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,7 +85,7 @@ import { EditNewsDialogComponent } from './dialogs/edit-news-dialog/edit-news-di
     CannotFoundComponent,
     FormsComponent,
     DeleteNewsDialogComponent,
-    EditNewsDialogComponent
+    EditNewsDialogComponent,
   ],
   imports: [
     AppRoutingModule,

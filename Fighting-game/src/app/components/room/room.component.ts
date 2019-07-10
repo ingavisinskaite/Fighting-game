@@ -31,7 +31,6 @@ export class RoomComponent implements OnInit {
     this.roomNum = this._activatedRoute.snapshot.params.roomNum; //ROOM number
     this.getCurrentUserId();
     this.getRoomPlayers(this.roomNum);
-    setInterval(() => this.checkIfJoined(), 3000);
   }
 
   private getRoomPlayers(roomNum: number): IRoom {
@@ -90,6 +89,8 @@ export class RoomComponent implements OnInit {
       this.leaveRoom();
       this._router.navigateByUrl('/arena');
       this.joinedPlayers = [];
+      this.room.matchedPlayers = [];
+      this.updateRoom(this.roomNum, this.room);
     }
   }
 
@@ -99,15 +100,18 @@ export class RoomComponent implements OnInit {
     return this.currentUserId;
   }
 
-  private updateRoom(roomNum: number, data: IRoom): void {
+  private updateRoom(roomNum: number, data: IRoom): Promise<void> {
     const roomId = 'Room ' + roomNum;
-    this._lobbyService.updateRoom(roomId, data);
+    return this._lobbyService.updateRoom(roomId, data).then(room => {
+      this.checkIfJoined();
+    });
   }
 
   public leaveRoom(): void {
     let roomId = 'Room ' + this.roomNum;
     const currentUserPosition = this.room.players.indexOf(this.currentUserId);
     this.room.players.splice(currentUserPosition, 1);
+    this.stopLookingForAFight();
     this.room.playerCount -= 1;
 
     if (this.room.players.length === 0) {
