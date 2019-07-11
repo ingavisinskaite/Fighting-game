@@ -1,7 +1,7 @@
 import { IUser } from './../../models/user/user.model';
 import { AuthService } from './../../services/auth.service';
 import { LobbyService } from './../../services/lobby.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IRoom } from 'src/app/models/room.model';
 
@@ -19,13 +19,15 @@ export class RoomComponent implements OnInit {
   currentPlayer: IUser;
   lookingForFight = false;
   playersWaiting: Array<string>;
-  joinedPlayers = [];
+  matchedPlayers = [];
   playersUserNames = [];
+  opponent: IUser;
 
   constructor(private _lobbyService: LobbyService,
     private _authService: AuthService,
     private _activatedRoute: ActivatedRoute,
-    private _router: Router) { }
+    private _router: Router,
+    private el: ElementRef) { }
 
   ngOnInit() {
     this.roomNum = this._activatedRoute.snapshot.params.roomNum; //ROOM number
@@ -47,6 +49,7 @@ export class RoomComponent implements OnInit {
       this.room.playersWaiting.push(this.currentUserId);
       this.updateRoom(this.roomNum, this.room);
       this.joinRandomPlayers();
+      this.checkIfJoined();
       this.lookingForFight = true;
   }
 
@@ -60,10 +63,10 @@ export class RoomComponent implements OnInit {
   private getRoomPlayersUserNames(): Array<string> { // when we have player username
     for (const player of this.players) {
       this._authService.getPlayer(player).subscribe(user => {
-        this.playersUserNames.push(user.displayName);
+        this.playersUserNames.push(user.fullName);
       });
-      return this.playersUserNames;
     }
+    return this.playersUserNames;
   }
 
   public sendMessage(message: string): void {
@@ -76,22 +79,33 @@ export class RoomComponent implements OnInit {
 
   private joinRandomPlayers() {
     if (this.playersWaiting.length > 1) {
-      this.joinedPlayers = this.playersWaiting.sort(() => .5 - Math.random()).slice(0, 2);
-      this.room.matchedPlayers = this.joinedPlayers;
-      this.updateRoom(this.roomNum, this.room);
-      this.checkIfJoined();
+      this.matchedPlayers = this.playersWaiting.sort(() => .5 - Math.random()).slice(0, 2);
+      let opponentId = '';
+      const currentUserPosition = this.room.playersWaiting.indexOf(this.currentUserId);
+      if (currentUserPosition === 0) {
+        opponentId = this.matchedPlayers[1];
+        this.getOpponentPlayer(opponentId);
+      } else {
+        opponentId = this.matchedPlayers[0];
+        this.getOpponentPlayer(opponentId);
+      }
+      this.currentPlayer.opponentId = opponentId;
+      this._authService.updatePlayer(this.currentUserId, this.currentPlayer);
+      this.updateOpponent(opponentId);
     }
   }
 
   private checkIfJoined() {
-    if (this.room.matchedPlayers.indexOf(this.currentUserId) > -1) {
-      this.stopLookingForAFight();
-      this.leaveRoom();
-      this._router.navigateByUrl('/arena');
-      this.joinedPlayers = [];
-      this.room.matchedPlayers = [];
-      this.updateRoom(this.roomNum, this.room);
-    }
+    this._authService.getPlayers()
+    .subscribe(data => {
+      for (const user of data) {
+        if (user.opponentId === this.currentUserId) {
+          this.stopLookingForAFight();
+          this.leaveRoom();
+          this._router.navigateByUrl('/arena');
+        }
+      }
+    });
   }
 
   private getCurrentUserId(): string {
@@ -102,9 +116,7 @@ export class RoomComponent implements OnInit {
 
   private updateRoom(roomNum: number, data: IRoom): Promise<void> {
     const roomId = 'Room ' + roomNum;
-    return this._lobbyService.updateRoom(roomId, data).then(room => {
-      this.checkIfJoined();
-    });
+    return this._lobbyService.updateRoom(roomId, data);
   }
 
   public leaveRoom(): void {
@@ -149,6 +161,17 @@ export class RoomComponent implements OnInit {
       this.currentPlayer = player;
     });
     return this.currentPlayer;
+  }
+
+  private getOpponentPlayer(opponentId: string) {
+    this._authService.getPlayer(opponentId).subscribe(player => {
+      this.opponent = player;
+    });
+  }
+
+  private updateOpponent(opponentId: string) {
+    this.opponent.opponentId = this.currentUserId;
+    this._authService.updatePlayer(opponentId, this.opponent);
   }
 
 
