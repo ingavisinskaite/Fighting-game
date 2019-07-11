@@ -1,4 +1,6 @@
 import { ShopService } from './services/shop.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { CannotFoundComponent } from './components/404/404.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
@@ -7,8 +9,11 @@ import { LobbyService, AuthService } from './services';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import {AngularFireStorageModule} from '@angular/fire/storage';
+
 import { Weaponry, Armory } from './classes';
 import { FightService } from './services/fight.service';
+import { NewsService } from './services/news.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +29,8 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+
 import {
   MatCheckboxModule,
   MatFormFieldModule,
@@ -44,7 +51,12 @@ import {
   MatTabsModule,
   MatSnackBarModule,
   MatTooltipModule,
+  MatToolbarModule,
+  MatSidenavModule,
+  MatListModule,
+  MatIconModule
 } from '@angular/material';
+
 
 
 
@@ -60,6 +72,8 @@ import { FistsComponent } from './components/shop/fists/fists.component';
 import { FlailComponent } from './components/shop/flail/flail.component';
 import { SwordComponent } from './components/shop/sword/sword.component';
 import { FormsComponent } from './components/profile/forms/forms.component';
+import { DeleteNewsDialogComponent } from './dialogs/delete-news-dialog/delete-news-dialog.component';
+import { EditNewsDialogComponent } from './dialogs/edit-news-dialog/edit-news-dialog.component';
 
 
 @NgModule({
@@ -81,7 +95,9 @@ import { FormsComponent } from './components/profile/forms/forms.component';
     FlailComponent,
     SwordComponent,
     CannotFoundComponent,
-    FormsComponent
+    FormsComponent,
+    DeleteNewsDialogComponent,
+    EditNewsDialogComponent
   ],
   imports: [
     AppRoutingModule,
@@ -106,17 +122,17 @@ import { FormsComponent } from './components/profile/forms/forms.component';
     MatSelectModule,
     MatGridListModule,
     MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatDialogModule,
-    MatAutocompleteModule,
-    MatExpansionModule,
-    MatProgressSpinnerModule,
-    MatTabsModule
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    FlexLayoutModule,
+    AngularFireStorageModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule
   ],
-
-  entryComponents: [ShopComponent, FistsComponent, DaggerComponent, SwordComponent, FlailComponent],
-  providers: [FightService, Weaponry, Armory, AuthService, LobbyService, ShopService],
+  entryComponents: [DeleteNewsDialogComponent, EditNewsDialogComponent,
+  ShopComponent, FistsComponent, DaggerComponent, SwordComponent, FlailComponent],
+  providers: [NewsService, FightService, Weaponry, Armory, AuthService, LobbyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -13,16 +13,15 @@ export class LobbyComponent implements OnInit {
 
   joinedRoom: number;
   onlinePlayers: number;
-  message = 'Welcome to game lobby';
-  roomPlayers: Array<IRoom>;
+  message = 'LOBBY';
+  roomPlayers: Array<IRoom> = [];
   isInRoom: boolean = false;
   userId: string;
   currentPlayer: IUser;
 
   constructor(public _lobbyService: LobbyService,
-              public authService: AuthService,
-              public router: Router)
-            {this.isInRoom = false;}
+    public authService: AuthService,
+    public router: Router) { this.isInRoom = false; }
 
   ngOnInit() {
     this.getRooms();
@@ -30,19 +29,13 @@ export class LobbyComponent implements OnInit {
     this.getCurrentUserId();
   }
 
-  public toggleRoom(roomNum: number, userId: string) {
+  public toggleRoom(roomNum: number, userId: string): void {
     this.joinedRoom = roomNum;
     const roomId = 'Room ' + roomNum;
     const selectedRoom = this.roomPlayers[roomNum - 1];
-    delete selectedRoom.playerCount;
     if (!this.isInRoom) {
-      if (selectedRoom.player1 === '') {
-        selectedRoom.player1 = userId;
-        this.router.navigateByUrl('/room/' + roomNum);
-      } else {
-        selectedRoom.player2 = userId;
-        this.router.navigateByUrl('/room/' + roomNum);
-      }
+      selectedRoom.players.push(userId);
+      this.router.navigateByUrl('/room/' + roomNum);
       this.currentPlayer.room = roomNum;
       this.authService.updatePlayer(userId, this.currentPlayer);
       this._lobbyService.updateRoom(roomId, selectedRoom);
@@ -50,15 +43,15 @@ export class LobbyComponent implements OnInit {
       this.message = 'You joined room ' + roomNum;
       this.joinedRoom = roomNum;
     } else {
-      selectedRoom.player1 = '';
       this.joinedRoom = 0;
+      selectedRoom.playerCount -= 1;
       this.isInRoom = false;
-      this.message = 'Welcome to game lobby';
+      this.message = 'LOBBY';
       this._lobbyService.updateRoom(roomId, selectedRoom);
     }
   }
 
-  public checkIfJoined() {
+  private checkIfJoined(): void {
     this.authService.getPlayer(this.userId).subscribe(player => {
       this.currentPlayer = player;
       if (player.room !== -1) {
@@ -67,11 +60,7 @@ export class LobbyComponent implements OnInit {
     });
   }
 
-  public get isLoggedIn(): boolean {
-    return this.authService.isLoggedIn;
-  }
-
-  public getOnlinePlayersCount() {
+  public getOnlinePlayersCount(): number {
     this.authService.getPlayers()
       .subscribe(data => {
         this.onlinePlayers = 0;
@@ -81,20 +70,23 @@ export class LobbyComponent implements OnInit {
           }
         }
       });
+    return this.onlinePlayers;
   }
 
-  public getCurrentUserId() {
+  public getCurrentUserId(): string {
     this.userId = this.authService.getUserId();
     this.checkIfJoined();
+    return this.userId;
   }
 
   public getRooms() {
     this._lobbyService.getRooms().subscribe(rooms => {
       this.roomPlayers = rooms.map(r => {
-        r.playerCount = (r.player1 ? 1 : 0) + (r.player2 ? 1 : 0);
+        r.playerCount = r.players.length;
         const room = r as IRoom;
         return room;
       });
     });
   }
+
 }

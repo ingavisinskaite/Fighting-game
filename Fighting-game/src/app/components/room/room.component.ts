@@ -18,30 +18,27 @@ export class RoomComponent implements OnInit {
   formatedDate: string;
   currentPlayer: IUser;
 
-  // @HostListener('window:beforeunload', ['$event'])
-  // beforeUnloadHandler(event) {
-  //   this.removePlayerFromRoom();
-  // }
-
   constructor(private _lobbyService: LobbyService,
     private _authService: AuthService,
     private _activatedRoute: ActivatedRoute,
     private _router: Router) { }
 
   ngOnInit() {
-    this.roomNum = this._activatedRoute.snapshot.params.roomNum;
+    this.roomNum = this._activatedRoute.snapshot.params.roomNum; //ROOM number
     this.getCurrentUserId();
     this.getRoomPlayers(this.roomNum);
   }
 
-  public getRoomPlayers(roomNum: number) {
+  private getRoomPlayers(roomNum: number): IRoom {
     const roomId = 'Room ' + roomNum;
     this._lobbyService.getRoom(roomId).subscribe(room => {
       this.room = room;
+      this.players = room.players;
     });
+    return this.room;
   }
 
-  public sendMessage(message: string) {
+  public sendMessage(message: string): void {
     const sentMessage = message;
     this.getCurrentDate();
     const playerSentMessage = this.formatedDate + ' ' + this.currentUserId + ': ' + sentMessage;
@@ -49,27 +46,24 @@ export class RoomComponent implements OnInit {
     this.updateRoom(this.roomNum, this.room);
   }
 
-  public getCurrentUserId() {
+  private getCurrentUserId(): string {
     this.currentUserId = this._authService.getUserId();
     this.getCurrentPlayer(this.currentUserId);
+    return this.currentUserId;
   }
 
-  public updateRoom(roomNum: number, data: IRoom) {
-    let roomId = 'Room ' + roomNum;
+  private updateRoom(roomNum: number, data: IRoom): void {
+    const roomId = 'Room ' + roomNum;
     this._lobbyService.updateRoom(roomId, data);
   }
 
-  public leaveRoom() {
+  public leaveRoom(): void {
     let roomId = 'Room ' + this.roomNum;
-    if (this.room.player1 === this.currentUserId) {
-      this.room.player1 = '';
-      this.room.playerCount -= 1;
-    } else {
-      this.room.player2 = '';
-      this.room.playerCount -= 1;
-    }
+    const currentUserPosition = this.room.players.indexOf(this.currentUserId);
+    this.room.players.splice(currentUserPosition, 1);
+    this.room.playerCount -= 1;
 
-    if (this.room.player1 === '' && this.room.player2 === '') {
+    if (this.room.players.length === 0) {
       this.room.chat = [];
     }
     this.currentPlayer.room = -1;
@@ -78,7 +72,7 @@ export class RoomComponent implements OnInit {
     this._router.navigateByUrl('/lobby');
   }
 
-  public getCurrentDate() {
+  private getCurrentDate(): string {
     this.formatedDate = '';
     const fullDate = new Date();
     const hours = fullDate.getHours();
@@ -99,10 +93,11 @@ export class RoomComponent implements OnInit {
     return this.formatedDate;
   }
 
-    public getCurrentPlayer(playerId: string) {
+    private getCurrentPlayer(playerId: string): IUser {
     this._authService.getPlayer(playerId).subscribe(player => {
       this.currentPlayer = player;
-    })
+    });
+    return this.currentPlayer;
   }
 
 

@@ -1,5 +1,5 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-
+import {MatSnackBar} from '@angular/material/snack-bar';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
@@ -13,7 +13,9 @@ export class SignUpComponent implements OnInit {
 signUpForm: FormGroup;
 
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService,
+              private _snackBar: MatSnackBar,
+              ) { }
 
   ngOnInit() {
     this.createSignUpForm();
@@ -31,7 +33,7 @@ signUpForm: FormGroup;
     if (password === confpassword) {
       return this.authService.signUp(email, password);
     } else {
-      window.alert('PASSWORDS DONT MATCH');
+      this._snackBar.open('Password dont match!!', 'Ok');
     }
   }
   public fbLogin() {
@@ -40,4 +42,9 @@ signUpForm: FormGroup;
   public  googleLogin() {
     return this.authService.doGoogleLogin();
   }
+  public openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+        duration: 3000
+    });
+}
 }
