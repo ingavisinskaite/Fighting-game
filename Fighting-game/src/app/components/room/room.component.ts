@@ -49,13 +49,13 @@ export class RoomComponent implements OnInit {
       this.room.playersWaiting.push(this.currentUserId);
       this.updateRoom(this.roomNum, this.room);
       this.joinRandomPlayers();
-      this.checkIfJoined();
       this.lookingForFight = true;
   }
 
   public stopLookingForAFight() {
       const currentUserPosition = this.room.playersWaiting.indexOf(this.currentUserId);
       this.room.playersWaiting.splice(currentUserPosition, 1);
+      this.playersWaiting = this.room.playersWaiting;
       this.updateRoom(this.roomNum, this.room);
       this.lookingForFight = false;
   }
@@ -91,7 +91,7 @@ export class RoomComponent implements OnInit {
       }
       this.currentPlayer.opponentId = opponentId;
       this._authService.updatePlayer(this.currentUserId, this.currentPlayer);
-      this.updateOpponent(opponentId);
+      this.checkIfJoined();
     }
   }
 
@@ -100,6 +100,7 @@ export class RoomComponent implements OnInit {
     .subscribe(data => {
       for (const user of data) {
         if (user.opponentId === this.currentUserId) {
+          this.updateOpponent(user.opponentId);
           this.stopLookingForAFight();
           this.leaveRoom();
           this._router.navigateByUrl('/arena');
