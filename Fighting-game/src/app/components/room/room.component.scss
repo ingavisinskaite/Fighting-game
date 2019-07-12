@@ -1,8 +1,6 @@
-$break-medium: 1000px;
-$break-medium-small: 850px;
-$break-small: 750px;
-$break-xs: 510px;
-$break-mobile: 450px;
+$break-small: 960px;
+$break-mobile: 600px;
+
 
 .roomPage {
     min-height: 80vh;
@@ -10,7 +8,7 @@ $break-mobile: 450px;
     background: url('https://media.giphy.com/media/nIFXEYqtgMmKA/giphy.gif');
     background-size: cover;
     margin: 0 10px;
-    padding-top: 20px;
+    padding: 20px 0;
     position: relative;
 }
 
@@ -19,49 +17,24 @@ $break-mobile: 450px;
 }
 
 .players {
-  width: 50vw;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 5px;
   padding: 5px;
   margin-left: 15px;
-  @media screen and (max-width: $break-medium-small) {
-    font-size: 14px
-  }
+  height: 300px;
+  overflow-y: auto;
   @media screen and (max-width: $break-small) {
-    font-size: 12px
-  }
-  @media screen and (max-width: $break-xs) {
-    font-size: 10px
+    font-size: 14px;
   }
   @media screen and (max-width: $break-mobile) {
-    width: 85vw;
+    font-size: 10px;
   }
 }
 
 #character {
   width: 100%;
-}
-
-.character {
-  width: 22%;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 5px;
-  position: absolute;
-  right: 134px;
-  top: 65px;
-  @media screen and (max-width: $break-medium) {
-    width: 24%;
-    right: 120px;
-  }
-  @media screen and (max-width: $break-medium-small) {
-    width: 28%;
-    right: 70px;
-  }
-  @media screen and (max-width: $break-small) {
-    width: 28%;
-    right: 50px;
-    top: 100px;
-  }
   @media screen and (max-width: $break-mobile) {
     display: none;
   }
@@ -86,9 +59,8 @@ $break-mobile: 450px;
   float: right;
   margin-right: 50px;
   @media screen and (max-width: $break-mobile) {
-    position: absolute;
-    bottom: 20px;
-    left: 48%;
+    margin-bottom: 5px;
+    margin-right: 20px;
   }
 }
 
@@ -97,37 +69,27 @@ $break-mobile: 450px;
     width: 62vw;
     z-index: -1;
     margin-left: 15px;
-    @media screen and (max-width: $break-medium-small) {
-      font-size: 14px
-    }
     @media screen and (max-width: $break-small) {
-      font-size: 12px
+      font-size: 12px;
     }
-    @media screen and (max-width: $break-xs) {
-      font-size: 10px
+    @media screen and (max-width: $break-mobile) {
+      font-size: 10px;
     }
 }
 
 .chat {
-    width: 50vw;
     display: block;
     margin-top: 5px;
     background-color: rgba(255, 255, 255, 0.5);
-    height: 300px;
+    height: 200px;
     margin-left: 15px;
     overflow-y: auto;
     padding-top: 5px;
-    @media screen and (max-width: $break-medium-small) {
-      font-size: 14px
-    }
     @media screen and (max-width: $break-small) {
-      font-size: 12px
-    }
-    @media screen and (max-width: $break-xs) {
-      font-size: 10px
+      font-size: 12px;
     }
     @media screen and (max-width: $break-mobile) {
-      width: 85vw;
+      font-size: 10px;
     }
 }
 
