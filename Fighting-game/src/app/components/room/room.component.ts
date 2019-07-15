@@ -33,6 +33,7 @@ export class RoomComponent implements OnInit {
     this.roomNum = this._activatedRoute.snapshot.params.roomNum; //ROOM number
     this.getCurrentUserId();
     this.getRoomPlayers(this.roomNum);
+    this.getCurrentPlayer(this.currentUserId);
   }
 
   private getRoomPlayers(roomNum: number): IRoom {
@@ -51,11 +52,6 @@ export class RoomComponent implements OnInit {
     // this.joinRandomPlayers();
     this.lookingForFight = true;
     this.getCurrentPlayer(this.currentUserId);
-    if (this.currentPlayer.opponentId && this.currentPlayer.opponentId !== '') {
-      this.stopLookingForAFight();
-      this.leaveRoom();
-      this._router.navigateByUrl('/arena');
-    }
   }
 
   public stopLookingForAFight() {
@@ -121,7 +117,6 @@ export class RoomComponent implements OnInit {
 
   private getCurrentUserId(): string {
     this.currentUserId = this._authService.getUserId();
-    this.getCurrentPlayer(this.currentUserId);
     return this.currentUserId;
   }
 
@@ -170,6 +165,11 @@ export class RoomComponent implements OnInit {
   private getCurrentPlayer(playerId: string): IUser {
     this._authService.getPlayer(playerId).subscribe(player => {
       this.currentPlayer = player;
+      if (player.opponentId && player.opponentId !== '') {
+        this.stopLookingForAFight();
+        this.leaveRoom();
+        this._router.navigateByUrl('/arena');
+      }
     });
     return this.currentPlayer;
   }
