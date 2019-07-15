@@ -46,18 +46,24 @@ export class RoomComponent implements OnInit {
   }
 
   public lookForAFight() {
-      this.room.playersWaiting.push(this.currentUserId);
-      this.updateRoom(this.roomNum, this.room);
-      this.joinRandomPlayers();
-      this.lookingForFight = true;
+    this.room.playersWaiting.push(this.currentUserId);
+    this.updateRoom(this.roomNum, this.room);
+    // this.joinRandomPlayers();
+    this.lookingForFight = true;
+    this.getCurrentPlayer(this.currentUserId);
+    if (this.currentPlayer.opponentId && this.currentPlayer.opponentId !== '') {
+      this.stopLookingForAFight();
+      this.leaveRoom();
+      this._router.navigateByUrl('/arena');
+    }
   }
 
   public stopLookingForAFight() {
-      const currentUserPosition = this.room.playersWaiting.indexOf(this.currentUserId);
-      this.room.playersWaiting.splice(currentUserPosition, 1);
-      this.playersWaiting = this.room.playersWaiting;
-      this.updateRoom(this.roomNum, this.room);
-      this.lookingForFight = false;
+    const currentUserPosition = this.room.playersWaiting.indexOf(this.currentUserId);
+    this.room.playersWaiting.splice(currentUserPosition, 1);
+    this.playersWaiting = this.room.playersWaiting;
+    this.updateRoom(this.roomNum, this.room);
+    this.lookingForFight = false;
   }
 
   private getRoomPlayersUserNames(): Array<string> { // when we have player username
@@ -77,37 +83,41 @@ export class RoomComponent implements OnInit {
     this.updateRoom(this.roomNum, this.room);
   }
 
-  private joinRandomPlayers() {
-    if (this.playersWaiting.length > 1) {
-      this.matchedPlayers = this.playersWaiting.sort(() => .5 - Math.random()).slice(0, 2);
-      let opponentId = '';
-      const currentUserPosition = this.room.playersWaiting.indexOf(this.currentUserId);
-      if (currentUserPosition === 0) {
-        opponentId = this.matchedPlayers[1];
-        this.getOpponentPlayer(opponentId);
-      } else {
-        opponentId = this.matchedPlayers[0];
-        this.getOpponentPlayer(opponentId);
-      }
-      this.currentPlayer.opponentId = opponentId;
-      this._authService.updatePlayer(this.currentUserId, this.currentPlayer);
-      this.checkIfJoined();
-    }
-  }
+  // private joinRandomPlayers() {
+  //   if (this.playersWaiting.length > 1) {
+  //     this.matchedPlayers = this.playersWaiting.sort(() => .5 - Math.random()).slice(0, 2);
+  //     let opponentId = '';
+  //     const currentUserPosition = this.matchedPlayers.indexOf(this.currentUserId);
+  //     if (currentUserPosition === 0) {
+  //       opponentId = this.matchedPlayers[1];
+  //       this.getOpponentPlayer(opponentId);
+  //     } else {
+  //       opponentId = this.matchedPlayers[0];
+  //       this.getOpponentPlayer(opponentId);
+  //     }
+  //     this.currentPlayer.opponentId = opponentId;
+  //     this._authService.updatePlayer(this.currentUserId, this.currentPlayer);
+  //     this.checkIfJoined();
+  //   }
+  // }
 
-  private checkIfJoined() {
-    this._authService.getPlayers()
-    .subscribe(data => {
-      for (const user of data) {
-        if (user.opponentId === this.currentUserId) {
-          this.updateOpponent(user.opponentId);
-          this.stopLookingForAFight();
-          this.leaveRoom();
-          this._router.navigateByUrl('/arena');
-        }
-      }
-    });
-  }
+  // private checkIfJoined() { // 
+  //   this._authService.getPlayers()
+  //   .subscribe(data => {
+  //     for (const user of data) {
+  //       if (user.opponentId === this.currentUserId) {
+  //         this.updateOpponent(user.opponentId);
+  //         this.stopLookingForAFight();
+  //         this.leaveRoom();
+  //         this._router.navigateByUrl('/arena');
+  //       } else {
+  //         console.log('test');
+  //         console.log(this.currentPlayer);
+  //         console.log(user);
+  //       }
+  //     }
+  //   });
+  // }
 
   private getCurrentUserId(): string {
     this.currentUserId = this._authService.getUserId();
@@ -142,38 +152,38 @@ export class RoomComponent implements OnInit {
     const hours = fullDate.getHours();
     let hoursString = '';
     if (hours < 10) {
-        hoursString = `0${hours.toString()}`;
+      hoursString = `0${hours.toString()}`;
     } else {
-        hoursString = hours.toString();
+      hoursString = hours.toString();
     }
     const minutes = fullDate.getMinutes();
     let minutesString = '';
     if (minutes < 10) {
-        minutesString = `0${minutes.toString()}`;
+      minutesString = `0${minutes.toString()}`;
     } else {
-        minutesString = minutes.toString();
+      minutesString = minutes.toString();
     }
     this.formatedDate = hoursString + ':' + minutesString;
     return this.formatedDate;
   }
 
-    private getCurrentPlayer(playerId: string): IUser {
+  private getCurrentPlayer(playerId: string): IUser {
     this._authService.getPlayer(playerId).subscribe(player => {
       this.currentPlayer = player;
     });
     return this.currentPlayer;
   }
 
-  private getOpponentPlayer(opponentId: string) {
-    this._authService.getPlayer(opponentId).subscribe(player => {
-      this.opponent = player;
-    });
-  }
+  // private getOpponentPlayer(opponentId: string) {
+  //   this._authService.getPlayer(opponentId).subscribe(player => {
+  //     this.opponent = player;
+  //   });
+  // }
 
-  private updateOpponent(opponentId: string) {
-    this.opponent.opponentId = this.currentUserId;
-    this._authService.updatePlayer(opponentId, this.opponent);
-  }
+  // private updateOpponent(opponentId: string) {
+  //   this.opponent.opponentId = this.currentUserId;
+  //   this._authService.updatePlayer(opponentId, this.opponent);
+  // }
 
 
 }
