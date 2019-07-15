@@ -16,6 +16,7 @@ export class NewsComponent implements OnInit {
   updatedName: string;
   updatedVersion: number;
   updatedContent: string;
+  notAdmin = true;
 
   author = new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]);
   version = new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(10)]);
@@ -44,6 +45,7 @@ export class NewsComponent implements OnInit {
     this.auth.getPlayer(id).subscribe(player => {
       if (!player.isAdmin) {
         this.displayedColumns = ['author', 'version', 'content'];
+        this.notAdmin = false;
       }
     });
   }
