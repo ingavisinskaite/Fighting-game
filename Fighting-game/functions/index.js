@@ -66,24 +66,4 @@ exports.matchPlayers = functions.firestore.document('rooms/{roomId}')
   }
 
   return 0;
-  //   let firstPlayer = waitingPlayers[0];
-  //   firstPlayer.opponentId = waitingPlayers[1].id
-  //   let opponentId = '';
-  //   const currentUserPosition = matchedPlayers.indexOf(userId);
-  //   console.log(2);
-  //   if (currentUserPosition === 0) {
-  //     opponentId = matchedPlayers[1];
-  //     console.log(opponentId);
-  //   } else {
-  //     opponentId = matchedPlayers[0];
-  //     console.log(opponentId);
-  //   }
-  //   user.opponentId = opponentId;
-  //   admin.firestore.collection('users').doc(userId).set({opponentId: opponentId})
-  //   .then(function() {
-  //     console.log("Document successfully updated!");
-  // })
-  // .catch(function(error) {
-  //     console.error("Error updating document: ", error);
-  // });
 });

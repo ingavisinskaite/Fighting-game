@@ -49,7 +49,6 @@ export class RoomComponent implements OnInit {
   public lookForAFight() {
     this.room.playersWaiting.push(this.currentUserId);
     this.updateRoom(this.roomNum, this.room);
-    // this.joinRandomPlayers();
     this.lookingForFight = true;
     this.getCurrentPlayer(this.currentUserId);
   }
@@ -78,42 +77,6 @@ export class RoomComponent implements OnInit {
     this.room.chat.push(playerSentMessage);
     this.updateRoom(this.roomNum, this.room);
   }
-
-  // private joinRandomPlayers() {
-  //   if (this.playersWaiting.length > 1) {
-  //     this.matchedPlayers = this.playersWaiting.sort(() => .5 - Math.random()).slice(0, 2);
-  //     let opponentId = '';
-  //     const currentUserPosition = this.matchedPlayers.indexOf(this.currentUserId);
-  //     if (currentUserPosition === 0) {
-  //       opponentId = this.matchedPlayers[1];
-  //       this.getOpponentPlayer(opponentId);
-  //     } else {
-  //       opponentId = this.matchedPlayers[0];
-  //       this.getOpponentPlayer(opponentId);
-  //     }
-  //     this.currentPlayer.opponentId = opponentId;
-  //     this._authService.updatePlayer(this.currentUserId, this.currentPlayer);
-  //     this.checkIfJoined();
-  //   }
-  // }
-
-  // private checkIfJoined() { // 
-  //   this._authService.getPlayers()
-  //   .subscribe(data => {
-  //     for (const user of data) {
-  //       if (user.opponentId === this.currentUserId) {
-  //         this.updateOpponent(user.opponentId);
-  //         this.stopLookingForAFight();
-  //         this.leaveRoom();
-  //         this._router.navigateByUrl('/arena');
-  //       } else {
-  //         console.log('test');
-  //         console.log(this.currentPlayer);
-  //         console.log(user);
-  //       }
-  //     }
-  //   });
-  // }
 
   private getCurrentUserId(): string {
     this.currentUserId = this._authService.getUserId();
@@ -173,17 +136,5 @@ export class RoomComponent implements OnInit {
     });
     return this.currentPlayer;
   }
-
-  // private getOpponentPlayer(opponentId: string) {
-  //   this._authService.getPlayer(opponentId).subscribe(player => {
-  //     this.opponent = player;
-  //   });
-  // }
-
-  // private updateOpponent(opponentId: string) {
-  //   this.opponent.opponentId = this.currentUserId;
-  //   this._authService.updatePlayer(opponentId, this.opponent);
-  // }
-
 
 }
